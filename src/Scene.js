@@ -37,6 +37,11 @@ class Scene extends Phaser.Scene {
         this.cursors = this.input.keyboard.createCursorKeys();
         this.cameras.main.startFollow(this.player.player);
 
+        this.fireworks();
+
+    }
+
+    fireworks() {
 
         // Fireworks à mettre dans une classe
         const firework = this.physics.add.group();
@@ -64,10 +69,7 @@ class Scene extends Phaser.Scene {
             fireworksGenLoop.destroy();
             this.physics.pause();
         })
-
     }
-
-
 
     update() {
 
