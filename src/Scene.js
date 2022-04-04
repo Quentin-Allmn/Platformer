@@ -16,14 +16,14 @@ class Scene extends Phaser.Scene {
         backgroundImage.setScale(2, 0.8);
 
         // chargement de la map
-        const map = this.add.tilemap("map");
+        const map = this.add.tilemap('map');
         // chargement du tileset
         const tileset = map.addTilesetImage(
-            "platformPack_tilesheet",
-            "tiles"
+            'platformPack_tilesheet',
+            'tiles'
         );
 
-        this.platforms = map.createStaticLayer('Platforms', tileset, 0, 200);
+        this.platforms = map.createStaticLayer('Platforms', tileset, 0, -1228);
         this.platforms.setCollisionByProperty({collides:true});
         this.platforms.setCollisionByExclusion(-1, true);
 
