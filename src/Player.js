@@ -48,11 +48,25 @@ class Player {
             this.player.play('walk', true)}
         this.player.setFlipX(true);
     }
-    stop(){
+    stop() {
         this.player.setVelocityX(0);
         if (this.player.body.onFloor()) {
-            this.player.play('idle',true)
+            this.player.play('idle', true)
         }
     }
+    runRight(){
+        this.player.setVelocityX(350);
+        this.player.setFlipX(false);
+        if (this.player.body.onFloor()) {
+            this.player.play('walk', true)}
+    }
+    runLeft()
+        {
+            this.player.setVelocityX(-350);
+            if (this.player.body.onFloor()) {
+                this.player.play('walk', true)
+            }
+            this.player.setFlipX(true);
+        }
 
 }
