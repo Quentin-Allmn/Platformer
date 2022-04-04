@@ -7,9 +7,9 @@ let gameConfig = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 0 }
+            gravity: { y: 500 }
         }
     },
-    scene: new Tableau()
+    scene: new Scene()
 };
 let game = new Phaser.Game(gameConfig);

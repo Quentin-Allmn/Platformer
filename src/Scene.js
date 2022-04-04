@@ -1,4 +1,4 @@
-class Tableau extends Phaser.Scene {
+class Scene extends Phaser.Scene {
 
     preload() {
 
@@ -15,11 +15,19 @@ class Tableau extends Phaser.Scene {
         const backgroundImage = this.add.image(0, 0, 'background').setOrigin(0, 0);
         backgroundImage.setScale(2, 0.8);
 
-        const map = this.make.tilemap({key: 'map'});
-        const tileset = map.addTilesetImage('platformPack_tilesheet', 'tiles');
+        // chargement de la map
+        const map = this.add.tilemap("map");
+        // chargement du tileset
+        const tileset = map.addTilesetImage(
+            "platformPack_tilesheet",
+            "tiles"
+        );
+
         this.platforms = map.createStaticLayer('Platforms', tileset, 0, 200);
         this.platforms.setCollisionByProperty({collides:true});
         this.platforms.setCollisionByExclusion(-1, true);
+
+        this.player = new Player(this)
 
         this.cursors = this.input.keyboard.createCursorKeys();
         this.cameras.main.startFollow(this.player.player);
@@ -38,8 +46,9 @@ class Tableau extends Phaser.Scene {
         } else if (this.cursors.right.isDown) {
             this.player.moveRight()
         } else {
-            this.player.stop();
+          this.player.stop();
         }
 
     }
+
 }

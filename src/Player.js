@@ -1,10 +1,8 @@
 class Player {
 
-    constructor(Tableau) {
-        this.scene = Tableau
-        this.pousse=false
-        this.player = this.scene.physics.add.sprite(100, 350, 'player');
-        this.player.key=0
+    constructor(Scene) {
+        this.scene = Scene
+        this.player = this.scene.physics.add.sprite(650, 100, 'player');
         this.player.setBounce(0.1).setVelocityX(0);
         this.scene.physics.add.collider(this.player, this.scene.platforms);
         this.scene.anims.create({
@@ -56,7 +54,5 @@ class Player {
             this.player.play('idle',true)
         }
     }
-
-
 
 }
