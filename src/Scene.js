@@ -43,7 +43,6 @@ class Scene extends Phaser.Scene {
 
     fireworks() {
 
-        // Fireworks à mettre dans une classe
         const firework = this.physics.add.group();
 
         const fireworksList = ['fireworks1', 'fireworks2', 'fireworks3']

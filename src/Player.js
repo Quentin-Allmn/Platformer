@@ -55,14 +55,14 @@ class Player {
         }
     }
     runRight(){
-        this.player.setVelocityX(350);
+        this.player.setVelocityX(450);
         this.player.setFlipX(false);
         if (this.player.body.onFloor()) {
             this.player.play('walk', true)}
     }
     runLeft()
         {
-            this.player.setVelocityX(-350);
+            this.player.setVelocityX(-450);
             if (this.player.body.onFloor()) {
                 this.player.play('walk', true)
             }
