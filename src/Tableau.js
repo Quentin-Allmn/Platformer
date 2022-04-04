@@ -1,9 +1,12 @@
 class Tableau extends Phaser.Scene {
+
     preload() {
 
         this.load.image('background', 'assets/images/background.png');
+
         this.load.atlas('player', 'assets/images/kenney_player.png', 'assets/images/kenney_player_atlas.json');
         this.load.image('tiles', 'assets/tilesets/platformPack_tilesheet.png');
+
         this.load.tilemapTiledJSON('map', 'assets/tilemaps/level1.json');
     }
 
@@ -17,6 +20,9 @@ class Tableau extends Phaser.Scene {
         this.platforms = map.createStaticLayer('Platforms', tileset, 0, 200);
         this.platforms.setCollisionByProperty({collides:true});
         this.platforms.setCollisionByExclusion(-1, true);
+
+        this.cursors = this.input.keyboard.createCursorKeys();
+        this.cameras.main.startFollow(this.player.player);
     }
 
 
