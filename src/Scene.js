@@ -35,9 +35,13 @@ class Scene extends Phaser.Scene {
         this.player = new Player(this)
 
         this.cursors = this.input.keyboard.createCursorKeys();
-        this.cameras.main.startFollow(this.player.player);
+
 
         this.fireworks();
+
+        this.cameras.main.setRoundPixels(true);
+        this.cameras.main.setBounds(0,0,10000,8000);
+        this.cameras.main.startFollow(this.player.player);
 
     }
 
