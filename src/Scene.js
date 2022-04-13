@@ -33,11 +33,10 @@ class Scene extends Phaser.Scene {
         this.platforms.setCollisionByExclusion(-1, true);
 
         this.player = new Player(this)
-
-        this.cursors = this.input.keyboard.createCursorKeys();
-
-
         this.fireworks();
+
+        
+        this.cursors = this.input.keyboard.createCursorKeys();
 
         this.cameras.main.setRoundPixels(true);
         this.cameras.main.setBounds(0,0,10000,8000);
