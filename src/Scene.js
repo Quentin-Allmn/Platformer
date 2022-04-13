@@ -7,7 +7,7 @@ class Scene extends Phaser.Scene {
         this.load.atlas('player', 'assets/images/kenney_player.png', 'assets/images/kenney_player_atlas.json');
         this.load.image('tiles', 'assets/tilesets/platformPack_tilesheet.png');
 
-        this.load.tilemapTiledJSON('map', 'assets/tilemaps/level1.json');
+        this.load.tilemapTiledJSON('map', 'assets/tilemaps/level3.json');
 
 
         this.load.image('fireworks1','assets/images/fireworks1.png')
@@ -18,7 +18,7 @@ class Scene extends Phaser.Scene {
     create() {
 
         const backgroundImage = this.add.image(0, 0, 'background').setOrigin(0, 0);
-        backgroundImage.setScale(2, 0.8);
+        backgroundImage.setScale(4, 2);
 
         // chargement de la map
         const map = this.add.tilemap('map');
@@ -28,14 +28,13 @@ class Scene extends Phaser.Scene {
             'tiles'
         );
 
-        this.platforms = map.createStaticLayer('Platforms', tileset, 0, -1228);
+        this.platforms = map.createStaticLayer('Platforms', tileset, 0, 650);
         this.platforms.setCollisionByProperty({collides:true});
         this.platforms.setCollisionByExclusion(-1, true);
 
         this.player = new Player(this)
         this.fireworks();
 
-        
         this.cursors = this.input.keyboard.createCursorKeys();
 
         this.cameras.main.setRoundPixels(true);
