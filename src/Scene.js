@@ -9,7 +9,6 @@ class Scene extends Phaser.Scene {
 
         this.load.tilemapTiledJSON('map', 'assets/tilemaps/level3.json');
 
-
         this.load.image('fireworks1','assets/images/fireworks1.png')
         this.load.image('fireworks2','assets/images/fireworks2.png')
         this.load.image('fireworks3','assets/images/fireworks3.png')
@@ -28,7 +27,7 @@ class Scene extends Phaser.Scene {
             'tiles'
         );
 
-        this.platforms = map.createStaticLayer('Platforms', tileset, 0, 650);
+        this.platforms = map.createStaticLayer('Platforms', tileset, 0, 0);
         this.platforms.setCollisionByProperty({collides:true});
         this.platforms.setCollisionByExclusion(-1, true);
 
