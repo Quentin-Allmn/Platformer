@@ -12,6 +12,8 @@ class Scene extends Phaser.Scene {
         this.load.image('fireworks1','assets/images/fireworks1.png')
         this.load.image('fireworks2','assets/images/fireworks2.png')
         this.load.image('fireworks3','assets/images/fireworks3.png')
+
+        this.load.image('destructible','assets/images/destructible.png')
     }
 
     create() {
@@ -28,7 +30,7 @@ class Scene extends Phaser.Scene {
         );
 
         this.platforms = map.createStaticLayer('Platforms', tileset, 0, 0);
-        this.platforms.setCollisionByProperty({collides:true});
+        this.platforms.setCollisionByProperty({collides: true});
         this.platforms.setCollisionByExclusion(-1, true);
 
         this.player = new Player(this)
@@ -37,11 +39,19 @@ class Scene extends Phaser.Scene {
         this.cursors = this.input.keyboard.createCursorKeys();
 
         this.cameras.main.setRoundPixels(true);
-        this.cameras.main.setBounds(0,0,10000,8000);
+        this.cameras.main.setBounds(0, 0, 10000, 8000);
         this.cameras.main.startFollow(this.player.player);
 
-        this.gameOver = false;
-        this.gameOverText = this.add.text(640,360,'Game Over')
+        this.destructible = this.physics.add.group({
+            allowGravity: false,
+            immovable: true
+        })
+        map.getObjectLayer('destructible').objects.forEach((destructible) => {
+            const destructibleSprite = this.destructible.create(destructible.x, destructible.y - 200, 'destructible').setOrigin(0).destructible = 1;
+        });
+
+        this.physics.add.collider(this.destructible, this.player.player);
+
     }
 
     fireworks() {
@@ -65,6 +75,12 @@ class Scene extends Phaser.Scene {
 
         this.physics.add.collider(firework, this.platforms, function (fireworks){
             fireworks.destroy();
+
+        })
+
+        this.physics.add.collider(firework, this.destructible, function (fireworks,destructible){
+            fireworks.destroy();
+            destructible.destroy();
 
         })
 
