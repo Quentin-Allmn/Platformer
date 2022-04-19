@@ -40,6 +40,8 @@ class Scene extends Phaser.Scene {
         this.cameras.main.setBounds(0,0,10000,8000);
         this.cameras.main.startFollow(this.player.player);
 
+        this.gameOver = false;
+        this.gameOverText = this.add.text(640,360,'Game Over')
     }
 
     fireworks() {
@@ -63,11 +65,14 @@ class Scene extends Phaser.Scene {
 
         this.physics.add.collider(firework, this.platforms, function (fireworks){
             fireworks.destroy();
+
         })
 
-        this.physics.add.collider(this.player, firework, () => {
+        this.physics.add.collider(this.player.player, firework, () => {
             fireworksGenLoop.destroy();
             this.physics.pause();
+
+            this.add.text(280, 150, 'Game Over', { fontSize: '15px', fill: '#000' })
         })
     }
 
