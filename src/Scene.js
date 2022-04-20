@@ -34,7 +34,6 @@ class Scene extends Phaser.Scene {
         this.platforms.setCollisionByExclusion(-1, true);
 
         this.player = new Player(this)
-        this.fireworks();
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -51,6 +50,8 @@ class Scene extends Phaser.Scene {
         });
 
         this.physics.add.collider(this.destructible, this.player.player);
+
+        this.fireworks();
 
     }
 
@@ -78,9 +79,9 @@ class Scene extends Phaser.Scene {
 
         })
 
-        this.physics.add.collider(firework, this.destructible, function (fireworks,destructible){
-            fireworks.destroy();
-            destructible.destroy();
+        this.physics.add.collider(firework, this.destructible,  (un,deux)=>{
+            un.destroy();
+            deux.destroy();
 
         })
 
@@ -88,7 +89,9 @@ class Scene extends Phaser.Scene {
             fireworksGenLoop.destroy();
             this.physics.pause();
 
-            this.add.text(280, 150, 'Game Over', { fontSize: '15px', fill: '#000' })
+            alert("GAME OVER !!!");
+            location.reload();
+            this.add.text(280, 150, 'Game Over', { fontSize: '32px', fill: '#000' })
         })
     }
 
