@@ -13,7 +13,10 @@ class Scene extends Phaser.Scene {
         this.load.image('fireworks2','assets/images/fireworks2.png')
         this.load.image('fireworks3','assets/images/fireworks3.png')
 
+        this.load.image('smoke','assets/images/particles/rising-smoke.png')
+
         this.load.image('destructible','assets/images/destructible.png')
+
     }
 
     create() {
@@ -40,7 +43,7 @@ class Scene extends Phaser.Scene {
         this.cameras.main.setRoundPixels(true);
         this.cameras.main.setBounds(0, 0, 10000, 8000);
         this.cameras.main.startFollow(this.player.player);
-        this.cameras.main.setAngle(-3);
+        this.cameras.main.setAngle(-8);
 
         this.destructible = this.physics.add.group({
             allowGravity: false,
@@ -51,6 +54,7 @@ class Scene extends Phaser.Scene {
         });
 
         this.physics.add.collider(this.destructible, this.player.player);
+
 
         this.fireworks();
 
@@ -65,7 +69,21 @@ class Scene extends Phaser.Scene {
         const fireworksGen = () => {
             const xCoord = Math.random() * 3000
             let randomfireworks = fireworksList[Math.floor(Math.random() * 3)]
-            firework.create(xCoord, 10, randomfireworks)
+            firework.create(xCoord, 10, randomfireworks);
+
+            this.particles = this.add.particles('smoke');
+
+            this.particles.createEmitter({
+                alpha: { start: 1, end: 0 },
+                scale: { start: 0.5, end: 2.5 },
+                //tint: { start: 0xff945e, end: 0xff945e },
+                rotate: { min: -180, max: 180 },
+                lifespan: { min: 1000, max: 1100 },
+                blendMode: 'ADD',
+                frequency: 111110,
+                maxParticles: 10,
+                follow: firework
+            });
         }
 
         const fireworksGenLoop = this.time.addEvent({
