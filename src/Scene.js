@@ -40,6 +40,7 @@ class Scene extends Phaser.Scene {
         this.cameras.main.setRoundPixels(true);
         this.cameras.main.setBounds(0, 0, 10000, 8000);
         this.cameras.main.startFollow(this.player.player);
+        this.cameras.main.setAngle(-3);
 
         this.destructible = this.physics.add.group({
             allowGravity: false,
