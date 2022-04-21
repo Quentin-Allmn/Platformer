@@ -36,18 +36,7 @@ class Player {
         this.player.play('jump', true);
         console.log(this.player.key)
     }
-    moveRight(){
-        this.player.setVelocityX(200);
-        this.player.setFlipX(false);
-        if (this.player.body.onFloor()) {
-            this.player.play('walk', true)}
-    }
-    moveLeft(){
-        this.player.setVelocityX(-200);
-        if (this.player.body.onFloor()) {
-            this.player.play('walk', true)}
-        this.player.setFlipX(true);
-    }
+
     stop() {
         this.player.setVelocityX(0);
         if (this.player.body.onFloor()) {

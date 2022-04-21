@@ -14,6 +14,7 @@ class Scene extends Phaser.Scene {
         this.load.image('fireworks3','assets/images/fireworks3.png')
 
         this.load.image('smoke','assets/images/particles/rising-smoke.png')
+        this.load.atlas('flares', 'assets/images/particles/flares.png', 'assets/images/particles/flares.json');
 
         this.load.image('destructible','assets/images/destructible.png')
 
@@ -55,8 +56,42 @@ class Scene extends Phaser.Scene {
 
         this.physics.add.collider(this.destructible, this.player.player);
 
-
         this.fireworks();
+
+    }
+
+    particles(){
+
+        var particles = this.add.particles('flares');
+
+        var emitter1 = particles.createEmitter({
+            frame: 'blue',
+            x: X,
+            y: Y,
+            speed: 200,
+            blendMode: 'ADD',
+            lifespan: 500
+        });
+
+        var emitter2 = particles.createEmitter({
+            frame: 'red',
+            x: X,
+            y: Y,
+            speed: 200,
+            scale: 0.5,
+            blendMode: 'ADD',
+            lifespan: 1000
+        });
+
+        var emitter3 = particles.createEmitter({
+            frame: 'yellow',
+            x: X,
+            y: Y,
+            speed: 200,
+            scale: { min: 0, max: 1 },
+            blendMode: 'ADD',
+            lifespan: 1500
+        });
 
     }
 
@@ -67,7 +102,7 @@ class Scene extends Phaser.Scene {
         const fireworksList = ['fireworks1', 'fireworks2', 'fireworks3']
 
         const fireworksGen = () => {
-            const xCoord = Math.random() * 3000
+            const xCoord = Math.random() * 5000
             let randomfireworks = fireworksList[Math.floor(Math.random() * 3)]
             firework.create(xCoord, 10, randomfireworks);
 
@@ -84,10 +119,11 @@ class Scene extends Phaser.Scene {
                 maxParticles: 10,
                 follow: firework
             });
+
         }
 
         const fireworksGenLoop = this.time.addEvent({
-            delay: 500,
+            delay: 450,
             callback: fireworksGen,
             loop: true,
         });
@@ -95,7 +131,7 @@ class Scene extends Phaser.Scene {
 
         this.physics.add.collider(firework, this.platforms, function (fireworks){
             fireworks.destroy();
-
+            //fireworks.particle();
         })
 
         this.physics.add.collider(firework, this.destructible,  (un,deux)=>{
@@ -112,6 +148,7 @@ class Scene extends Phaser.Scene {
             location.reload();
             this.add.text(280, 150, 'Game Over', { fontSize: '32px', fill: '#000' })
         })
+
     }
 
     update() {
