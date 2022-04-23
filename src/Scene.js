@@ -26,7 +26,7 @@ class Scene extends Phaser.Scene {
         // Background
 
         const backgroundImage = this.add.image(0, 0, 'background').setOrigin(0, 0);
-        backgroundImage.setScale(4, 2);
+        backgroundImage.setScale(6, 2);
 
         // chargement de la map
         const map = this.add.tilemap('map');
@@ -36,20 +36,25 @@ class Scene extends Phaser.Scene {
             'tiles'
         );
 
+        // Troisieme Plan
+
+        const troisiemePlan = map.createLayer('troisiemePlan',tileset, 0, 200);
+        troisiemePlan.srollFactorX = 0.55;
+
+        // Second Plan
+
+        const secondPlan = map.createLayer('secondPlan',tileset, 0, 200);
+        secondPlan.srollFactorX = 0.65;
+
+
         this.platforms = map.createStaticLayer('Platforms', tileset, 0, 0);
         this.platforms.setCollisionByProperty({collides: true});
         this.platforms.setCollisionByExclusion(-1, true);
+        this.platforms.srollFactorX = 1;
 
         this.player = new Player(this)
 
         this.cursors = this.input.keyboard.createCursorKeys();
-
-        // Camera
-
-        this.cameras.main.setRoundPixels(true);
-        this.cameras.main.setBounds(0, 0, 10000, 8000);
-        this.cameras.main.startFollow(this.player.player);
-        this.cameras.main.setAngle(-8);
 
         // Platformes Destructibles
 
@@ -75,6 +80,13 @@ class Scene extends Phaser.Scene {
             const InvisibleSprite = this.invisible.create(invisible.x, invisible.y, 'invisible').setOrigin(0).visible = false ;
         });
         this.physics.add.collider(this.player.player, this.invisible);
+
+        // Camera
+
+        this.cameras.main.setRoundPixels(true);
+        this.cameras.main.setBounds(0, 0, 10000, 8000);
+        this.cameras.main.startFollow(this.player.player);
+        this.cameras.main.setAngle(-8);
 
         // Fireworks
 
