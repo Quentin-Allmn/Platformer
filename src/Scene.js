@@ -17,10 +17,13 @@ class Scene extends Phaser.Scene {
         this.load.atlas('flares', 'assets/images/particles/flares.png', 'assets/images/particles/flares.json');
 
         this.load.image('destructible','assets/images/destructible.png')
+        this.load.image('invisible','assets/images/Invisible.png')
 
     }
 
     create() {
+
+        // Background
 
         const backgroundImage = this.add.image(0, 0, 'background').setOrigin(0, 0);
         backgroundImage.setScale(4, 2);
@@ -41,10 +44,14 @@ class Scene extends Phaser.Scene {
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
+        // Camera
+
         this.cameras.main.setRoundPixels(true);
         this.cameras.main.setBounds(0, 0, 10000, 8000);
         this.cameras.main.startFollow(this.player.player);
         this.cameras.main.setAngle(-8);
+
+        // Platformes Destructibles
 
         this.destructible = this.physics.add.group({
             allowGravity: false,
@@ -55,6 +62,21 @@ class Scene extends Phaser.Scene {
         });
 
         this.physics.add.collider(this.destructible, this.player.player);
+
+
+        // Murs Invisibles
+
+        this.invisible = this.physics.add.group({
+            allowGravity: false,
+            immovable: true
+        })
+
+        map.getObjectLayer('invisible').objects.forEach((invisible) => {
+            const InvisibleSprite = this.invisible.create(invisible.x, invisible.y, 'invisible').setOrigin(0).visible = false ;
+        });
+        this.physics.add.collider(this.player.player, this.invisible);
+
+        // Fireworks
 
         this.fireworks();
 
