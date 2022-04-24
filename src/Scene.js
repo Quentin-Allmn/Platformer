@@ -47,7 +47,7 @@ class Scene extends Phaser.Scene {
         secondPlan.srollFactorX = 0.65;
 
 
-        this.platforms = map.createStaticLayer('Platforms', tileset, 0, 0);
+        this.platforms = map.createStaticLayer('Platforms', tileset, 0, 100);
         this.platforms.setCollisionByProperty({collides: true});
         this.platforms.setCollisionByExclusion(-1, true);
         this.platforms.srollFactorX = 1;
@@ -84,7 +84,7 @@ class Scene extends Phaser.Scene {
         // Camera
 
         this.cameras.main.setRoundPixels(true);
-        this.cameras.main.setBounds(0, 0, 10000, 8000);
+        this.cameras.main.setBounds(0, 0, 9000, 1152);
         this.cameras.main.startFollow(this.player.player);
         this.cameras.main.setAngle(-8);
 
@@ -191,6 +191,7 @@ class Scene extends Phaser.Scene {
             this.player.jump()
             console.log("oui")
         }
+
         if (this.cursors.left.isDown ){
             this.player.runLeft();
         }

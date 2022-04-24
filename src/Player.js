@@ -2,7 +2,7 @@ class Player {
 
     constructor(Scene) {
         this.scene = Scene
-        this.player = this.scene.physics.add.sprite(150, 850, 'player');
+        this.player = this.scene.physics.add.sprite(725, 900, 'player');
         this.player.setBounce(0.1).setVelocityX(0);
         this.scene.physics.add.collider(this.player, this.scene.platforms);
         this.scene.anims.create({
@@ -32,7 +32,7 @@ class Player {
     }
 
     jump(){
-        this.player.setVelocityY(-350);
+        this.player.setVelocityY(-450);
         this.player.play('jump', true);
         console.log(this.player.key)
     }
