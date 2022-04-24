@@ -1,9 +1,9 @@
 #instruction{
+    margin-top: 10px;
     text-align: center;
 }
 
 body{
-    font-family: Impact, DejaVu Sans;
     font-size: 14px;
     background-color: #ffffff;
     text-align: center;
@@ -12,10 +12,11 @@ body{
 
 }
 a{
-    color: #ffffff;
+    color: #000000;
     text-transform: uppercase;
     text-decoration: none;
     transition: color 1s;
+    margin-bottom: 10px;
 }
 a:hover{
     color: #ff0000;
@@ -35,12 +36,8 @@ a:visited{
 canvas{
     outline: 1px solid #000000;
 }
-#scores{
-    color: #ff0000;
-    font-size : 3vw;
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    top: 0;
-    width: 100%;
+
+h1{
+    color: #880000;
+    font-family: Impact, DejaVu Sans;
 }
