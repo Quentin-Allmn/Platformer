@@ -90,6 +90,8 @@ class Scene extends Phaser.Scene {
 
         // Fireworks
 
+        this.particles();
+
         this.fireworks();
 
     }
@@ -100,31 +102,31 @@ class Scene extends Phaser.Scene {
 
         var emitter1 = particles.createEmitter({
             frame: 'blue',
-            x: X,
-            y: Y,
+            x: 725,
+            y: 900,
             speed: 200,
             blendMode: 'ADD',
-            lifespan: 500
+            lifespan: 250
         });
 
         var emitter2 = particles.createEmitter({
             frame: 'red',
-            x: X,
-            y: Y,
+            x: 725,
+            y: 900,
             speed: 200,
             scale: 0.5,
             blendMode: 'ADD',
-            lifespan: 1000
+            lifespan: 500
         });
 
         var emitter3 = particles.createEmitter({
             frame: 'yellow',
-            x: X,
-            y: Y,
+            x: 725,
+            y: 900,
             speed: 200,
             scale: { min: 0, max: 1 },
             blendMode: 'ADD',
-            lifespan: 1500
+            lifespan: 750
         });
 
     }
@@ -162,16 +164,13 @@ class Scene extends Phaser.Scene {
             loop: true,
         });
 
-
         this.physics.add.collider(firework, this.platforms, function (fireworks){
             fireworks.destroy();
-            //fireworks.particle();
         })
 
         this.physics.add.collider(firework, this.destructible,  (un,deux)=>{
             un.destroy();
             deux.destroy();
-
         })
 
         this.physics.add.collider(this.player.player, firework, () => {
