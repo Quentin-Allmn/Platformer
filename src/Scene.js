@@ -169,7 +169,8 @@ class Scene extends Phaser.Scene {
         })
 
         this.physics.add.collider(firework, this.destructible,  (un,deux)=>{
-            this.cameras.main.shake(0.05, 500);
+            this.cameras.main.shake(0.5, 1000);
+            console.log("shake")
             un.destroy();
             deux.destroy();
         })
@@ -200,6 +201,9 @@ class Scene extends Phaser.Scene {
         }
         else {
             this.player.stop();
+        }
+        if (this.cursors.down.isDown){
+            this.cameras.main.shake(0.05, 500);
         }
     }
 
