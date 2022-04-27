@@ -106,7 +106,7 @@ class Scene extends Phaser.Scene {
             y: 900,
             speed: 200,
             blendMode: 'ADD',
-            lifespan: 250
+            lifespan: 150
         });
 
         var emitter2 = particles.createEmitter({
@@ -116,7 +116,7 @@ class Scene extends Phaser.Scene {
             speed: 200,
             scale: 0.5,
             blendMode: 'ADD',
-            lifespan: 500
+            lifespan: 250
         });
 
         var emitter3 = particles.createEmitter({
@@ -126,7 +126,7 @@ class Scene extends Phaser.Scene {
             speed: 200,
             scale: { min: 0, max: 1 },
             blendMode: 'ADD',
-            lifespan: 750
+            lifespan: 450
         });
 
     }
@@ -169,6 +169,7 @@ class Scene extends Phaser.Scene {
         })
 
         this.physics.add.collider(firework, this.destructible,  (un,deux)=>{
+            this.cameras.main.shake(0.05, 500);
             un.destroy();
             deux.destroy();
         })
