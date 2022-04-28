@@ -26,7 +26,7 @@ class Scene extends Phaser.Scene {
         // Background
 
         const backgroundImage = this.add.image(0, 0, 'background').setOrigin(0, 0);
-        backgroundImage.setScale(6, 2);
+        backgroundImage.setScale(18, 2);
 
         // chargement de la map
         const map = this.add.tilemap('map');
@@ -52,6 +52,7 @@ class Scene extends Phaser.Scene {
         this.platforms.setCollisionByExclusion(-1, true);
         this.platforms.srollFactorX = 1;
 
+        // palyer
         this.player = new Player(this)
 
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -84,7 +85,7 @@ class Scene extends Phaser.Scene {
         // Camera
 
         this.cameras.main.setRoundPixels(true);
-        this.cameras.main.setBounds(0, 0, 9000, 1152);
+        this.cameras.main.setBounds(0, 0, 17920, 1152);
         this.cameras.main.startFollow(this.player.player);
         this.cameras.main.setAngle(-8);
 
@@ -138,7 +139,7 @@ class Scene extends Phaser.Scene {
         const fireworksList = ['fireworks1', 'fireworks2', 'fireworks3']
 
         const fireworksGen = () => {
-            const xCoord = Math.random() * 5000
+            const xCoord = Math.random() * 17920
             let randomfireworks = fireworksList[Math.floor(Math.random() * 3)]
             firework.create(xCoord, 10, randomfireworks);
 
@@ -159,7 +160,7 @@ class Scene extends Phaser.Scene {
         }
 
         const fireworksGenLoop = this.time.addEvent({
-            delay: 450,
+            delay: 350,
             callback: fireworksGen,
             loop: true,
         });
@@ -169,13 +170,13 @@ class Scene extends Phaser.Scene {
         })
 
         this.physics.add.collider(firework, this.destructible,  (un,deux)=>{
-            this.cameras.main.shake(0.5, 1000);
+            this.cameras.main.shake(0.5, 500);
             console.log("shake")
             un.destroy();
             deux.destroy();
         })
 
-        this.physics.add.collider(this.player.player, firework, () => {
+        this.physics.add.collider(this.player, firework, () => {
             fireworksGenLoop.destroy();
             this.physics.pause();
 
@@ -205,6 +206,7 @@ class Scene extends Phaser.Scene {
         if (this.cursors.down.isDown){
             this.cameras.main.shake(0.05, 500);
         }
+
     }
 
 }
