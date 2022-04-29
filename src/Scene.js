@@ -96,6 +96,40 @@ class Scene extends Phaser.Scene {
 
     }
 
+    particles(){
+
+        var particles = this.add.particles('flares');
+
+        var emitter1 = particles.createEmitter({
+            frame: 'blue',
+            x: 725,
+            y: 900,
+            speed: 200,
+            blendMode: 'ADD',
+            lifespan: 150
+        });
+
+        var emitter2 = particles.createEmitter({
+            frame: 'red',
+            x: 725,
+            y: 900,
+            speed: 200,
+            scale: 0.5,
+            blendMode: 'ADD',
+            lifespan: 250
+        });
+
+        var emitter3 = particles.createEmitter({
+            frame: 'yellow',
+            x: 725,
+            y: 900,
+            speed: 200,
+            scale: { min: 0, max: 1 },
+            blendMode: 'ADD',
+            lifespan: 450
+        });
+
+    }
 
     fireworks() {
 
