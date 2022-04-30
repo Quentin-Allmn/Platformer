@@ -166,9 +166,9 @@ class Scene extends Phaser.Scene {
 
         this.physics.add.collider(firework, this.platforms, function (fireworks){
             fireworks.destroy();
-            this.fX = fireworks.body.x;
-            this.fY = fireworks.body.y;
-            this.particles();
+            //this.fX = fireworks.body.x;
+            //this.fY = fireworks.body.y;
+           // this.particles();
         })
 
         this.physics.add.collider(firework, this.destructible,  (un,deux)=>{
@@ -178,7 +178,7 @@ class Scene extends Phaser.Scene {
             deux.destroy();
         })
 
-        this.physics.add.collider(this.player, firework, () => {
+        this.physics.add.collider(this.player.player, firework, () => {
             fireworksGenLoop.destroy();
             this.physics.pause();
 
