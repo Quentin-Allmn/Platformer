@@ -10,6 +10,6 @@ let gameConfig = {
             gravity: { y: 500 }
         }
     },
-    scene: [SceneMenu,Scene,SceneOptions]
+    scene: [SceneMenu,Scene,SceneOptions,SceneGameOver]
 };
 let game = new Phaser.Game(gameConfig);

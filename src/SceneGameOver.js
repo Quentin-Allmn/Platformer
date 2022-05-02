@@ -15,26 +15,26 @@ class SceneGameOver extends Phaser.Scene{
 
         this.add.text(380,320,"GAME OVER",{ fontFamily: 'Asian', color: '#FFC100', fontSize: '100px' });
 
-        this.add.text(380,420, "You failed to save your village ",{ fontFamily: 'Asian', color: '#FFC100', fontSize: '100px' });
+        this.add.text(340,420, "You failed to save your village ",{ fontFamily: 'Asian', color: '#FFC100', fontSize: '60px' });
 
-        let backmenubutton = this.add.text(20,20,"Back",{ fontFamily: 'Asian', color: '#FFC100', fontSize: '30px' })
+        let backmbutton = this.add.text(20,20,"Back Menu",{color: '#FFC100', fontSize: '30px' })
 
-        backmenubutton.setInteractive();
+        backmbutton.setInteractive();
 
-        backmenubutton.on("pointerover",()=>{
+        backmbutton.on("pointerover",()=>{
             console.log("over")
         })
 
-        backmenubutton.on("pointerout",()=>{
+        backmbutton.on("pointerout",()=>{
             console.log("out")
         })
 
-        backmenubutton.on("pointerup",()=>{
+        backmbutton.on("pointerup",()=>{
             console.log("up")
             this.scene.start("menuGame")
         })
 
-        let backplaybutton = this.add.text(20,20,"Play",{ fontFamily: 'Asian', color: '#FFC100', fontSize: '30px' })
+        let backplaybutton = this.add.text(600,520,"Play Again",{ color: '#FFC100', fontSize: '30px' })
 
         backplaybutton.setInteractive();
 

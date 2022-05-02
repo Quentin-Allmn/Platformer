@@ -163,7 +163,7 @@ class Scene extends Phaser.Scene {
         }
 
         const fireworksGenLoop = this.time.addEvent({
-            delay: 350,
+            delay: 250,
             callback: fireworksGen,
             loop: true,
         });
@@ -186,7 +186,9 @@ class Scene extends Phaser.Scene {
             //fireworksGenLoop.destroy();
             //this.physics.pause();
 
+            console.log("Game Over")
             this.scene.start("GameOver")
+
             //alert("GAME OVER !!!");
            // location.reload();
             //this.add.text(280, 150, 'Game Over', { fontSize: '32px', fill: '#000' })
