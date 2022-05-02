@@ -9,15 +9,21 @@ class SceneMenu extends Phaser.Scene{
         this.load.image('play2', 'assets/images/UI/UI_Play_On.png');
         this.load.image('options', 'assets/images/UI/UI_Options.png');
         this.load.image('options2', 'assets/images/UI/UI_Options_On.png');
-
+        this.load.image('background2','assets/images/background/sky1.png')
     }
 
     create() {
-        this.add.text(380,120,"A Night In Fire",{ fontFamily: 'Asian', color: '#FFC100', fontSize: '100px' });
 
-        let playbutton = this.add.image(660,340,'play');
+        const MbackgroundImage = this.add.image(0, 0, 'background2').setOrigin(0, 0);
+        MbackgroundImage.setScale(0.75, 1);
+
+        this.add.text(450,40,"A Night In Fire",{ fontFamily: 'Asian', color: '#FFC100', fontSize: '80px' });
+
+        let playbutton = this.add.image(660,440,'play');
+        playbutton.setScale(0.75);
 
         let optionsbutton = this.add.image(660,540,'options');
+        optionsbutton.setScale(0.75);
 
         playbutton.setInteractive();
 

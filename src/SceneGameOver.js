@@ -9,10 +9,15 @@ class SceneGameOver extends Phaser.Scene{
         this.load.image('back2', 'assets/images/UI/UI_BackMenu_On.png');
         this.load.image('playAgain', 'assets/images/UI/UI_PlayAgain.png');
         this.load.image('playAgain2', 'assets/images/UI/UI_PlayAgain_On.png');
+        this.load.image('background2','assets/images/background/sky1.png')
 
     }
 
     create() {
+
+        const MbackgroundImage = this.add.image(0, 0, 'background2').setOrigin(0, 0);
+        MbackgroundImage.setScale(0.75, 1);
+
         this.add.text(380,120,"A Night In Fire",{ fontFamily: 'Asian', color: '#FFC100', fontSize: '100px' });
 
         this.add.text(380,320,"GAME OVER",{ fontFamily: 'Asian', color: '#FFC100', fontSize: '100px' });
@@ -41,6 +46,7 @@ class SceneGameOver extends Phaser.Scene{
         })
 
         let backplaybutton = this.add.image(660,550,'playAgain');
+        backplaybutton.setScale(0.75);
 
         backplaybutton.setInteractive();
 
