@@ -1,5 +1,9 @@
 class Scene extends Phaser.Scene {
 
+    constructor (){
+        super("playGame")
+    }
+
     preload() {
 
         this.load.image('background', 'assets/images/background.png');
