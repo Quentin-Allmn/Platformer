@@ -13,11 +13,30 @@ class SceneOptions extends Phaser.Scene{
     create() {
         this.add.text(380,120,"A Night In Fire",{ fontFamily: 'Asian', color: '#FFC100', fontSize: '100px' });
 
-        this.add.image(660,340,'play');
+        this.add.text(380,320,"Options",{ fontFamily: 'Asian', color: '#FFC100', fontSize: '100px' });
 
-        this.add.image(660,540,'options');
+        let backbutton = this.add.text(20,20,"Back",{ fontFamily: 'Asian', color: '#FFC100', fontSize: '30px' })
+
+        backbutton.setInteractive();
+
+        backbutton.on("pointerover",()=>{
+            console.log("over")
+        })
+
+        backbutton.on("pointerout",()=>{
+            console.log("out")
+        })
+
+        backbutton.on("pointerup",()=>{
+            console.log("up")
+            this.scene.start("menuGame")
+        })
 
         //this.scene.start("playGame");
+    }
+
+    update(){
+
     }
 
 }

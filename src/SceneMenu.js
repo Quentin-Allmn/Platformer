@@ -13,11 +13,42 @@ class SceneMenu extends Phaser.Scene{
     create() {
         this.add.text(380,120,"A Night In Fire",{ fontFamily: 'Asian', color: '#FFC100', fontSize: '100px' });
 
-        this.add.image(660,340,'play');
+        let playbutton = this.add.image(660,340,'play');
 
-        this.add.image(660,540,'options');
+        let optionsbutton = this.add.image(660,540,'options');
 
-        //this.scene.start("playGame");
+        this.cursors = this.input.keyboard.createCursorKeys();
+
+        playbutton.setInteractive();
+
+        playbutton.on("pointerover",()=>{
+            console.log("over")
+        })
+
+        playbutton.on("pointerout",()=>{
+            console.log("out")
+        })
+
+        playbutton.on("pointerup",()=>{
+            console.log("up")
+            this.scene.start("playGame")
+        })
+
+        optionsbutton.setInteractive();
+
+        optionsbutton.on("pointerover",()=>{
+            console.log("over")
+        })
+
+        optionsbutton.on("pointerout",()=>{
+            console.log("out")
+        })
+
+        optionsbutton.on("pointerup",()=>{
+            console.log("up")
+            this.scene.start("optionsGame")
+        })
+
     }
 
 }
