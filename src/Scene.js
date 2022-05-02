@@ -183,12 +183,13 @@ class Scene extends Phaser.Scene {
         })
 
         this.physics.add.collider(this.player.player, firework, () => {
-            fireworksGenLoop.destroy();
-            this.physics.pause();
+            //fireworksGenLoop.destroy();
+            //this.physics.pause();
 
-            alert("GAME OVER !!!");
-            location.reload();
-            this.add.text(280, 150, 'Game Over', { fontSize: '32px', fill: '#000' })
+            this.scene.start("GameOver")
+            //alert("GAME OVER !!!");
+           // location.reload();
+            //this.add.text(280, 150, 'Game Over', { fontSize: '32px', fill: '#000' })
         })
 
     }
