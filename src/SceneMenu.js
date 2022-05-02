@@ -6,7 +6,9 @@ class SceneMenu extends Phaser.Scene{
 
     preload(){
         this.load.image('play', 'assets/images/UI/UI_Play.png');
+        this.load.image('play2', 'assets/images/UI/UI_Play_On.png');
         this.load.image('options', 'assets/images/UI/UI_Options.png');
+        this.load.image('options2', 'assets/images/UI/UI_Options_On.png');
 
     }
 
@@ -17,20 +19,21 @@ class SceneMenu extends Phaser.Scene{
 
         let optionsbutton = this.add.image(660,540,'options');
 
-        this.cursors = this.input.keyboard.createCursorKeys();
-
         playbutton.setInteractive();
 
         playbutton.on("pointerover",()=>{
             console.log("over")
+            playbutton.setTexture('play2')
         })
 
         playbutton.on("pointerout",()=>{
             console.log("out")
+            playbutton.setTexture('play')
         })
 
         playbutton.on("pointerup",()=>{
             console.log("up")
+            playbutton.setTexture('play2')
             this.scene.start("playGame")
         })
 
@@ -38,14 +41,17 @@ class SceneMenu extends Phaser.Scene{
 
         optionsbutton.on("pointerover",()=>{
             console.log("over")
+            optionsbutton.setTexture('options2')
         })
 
         optionsbutton.on("pointerout",()=>{
             console.log("out")
+            optionsbutton.setTexture('options')
         })
 
         optionsbutton.on("pointerup",()=>{
             console.log("up")
+            optionsbutton.setTexture('options2')
             this.scene.start("optionsGame")
         })
 

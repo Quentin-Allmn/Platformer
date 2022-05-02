@@ -5,9 +5,9 @@ class SceneOptions extends Phaser.Scene{
     }
 
     preload(){
-        this.load.image('play', 'assets/images/UI/UI_Play.png');
-        this.load.image('options', 'assets/images/UI/UI_Options.png');
 
+        this.load.image('back', 'assets/images/UI/UI_BackMenu.png');
+        this.load.image('back2', 'assets/images/UI/UI_BackMenu_On.png');
     }
 
     create() {
@@ -15,20 +15,24 @@ class SceneOptions extends Phaser.Scene{
 
         this.add.text(380,320,"Options",{ fontFamily: 'Asian', color: '#FFC100', fontSize: '100px' });
 
-        let backbutton = this.add.text(20,20,"Back",{ fontFamily: 'Asian', color: '#FFC100', fontSize: '30px' })
+        let backbutton = this.add.image(160,60,'back');
+        backbutton.setScale(0.5)
 
         backbutton.setInteractive();
 
         backbutton.on("pointerover",()=>{
             console.log("over")
+            backbutton.setTexture('back2')
         })
 
         backbutton.on("pointerout",()=>{
             console.log("out")
+            backbutton.setTexture('back')
         })
 
         backbutton.on("pointerup",()=>{
             console.log("up")
+            backbutton.setTexture('back2')
             this.scene.start("menuGame")
         })
 
