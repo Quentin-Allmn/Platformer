@@ -5,10 +5,10 @@ class SceneGameOver extends Phaser.Scene{
     }
 
     preload(){
-        this.load.image('back', 'assets/images/UI/UI_BackMenu.png');
-        this.load.image('back2', 'assets/images/UI/UI_BackMenu_On.png');
-        this.load.image('playAgain', 'assets/images/UI/UI_PlayAgain.png');
-        this.load.image('playAgain2', 'assets/images/UI/UI_PlayAgain_On.png');
+        this.load.image('back', 'assets/images/UI/UI_BackMenu1.png');
+        this.load.image('back2', 'assets/images/UI/UI_BackMenu1_On.png');
+        this.load.image('playAgain', 'assets/images/UI/UI_PlayAgain1.png');
+        this.load.image('playAgain2', 'assets/images/UI/UI_PlayAgain1_On.png');
         this.load.image('background2','assets/images/background/sky1.png')
 
     }
@@ -25,7 +25,7 @@ class SceneGameOver extends Phaser.Scene{
         this.add.text(320,420, "You failed to save your village ",{ fontFamily: 'Asian', color: '#FFC100', fontSize: '60px' });
 
         let backmbutton = this.add.image(160,60,'back');
-        backmbutton.setScale(0.5)
+        backmbutton.setScale(1)
 
         backmbutton.setInteractive();
 
@@ -46,7 +46,7 @@ class SceneGameOver extends Phaser.Scene{
         })
 
         let backplaybutton = this.add.image(660,550,'playAgain');
-        backplaybutton.setScale(0.75);
+        backplaybutton.setScale(1);
 
         backplaybutton.setInteractive();
 

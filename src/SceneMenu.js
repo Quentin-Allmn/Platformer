@@ -7,8 +7,8 @@ class SceneMenu extends Phaser.Scene{
     preload(){
         this.load.image('play', 'assets/images/UI/UI_Play1.png');
         this.load.image('play2', 'assets/images/UI/UI_Play1_On.png');
-        this.load.image('options', 'assets/images/UI/UI_Options.png');
-        this.load.image('options2', 'assets/images/UI/UI_Options_On.png');
+        this.load.image('options', 'assets/images/UI/UI_Options1.png');
+        this.load.image('options2', 'assets/images/UI/UI_Options1_On.png');
         this.load.image('background2','assets/images/background/sky1.png')
     }
 
@@ -23,7 +23,7 @@ class SceneMenu extends Phaser.Scene{
         playbutton.setScale(1);
 
         let optionsbutton = this.add.image(660,540,'options');
-        optionsbutton.setScale(0.75);
+        optionsbutton.setScale(1);
 
         playbutton.setInteractive();
 

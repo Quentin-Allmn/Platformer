@@ -6,8 +6,8 @@ class SceneOptions extends Phaser.Scene{
 
     preload(){
 
-        this.load.image('back', 'assets/images/UI/UI_BackMenu.png');
-        this.load.image('back2', 'assets/images/UI/UI_BackMenu_On.png');
+        this.load.image('back', 'assets/images/UI/UI_BackMenu1.png');
+        this.load.image('back2', 'assets/images/UI/UI_BackMenu1_On.png');
         this.load.image('background2','assets/images/background/sky1.png')
 
     }
@@ -22,7 +22,7 @@ class SceneOptions extends Phaser.Scene{
         this.add.text(380,320,"Options",{ fontFamily: 'Asian', color: '#FFC100', fontSize: '100px' });
 
         let backbutton = this.add.image(160,60,'back');
-        backbutton.setScale(0.5)
+        backbutton.setScale(1)
 
         backbutton.setInteractive();
 
