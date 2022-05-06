@@ -30,7 +30,7 @@ class Scene extends Phaser.Scene {
 
         // Background
 
-        const backgroundImage = this.add.image(0, 0, 'sky2').setOrigin(0, 0);
+        const backgroundImage = this.add.image(0, 0, 'background').setOrigin(0, 0);
         backgroundImage.setScale(18, 1.75);
 
         // chargement de la map
