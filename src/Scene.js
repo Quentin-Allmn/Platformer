@@ -23,6 +23,7 @@ class Scene extends Phaser.Scene {
 
         this.load.image('destructible','assets/images/destructible.png')
         this.load.image('invisible','assets/images/Invisible.png')
+        //this.load.image('save', 'assets/images/Save.png');
 
     }
 
@@ -62,6 +63,9 @@ class Scene extends Phaser.Scene {
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
+        this.currentSaveX = 0;
+        this.currentSaveY = 0;
+
         // Platformes Destructibles
 
         this.destructible = this.physics.add.group({
@@ -99,7 +103,34 @@ class Scene extends Phaser.Scene {
 
         this.fireworks();
 
-    }
+// if ( modeHard == false ) {
+
+    //this.vie = 3;
+
+    //while (this.vie > 0) {
+
+        //map.getObjectLayer('Save').objects.forEach((save) => {
+        //  const saveSprite = this.saves.create(save.x, save.y + 200 - save.height, 'save').setOrigin(0);
+        // });
+        // this.physics.add.overlap(this.player.player, this.saves, this.sauvegarde, null, this)
+
+        //  this.cursors = this.input.keyboard.createCursorKeys();
+        //  this.cameras.main.startFollow(this.player.player);
+
+        // }
+
+//}
+}
+
+
+//sauvegarde(player, saves) {
+// console.log("current", this.currentSaveX, this.currentSaveY)
+// this.currentSaveX = player.x
+//   this.currentSaveY = player.y
+//   saves.body.enable = false;
+//   this.currentKey = player.key
+//   this.vie -= 1;
+//}
 
     particles(){
 
@@ -196,6 +227,7 @@ class Scene extends Phaser.Scene {
         })
 
     }
+
 
     update() {
 
