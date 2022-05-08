@@ -25,6 +25,8 @@ class Scene extends Phaser.Scene {
         this.load.image('invisible','assets/images/Invisible.png')
         //this.load.image('save', 'assets/images/Save.png');
 
+        this.load.image('enemy','assets/images/player.png');
+
     }
 
     create() {
@@ -103,6 +105,27 @@ class Scene extends Phaser.Scene {
 
         this.fireworks();
 
+        //Enemy
+
+        this.Rkick = false;
+
+        this.enemy = this.physics.add.sprite(17800, 500, "enemy")
+        //this.enemy.setCollideWorldBounds(true);
+        //this.enemy.setDepth(0);
+        this.enemy.body.setImmovable(false)
+        //this.enemy.hp = 100;
+        this.physics.add.collider(this.player.player, this.enemy, () => {
+            this.enemy.body.setImmovable(true)
+            this.Rkick = true;
+        })
+        this.physics.add.collider(this.platforms, this.enemy, () => {
+
+        })
+        this.physics.add.collider(this.invisible, this.enemy, () => {
+
+        })
+
+
 // if ( modeHard == false ) {
 
     //this.vie = 3;
@@ -120,6 +143,8 @@ class Scene extends Phaser.Scene {
         // }
 
 //}
+
+
 }
 
 
@@ -131,6 +156,7 @@ class Scene extends Phaser.Scene {
 //   this.currentKey = player.key
 //   this.vie -= 1;
 //}
+
 
     particles(){
 
@@ -214,7 +240,7 @@ class Scene extends Phaser.Scene {
             deux.destroy();
         })
 
-        this.physics.add.collider(this.player.player, firework, () => {
+        this.physics.add.collider(this.player, firework, () => {
             //fireworksGenLoop.destroy();
             //this.physics.pause();
 
@@ -231,7 +257,7 @@ class Scene extends Phaser.Scene {
 
     update() {
 
-        if ((this.cursors.space.isDown || this.cursors.up.isDown) && this.player.player.body.onFloor()) {
+        if (this.cursors.up.isDown && this.player.player.body.onFloor()) {
             this.player.jump()
             console.log("oui")
         }
@@ -248,7 +274,11 @@ class Scene extends Phaser.Scene {
         if (this.cursors.down.isDown){
             this.cameras.main.shake(0.05, 500);
         }
-
+        if (this.cursors.space.isDown && this.Rkick === true){
+            console.log("Kick");
+            this.enemy.destroy();
+            this.scene.start("Victory");
+        }
     }
 
 }
