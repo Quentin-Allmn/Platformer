@@ -8,7 +8,11 @@ class SceneOptions extends Phaser.Scene{
 
         this.load.image('back', 'assets/images/UI/UI_BackMenu1.png');
         this.load.image('back2', 'assets/images/UI/UI_BackMenu1_On.png');
-        this.load.image('background2','assets/images/background/sky1.png')
+
+        this.load.image('hard', 'assets/images/UI/UI_Difficulty_Hard.png');
+        this.load.image('normal', 'assets/images/UI/UI_Difficulty_Normal.png');
+
+        this.load.image('background2','assets/images/background/sky1.png');
 
     }
 
@@ -17,9 +21,9 @@ class SceneOptions extends Phaser.Scene{
         const MbackgroundImage = this.add.image(0, 0, 'background2').setOrigin(0, 0);
         MbackgroundImage.setScale(0.75, 1);
 
-        this.add.text(380,120,"A Night In Fire",{ fontFamily: 'Asian', color: '#FFC100', fontSize: '100px' });
+        //this.add.text(380,120,"A Night In Fire",{ fontFamily: 'Asian', color: '#FFC100', fontSize: '100px' });
 
-        this.add.text(380,320,"Options",{ fontFamily: 'Asian', color: '#FFC100', fontSize: '100px' });
+        this.add.text(600,20,"Options",{ fontFamily: 'Asian', color: '#FFC100', fontSize: '50px' });
 
         let backbutton = this.add.image(160,60,'back');
         backbutton.setScale(1)
@@ -42,7 +46,28 @@ class SceneOptions extends Phaser.Scene{
             this.scene.start("menuGame")
         })
 
-        //this.scene.start("playGame");
+        this.diffHard = false;
+
+        let diffbutton = this.add.image(700,460,'normal');
+        diffbutton.setScale(1)
+
+        diffbutton.setInteractive();
+
+        diffbutton.on("pointerup",()=>{
+            console.log("up")
+            if (this.diffHard === false){
+                diffbutton.setTexture('hard')
+                this.diffHard = true;
+            }
+            else {
+                diffbutton.setTexture('normal')
+                this.diffHard = false;
+            }
+            //this.scene.start("menuGame")
+        })
+
+
+
     }
 
     update(){
