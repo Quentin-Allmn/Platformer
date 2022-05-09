@@ -34,7 +34,6 @@ class Player {
     jump(){
         this.player.setVelocityY(-400);
         this.player.play('jump', true);
-        console.log(this.player.key)
     }
 
     stop() {

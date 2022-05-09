@@ -28,17 +28,17 @@ class SceneMenu extends Phaser.Scene{
         playbutton.setInteractive();
 
         playbutton.on("pointerover",()=>{
-            console.log("over")
+            //console.log("over")
             playbutton.setTexture('play2')
         })
 
         playbutton.on("pointerout",()=>{
-            console.log("out")
+            //console.log("out")
             playbutton.setTexture('play')
         })
 
         playbutton.on("pointerup",()=>{
-            console.log("up")
+            //console.log("up")
             playbutton.setTexture('play2')
             this.scene.start("playGame")
         })
@@ -46,17 +46,17 @@ class SceneMenu extends Phaser.Scene{
         optionsbutton.setInteractive();
 
         optionsbutton.on("pointerover",()=>{
-            console.log("over")
+            //console.log("over")
             optionsbutton.setTexture('options2')
         })
 
         optionsbutton.on("pointerout",()=>{
-            console.log("out")
+            //console.log("out")
             optionsbutton.setTexture('options')
         })
 
         optionsbutton.on("pointerup",()=>{
-            console.log("up")
+            //console.log("up")
             optionsbutton.setTexture('options2')
             this.scene.start("optionsGame")
         })

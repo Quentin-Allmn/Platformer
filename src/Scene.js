@@ -23,13 +23,23 @@ class Scene extends Phaser.Scene {
 
         this.load.image('destructible','assets/images/destructible.png')
         this.load.image('invisible','assets/images/Invisible.png')
-        //this.load.image('save', 'assets/images/Save.png');
+        this.load.image('save', 'assets/images/Save.png');
+        this.load.image('checkFw', 'assets/images/CheckFw.png');
 
         this.load.image('enemy','assets/images/player.png');
 
     }
 
     create() {
+
+        this.options = new SceneOptions(this);
+
+        if (this.options.diffHard === false){
+            console.log("la c'est normal")
+        }
+        if (this.options.diffHard === true){
+            console.log("la c'est Hard")
+        }
 
         // Background
 
@@ -95,15 +105,57 @@ class Scene extends Phaser.Scene {
 
         // Camera
 
-        this.cameras.main.setRoundPixels(true);
         this.cameras.main.setBounds(0, 0, 17920, 1152);
         this.cameras.main.startFollow(this.player.player);
         this.cameras.main.setAngle(-8);
+        this.cameras.main.setRoundPixels(true);
 
         // Fireworks
 
-
+        this.fwDeley = 200;
         this.fireworks();
+
+        // Mode Normal
+
+        if ( this.options.diffHard === false ) {
+            console.log("Normal")
+            this.vie = 3;
+            this.add.text(120,40,this.vie,{ color: '#FFC100', fontSize: '20px' });
+
+            while (this.vie > 0) {
+
+                this.saves = this.physics.add.group({
+                    allowGravity: false,
+                    immovable: true
+                });
+
+                map.getObjectLayer('Save').objects.forEach((save) => {
+                    const saveSprite = this.saves.create(save.x, save.y , 'save').setOrigin(0);
+                });
+                this.physics.add.overlap(this.player.player, this.saves, this.sauvegarde, null, this)
+
+                this.cursors = this.input.keyboard.createCursorKeys();
+                this.cameras.main.startFollow(this.player.player);
+
+            }
+            this.scene.start("GameOver")
+        }
+        if (this.options.diffHard === true) {
+            console.log("Hard")
+        }
+
+        // Checkpoint Fireworks
+        this.check = this.physics.add.group({
+            allowGravity: false,
+            immovable: true
+        });
+        map.getObjectLayer('CheckpointFw').objects.forEach((check) => {
+            const checkSprite = this.check.create(check.x, check.y , 'checkFw').setOrigin(0);
+        });
+        this.physics.add.overlap(this.player.player, this.check, () => {
+            this.fwDeley = this.fwDeley - 50;
+            console.log(this.fwDeley)
+        })
 
         //Enemy
 
@@ -125,72 +177,14 @@ class Scene extends Phaser.Scene {
 
         })
 
-
-// if ( modeHard == false ) {
-
-    //this.vie = 3;
-
-    //while (this.vie > 0) {
-
-        //map.getObjectLayer('Save').objects.forEach((save) => {
-        //  const saveSprite = this.saves.create(save.x, save.y + 200 - save.height, 'save').setOrigin(0);
-        // });
-        // this.physics.add.overlap(this.player.player, this.saves, this.sauvegarde, null, this)
-
-        //  this.cursors = this.input.keyboard.createCursorKeys();
-        //  this.cameras.main.startFollow(this.player.player);
-
-        // }
-
-//}
-
-
 }
 
-
-//sauvegarde(player, saves) {
-// console.log("current", this.currentSaveX, this.currentSaveY)
-// this.currentSaveX = player.x
-//   this.currentSaveY = player.y
-//   saves.body.enable = false;
-//   this.currentKey = player.key
-//   this.vie -= 1;
-//}
-
-
-    particles(){
-
-        var particles = this.add.particles('flares');
-
-        var emitter1 = particles.createEmitter({
-            frame: 'blue',
-            x: 725,
-            y: 900,
-            speed: 200,
-            blendMode: 'ADD',
-            lifespan: 150
-        });
-
-        var emitter2 = particles.createEmitter({
-            frame: 'red',
-            x: 725,
-            y: 900,
-            speed: 200,
-            scale: 0.5,
-            blendMode: 'ADD',
-            lifespan: 250
-        });
-
-        var emitter3 = particles.createEmitter({
-            frame: 'yellow',
-            x: 725,
-            y: 900,
-            speed: 200,
-            scale: { min: 0, max: 1 },
-            blendMode: 'ADD',
-            lifespan: 450
-        });
-
+    sauvegarde(player, saves) {
+    console.log("current", this.currentSaveX, this.currentSaveY)
+    this.currentSaveX = player.x
+      this.currentSaveY = player.y
+      saves.body.enable = false;
+      this.currentKey = player.key
     }
 
     fireworks() {
@@ -204,24 +198,10 @@ class Scene extends Phaser.Scene {
             let randomfireworks = fireworksList[Math.floor(Math.random() * 3)]
             firework.create(xCoord, 10, randomfireworks);
 
-            this.particles = this.add.particles('smoke');
-
-            this.particles.createEmitter({
-                alpha: { start: 1, end: 0 },
-                scale: { start: 0.5, end: 2.5 },
-                //tint: { start: 0xff945e, end: 0xff945e },
-                rotate: { min: -180, max: 180 },
-                lifespan: { min: 1000, max: 1100 },
-                blendMode: 'ADD',
-                frequency: 111110,
-                maxParticles: 10,
-                follow: firework
-            });
-
         }
 
         const fireworksGenLoop = this.time.addEvent({
-            delay: 200,
+            delay:  this.fwDeley,
             callback: fireworksGen,
             loop: true,
         });
@@ -244,16 +224,20 @@ class Scene extends Phaser.Scene {
             //fireworksGenLoop.destroy();
             //this.physics.pause();
 
-            console.log("Game Over")
             this.scene.start("GameOver")
 
+            this.vie -= 1;
+            console.log("Game Over")
+
+            if (this.options.diffHard === true) {
+                this.scene.start("GameOver")
+            }
             //alert("GAME OVER !!!");
            // location.reload();
             //this.add.text(280, 150, 'Game Over', { fontSize: '32px', fill: '#000' })
         })
 
     }
-
 
     update() {
 

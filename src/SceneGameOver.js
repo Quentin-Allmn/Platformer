@@ -30,17 +30,17 @@ class SceneGameOver extends Phaser.Scene{
         backmbutton.setInteractive();
 
         backmbutton.on("pointerover",()=>{
-            console.log("over")
+            //console.log("over")
             backmbutton.setTexture('back2')
         })
 
         backmbutton.on("pointerout",()=>{
-            console.log("out")
+           //console.log("out")
             backmbutton.setTexture('back')
         })
 
         backmbutton.on("pointerup",()=>{
-            console.log("up")
+            //console.log("up")
             backmbutton.setTexture('back2')
             this.scene.start("menuGame")
         })

@@ -31,17 +31,17 @@ class SceneOptions extends Phaser.Scene{
         backbutton.setInteractive();
 
         backbutton.on("pointerover",()=>{
-            console.log("over")
+            //console.log("over")
             backbutton.setTexture('back2')
         })
 
         backbutton.on("pointerout",()=>{
-            console.log("out")
+            //console.log("out")
             backbutton.setTexture('back')
         })
 
         backbutton.on("pointerup",()=>{
-            console.log("up")
+            //console.log("up")
             backbutton.setTexture('back2')
             this.scene.start("menuGame")
         })
@@ -54,14 +54,16 @@ class SceneOptions extends Phaser.Scene{
         diffbutton.setInteractive();
 
         diffbutton.on("pointerup",()=>{
-            console.log("up")
+            //console.log("up")
             if (this.diffHard === false){
                 diffbutton.setTexture('hard')
                 this.diffHard = true;
+                console.log("Hard")
             }
             else {
                 diffbutton.setTexture('normal')
                 this.diffHard = false;
+                console.log("Normal")
             }
             //this.scene.start("menuGame")
         })
@@ -71,6 +73,12 @@ class SceneOptions extends Phaser.Scene{
     }
 
     update(){
+        if (this.diffHard === true){
+            console.log("Hard")
+        }
+        else {
+            console.log("Normal")
+        }
 
     }
 
