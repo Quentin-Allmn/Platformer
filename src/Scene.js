@@ -24,7 +24,6 @@ class Scene extends Phaser.Scene {
         this.load.image('destructible','assets/images/destructible.png')
         this.load.image('invisible','assets/images/Invisible.png')
         this.load.image('save', 'assets/images/Save.png');
-        this.load.image('checkFw', 'assets/images/CheckFw.png');
 
         this.load.image('enemy','assets/images/player.png');
 
@@ -112,7 +111,7 @@ class Scene extends Phaser.Scene {
 
         // Fireworks
 
-        this.fwDeley = 200;
+        this.fwDelay = 200;
         this.fireworks();
 
         // Mode Normal
@@ -144,18 +143,6 @@ class Scene extends Phaser.Scene {
             console.log("Hard")
         }
 
-        // Checkpoint Fireworks
-        this.check = this.physics.add.group({
-            allowGravity: false,
-            immovable: true
-        });
-        map.getObjectLayer('CheckpointFw').objects.forEach((check) => {
-            const checkSprite = this.check.create(check.x, check.y , 'checkFw').setOrigin(0);
-        });
-        this.physics.add.overlap(this.player.player, this.check, () => {
-            this.fwDeley = this.fwDeley - 50;
-            console.log(this.fwDeley)
-        })
 
         //Enemy
 
@@ -187,6 +174,21 @@ class Scene extends Phaser.Scene {
       this.currentKey = player.key
     }
 
+    checkFw(player){
+        if (player < 900){
+            this.fwDelay = 300;
+        }
+        if (player > 900){
+            this.fwDelay = 200;
+        }
+        if (player > 10240){
+            this.fwDelay = this.fwDelay - 50;
+        }
+        if (player > 14080){
+            this.fwDelay = this.fwDelay - 50;
+        }
+    }
+
     fireworks() {
 
         const firework = this.physics.add.group();
@@ -201,12 +203,13 @@ class Scene extends Phaser.Scene {
         }
 
         const fireworksGenLoop = this.time.addEvent({
-            delay:  this.fwDeley,
+            delay:  this.fwDelay,
             callback: fireworksGen,
             loop: true,
         });
 
         this.physics.add.collider(firework, this.platforms, function (fireworks){
+            console.log(fireworks.body.x,fireworks.body.y)
             fireworks.destroy();
             //this.fX = fireworks.body.x;
             //this.fY = fireworks.body.y;
@@ -216,6 +219,7 @@ class Scene extends Phaser.Scene {
         this.physics.add.collider(firework, this.destructible,  (un,deux)=>{
             this.cameras.main.shake(0.5, 500);
             console.log("shake")
+            console.log(un.body.x,un.body.y)
             un.destroy();
             deux.destroy();
         })
@@ -241,6 +245,10 @@ class Scene extends Phaser.Scene {
 
     update() {
 
+        console.log("player",this.player.player.x,"y",this.player.player.y)
+
+        this.checkFw(this.player.player.x)
+
         if (this.cursors.up.isDown && this.player.player.body.onFloor()) {
             this.player.jump()
             console.log("oui")
@@ -263,6 +271,7 @@ class Scene extends Phaser.Scene {
             this.enemy.destroy();
             this.scene.start("Victory");
         }
+        console.log("Delay",this.fwDelay)
     }
 
 }
