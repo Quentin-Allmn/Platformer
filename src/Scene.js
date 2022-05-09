@@ -27,6 +27,10 @@ class Scene extends Phaser.Scene {
 
         this.load.image('enemy','assets/images/player.png');
 
+        for (let i = 1; i <= 8; i++) {
+            this.load.image('red-' + i, 'assets/images/Fireworks/red-' + i + '.png');
+        }
+
     }
 
     create() {
@@ -209,7 +213,27 @@ class Scene extends Phaser.Scene {
         });
 
         this.physics.add.collider(firework, this.platforms, function (fireworks){
-            console.log(fireworks.body.x,fireworks.body.y)
+            //console.log(fireworks.body.x,fireworks.body.y)
+            //
+            // this.FwRed = this.add.sprite(fireworks.body.x,fireworks.body.y, 'red-').setOrigin(0, 0);
+            //
+            // this.anims.create({
+            //     key: 'Red',
+            //     frames: [
+            //         {key: 'red-1'},
+            //         {key: 'red-2'},
+            //         {key: 'red-3'},
+            //         {key: 'red-4'},
+            //         {key: 'red-5'},
+            //         {key: 'red-6'},
+            //         {key: 'red-7'},
+            //         {key: 'red-8'},
+            //     ],
+            //     frameRate: 12,
+            //     // repeat: -1
+            // });
+            // this.FwRed.play('Red')
+
             fireworks.destroy();
             //this.fX = fireworks.body.x;
             //this.fY = fireworks.body.y;
