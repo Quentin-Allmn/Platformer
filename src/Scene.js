@@ -240,7 +240,7 @@ class Scene extends Phaser.Scene {
             deux.destroy();
         })
 
-        this.physics.add.collider(this.player, firework, () => {
+        this.physics.add.collider(this.player.player, firework, () => {
             //fireworksGenLoop.destroy();
             //this.physics.pause();
 
