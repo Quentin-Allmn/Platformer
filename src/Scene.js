@@ -217,9 +217,9 @@ class Scene extends Phaser.Scene {
         })
 
         this.physics.add.collider(firework, this.destructible,  (un,deux)=>{
-            this.cameras.main.shake(0.5, 500);
+            this.cameras.main.shake(1000, 0.005);
             console.log("shake")
-            console.log(un.body.x,un.body.y)
+            //console.log(un.body.x,un.body.y)
             un.destroy();
             deux.destroy();
         })
@@ -271,7 +271,7 @@ class Scene extends Phaser.Scene {
             this.enemy.destroy();
             this.scene.start("Victory");
         }
-        console.log("Delay",this.fwDelay)
+       //   console.log("Delay",this.fwDelay)
     }
 
 }
