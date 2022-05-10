@@ -4,7 +4,7 @@
 }
 
 body{
-    font-size: 14px;
+    font-size: 18px;
     background-color: #ffffff;
     text-align: center;
     background-position:100% 50%;
@@ -39,5 +39,4 @@ canvas{
 
 h1{
     color: #880000;
-    font-family: Impact, DejaVu Sans;
 }

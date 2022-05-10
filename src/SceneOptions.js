@@ -14,6 +14,10 @@ class SceneOptions extends Phaser.Scene{
 
         this.load.image('background2','assets/images/background/sky1.png');
 
+        for (let i = 1; i <= 9; i++) {
+            this.load.image('yellow-' + i, 'assets/images/Fireworks/yellow/yellow-' + i + '.png');
+        }
+
     }
 
     create() {
@@ -68,7 +72,27 @@ class SceneOptions extends Phaser.Scene{
             //this.scene.start("menuGame")
         })
 
+        this.FwYellow = this.add.sprite(600,10, 'yellow-').setOrigin(0, 0);
+        this.FwYellow.setScale(1.5)
 
+        this.anims.create({
+            key: 'yellow',
+            frames: [
+                {key: 'yellow-1'},
+                {key: 'yellow-2'},
+                {key: 'yellow-3'},
+                {key: 'yellow-4'},
+                {key: 'yellow-5'},
+                {key: 'yellow-6'},
+                {key: 'yellow-7'},
+                {key: 'yellow-8'},
+                {key: 'yellow-9'},
+            ],
+            frameRate: 12,
+
+        });
+
+        this.FwYellow.play('yellow')
 
     }
 

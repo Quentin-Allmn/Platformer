@@ -9,7 +9,10 @@ class SceneMenu extends Phaser.Scene{
         this.load.image('play2', 'assets/images/UI/UI_Play1_On.png');
         this.load.image('options', 'assets/images/UI/UI_Options1.png');
         this.load.image('options2', 'assets/images/UI/UI_Options1_On.png');
-        this.load.image('background2','assets/images/background/sky1.png')
+        this.load.image('background2','assets/images/background/sky1.png');
+
+        this.load.image('controls','assets/images/UI/Controls.png');
+        this.load.image('controls2','assets/images/UI/Controls_On.png');
 
         for (let i = 1; i <= 9; i++) {
             this.load.image('yellow-' + i, 'assets/images/Fireworks/yellow/yellow-' + i + '.png');
@@ -23,13 +26,16 @@ class SceneMenu extends Phaser.Scene{
         const MbackgroundImage = this.add.image(0, 0, 'background2').setOrigin(0, 0);
         MbackgroundImage.setScale(0.75, 1);
 
-        this.add.text(450,40,"A Night In Fire",{ fontFamily: 'Asian', color: '#FFC100', fontSize: '80px' });
+        this.add.text(425,40,"A Night In Fire",{ fontFamily: 'Asian', color: '#FFC100', fontSize: '80px' });
 
         let playbutton = this.add.image(660,440,'play');
         playbutton.setScale(1);
 
         let optionsbutton = this.add.image(660,540,'options');
         optionsbutton.setScale(1);
+
+        let controlbutton = this.add.image(660,640,'controls');
+        controlbutton.setScale(0.58);
 
         playbutton.setInteractive();
 
@@ -67,7 +73,26 @@ class SceneMenu extends Phaser.Scene{
             this.scene.start("optionsGame")
         })
 
-        //this.fireworks();
+        controlbutton.setInteractive();
+
+        controlbutton.on("pointerover",()=>{
+            //console.log("over")
+            controlbutton.setTexture('controls2')
+        })
+
+        controlbutton.on("pointerout",()=>{
+            //console.log("out")
+            controlbutton.setTexture('controls')
+        })
+
+        // controlbutton.on("pointerup",()=>{
+        //     //console.log("up")
+        //     controlbutton.setTexture('controls')
+        //     this.scene.start("optionsGame")
+        // })
+
+
+        this.fireworks();
 
     }
 
@@ -92,25 +117,25 @@ class SceneMenu extends Phaser.Scene{
 
         });
 
-        const firework = this.physics.add.group();
+        // const firework = this.physics.add.group();
+        //
+        // const fireworksList = ['yellow']
+        //
+        // const fireworksGen = () => {
+        //     const xCoord = Math.random() * 1920
+        //     const yCoord = Math.random() * 720
+        //     let randomfireworks = fireworksList(Math.random() * 3)
+        //     firework.create(xCoord, yCoord, randomfireworks);
+        //
+        // }
+        //
+        // const fireworksGenLoop = this.time.addEvent({
+        //     delay:  this.fwDelay,
+        //     callback: fireworksGen,
+        //     loop: true,
+        // });
 
-        const fireworksList = ['yellow']
-
-        const fireworksGen = () => {
-            const xCoord = Math.random() * 1920
-            const yCoord = Math.random() * 720
-            let randomfireworks = fireworksList(Math.random() * 3)
-            firework.create(xCoord, yCoord, randomfireworks);
-
-        }
-
-        const fireworksGenLoop = this.time.addEvent({
-            delay:  this.fwDelay,
-            callback: fireworksGen,
-            loop: true,
-        });
-
-        // this.FwYellow.play('yellow')
+         this.FwYellow.play('yellow')
     }
 
 }
