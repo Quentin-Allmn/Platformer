@@ -322,7 +322,7 @@ class Scene extends Phaser.Scene {
             me.FwYellow.setPosition(fireworks.body.x - 32,fireworks.body.y + 64);
 
             var randomColor = Phaser.Math.Between(1, 5);
-            
+
             switch (randomColor) {
                 case 1:
                     me.FwYellow.setTexture('yellow')
