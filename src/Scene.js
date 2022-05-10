@@ -171,7 +171,7 @@ class Scene extends Phaser.Scene {
         })
 
         this.FwYellow = this.add.sprite(10,10, 'yellow-');
-        this.FwYellow.setScale(1.5);
+        this.FwYellow.setScale(2);
 
         this.anims.create({
             key: 'yellow',
@@ -237,7 +237,7 @@ class Scene extends Phaser.Scene {
 
         this.physics.add.collider(firework, this.platforms, function (fireworks){
             console.log(fireworks.body.x,fireworks.body.y)
-            me.FwYellow.setPosition(fireworks.body.x,fireworks.body.y);
+            me.FwYellow.setPosition(fireworks.body.x - 32,fireworks.body.y + 64);
 
             me.FwYellow.play('yellow')
 
