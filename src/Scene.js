@@ -27,8 +27,26 @@ class Scene extends Phaser.Scene {
 
         this.load.image('enemy','assets/images/player.png');
 
+        // Fireworks
+
         for (let i = 1; i <= 9; i++) {
             this.load.image('yellow-' + i, 'assets/images/Fireworks/yellow/yellow-' + i + '.png');
+        }
+
+        for (let i = 1; i <= 9; i++) {
+            this.load.image('red-' + i, 'assets/images/Fireworks/red/red-' + i + '.png');
+        }
+
+        for (let i = 1; i <= 9; i++) {
+            this.load.image('blue-' + i, 'assets/images/Fireworks/blue/blue-' + i + '.png');
+        }
+
+        for (let i = 1; i <= 9; i++) {
+            this.load.image('green-' + i, 'assets/images/Fireworks/green/green-' + i + '.png');
+        }
+
+        for (let i = 1; i <= 9; i++) {
+            this.load.image('pink-' + i, 'assets/images/Fireworks/pink/pink-' + i + '.png');
         }
 
     }
@@ -189,6 +207,70 @@ class Scene extends Phaser.Scene {
             frameRate: 12,
         });
 
+        this.anims.create({
+            key: 'red',
+            frames: [
+                {key: 'red-1'},
+                {key: 'red-2'},
+                {key: 'red-3'},
+                {key: 'red-4'},
+                {key: 'red-5'},
+                {key: 'red-6'},
+                {key: 'red-7'},
+                {key: 'red-8'},
+                {key: 'red-9'},
+            ],
+            frameRate: 12,
+        });
+
+        this.anims.create({
+            key: 'blue',
+            frames: [
+                {key: 'blue-1'},
+                {key: 'blue-2'},
+                {key: 'blue-3'},
+                {key: 'blue-4'},
+                {key: 'blue-5'},
+                {key: 'blue-6'},
+                {key: 'blue-7'},
+                {key: 'blue-8'},
+                {key: 'blue-9'},
+            ],
+            frameRate: 12,
+        });
+
+        this.anims.create({
+            key: 'green',
+            frames: [
+                {key: 'green-1'},
+                {key: 'green-2'},
+                {key: 'green-3'},
+                {key: 'green-4'},
+                {key: 'green-5'},
+                {key: 'green-6'},
+                {key: 'green-7'},
+                {key: 'green-8'},
+                {key: 'green-9'},
+            ],
+            frameRate: 12,
+        });
+
+        this.anims.create({
+            key: 'pink',
+            frames: [
+                {key: 'pink-1'},
+                {key: 'pink-2'},
+                {key: 'pink-3'},
+                {key: 'pink-4'},
+                {key: 'pink-5'},
+                {key: 'pink-6'},
+                {key: 'pink-7'},
+                {key: 'pink-8'},
+                {key: 'pink-9'},
+            ],
+            frameRate: 12,
+        });
+
 }
 
     sauvegarde(player, saves) {
@@ -229,6 +311,8 @@ class Scene extends Phaser.Scene {
 
         }
 
+        this.randomColor = Math.random() * 5;
+
         const fireworksGenLoop = this.time.addEvent({
             delay:  this.fwDelay,
             callback: fireworksGen,
@@ -239,7 +323,24 @@ class Scene extends Phaser.Scene {
             console.log(fireworks.body.x,fireworks.body.y)
             me.FwYellow.setPosition(fireworks.body.x - 32,fireworks.body.y + 64);
 
-            me.FwYellow.play('yellow')
+            switch (this.randomColor) {
+                case 1:
+                    me.FwYellow.play('yellow')
+                    break
+                case 2:
+                    me.FwYellow.play('blue')
+                    break
+                case 3:
+                    me.FwYellow.play('pink')
+                    break
+                case 4:
+                    me.FwYellow.play('red')
+                    break
+                case 5:
+                    me.FwYellow.play('green')
+                    break
+            }
+            //me.FwYellow.play('red')
 
             fireworks.destroy();
         })
