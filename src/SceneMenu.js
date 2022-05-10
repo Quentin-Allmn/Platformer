@@ -19,6 +19,7 @@ class SceneMenu extends Phaser.Scene{
 
     create() {
 
+
         const MbackgroundImage = this.add.image(0, 0, 'background2').setOrigin(0, 0);
         MbackgroundImage.setScale(0.75, 1);
 
@@ -66,8 +67,13 @@ class SceneMenu extends Phaser.Scene{
             this.scene.start("optionsGame")
         })
 
+        //this.fireworks();
 
-        this.FwYellow = this.add.sprite(320,200, 'yellow-').setOrigin(0, 0);
+    }
+
+    fireworks(){
+        this.FwYellow = this.add.sprite(200,10, 'yellow-').setOrigin(0, 0);
+        this.FwYellow.setScale(1.5)
 
         this.anims.create({
             key: 'yellow',
@@ -84,12 +90,27 @@ class SceneMenu extends Phaser.Scene{
             ],
             frameRate: 12,
 
-            // repeat: -1
         });
-        this.FwYellow.play('yellow')
 
+        const firework = this.physics.add.group();
 
+        const fireworksList = ['yellow']
 
+        const fireworksGen = () => {
+            const xCoord = Math.random() * 1920
+            const yCoord = Math.random() * 720
+            let randomfireworks = fireworksList(Math.random() * 3)
+            firework.create(xCoord, yCoord, randomfireworks);
+
+        }
+
+        const fireworksGenLoop = this.time.addEvent({
+            delay:  this.fwDelay,
+            callback: fireworksGen,
+            loop: true,
+        });
+
+        // this.FwYellow.play('yellow')
     }
 
 }
