@@ -35,6 +35,8 @@ class Scene extends Phaser.Scene {
 
     create() {
 
+        let me = this;
+
         this.options = new SceneOptions(this);
 
         if (this.options.diffHard === false){
@@ -168,6 +170,25 @@ class Scene extends Phaser.Scene {
 
         })
 
+        this.FwYellow = this.add.sprite(10,10, 'yellow-');
+        this.FwYellow.setScale(1.5);
+
+        this.anims.create({
+            key: 'yellow',
+            frames: [
+                {key: 'yellow-1'},
+                {key: 'yellow-2'},
+                {key: 'yellow-3'},
+                {key: 'yellow-4'},
+                {key: 'yellow-5'},
+                {key: 'yellow-6'},
+                {key: 'yellow-7'},
+                {key: 'yellow-8'},
+                {key: 'yellow-9'},
+            ],
+            frameRate: 12,
+        });
+
 }
 
     sauvegarde(player, saves) {
@@ -195,6 +216,8 @@ class Scene extends Phaser.Scene {
 
     fireworks() {
 
+        let me = this;
+
         const firework = this.physics.add.group();
 
         const fireworksList = ['fireworks1', 'fireworks2', 'fireworks3']
@@ -214,31 +237,11 @@ class Scene extends Phaser.Scene {
 
         this.physics.add.collider(firework, this.platforms, function (fireworks){
             console.log(fireworks.body.x,fireworks.body.y)
+            me.FwYellow.setPosition(fireworks.body.x,fireworks.body.y);
 
-            this.fX = fireworks.body.x;
-            this.fY = fireworks.body.y;
-            // this.FwYellow = this.add.sprite(fX,fY, 'yellow-').setOrigin(0, 0);
-            //
-            // this.anims.create({
-            //     key: 'yellow',
-            //     frames: [
-            //         {key: 'yellow-1'},
-            //         {key: 'yellow-2'},
-            //         {key: 'yellow-3'},
-            //         {key: 'yellow-4'},
-            //         {key: 'yellow-5'},
-            //         {key: 'yellow-6'},
-            //         {key: 'yellow-7'},
-            //         {key: 'yellow-8'},
-            //         {key: 'yellow-9'},
-            //     ],
-            //     frameRate: 12,
-            //     // repeat: -1
-            // });
-            //this.FwYellow.play('yellow')
+            me.FwYellow.play('yellow')
 
             fireworks.destroy();
-           //this.particles();
         })
 
         this.physics.add.collider(firework, this.destructible,  (un,deux)=>{
@@ -270,7 +273,7 @@ class Scene extends Phaser.Scene {
 
     update() {
 
-        console.log("player",this.player.player.x,"y",this.player.player.y)
+        //console.log("player",this.player.player.x,"y",this.player.player.y)
 
         this.checkFw(this.player.player.x)
 
