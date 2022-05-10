@@ -28,7 +28,7 @@ class Scene extends Phaser.Scene {
         this.load.image('enemy','assets/images/player.png');
 
         for (let i = 1; i <= 8; i++) {
-            this.load.image('red-' + i, 'assets/images/Fireworks/red-' + i + '.png');
+            this.load.image('yellow-' + i, 'assets/images/Fireworks/yellow/yellow-' + i + '.png');
         }
 
     }
@@ -213,31 +213,31 @@ class Scene extends Phaser.Scene {
         });
 
         this.physics.add.collider(firework, this.platforms, function (fireworks){
-            //console.log(fireworks.body.x,fireworks.body.y)
-            //
-            // this.FwRed = this.add.sprite(fireworks.body.x,fireworks.body.y, 'red-').setOrigin(0, 0);
-            //
-            // this.anims.create({
-            //     key: 'Red',
-            //     frames: [
-            //         {key: 'red-1'},
-            //         {key: 'red-2'},
-            //         {key: 'red-3'},
-            //         {key: 'red-4'},
-            //         {key: 'red-5'},
-            //         {key: 'red-6'},
-            //         {key: 'red-7'},
-            //         {key: 'red-8'},
-            //     ],
-            //     frameRate: 12,
-            //     // repeat: -1
-            // });
-            // this.FwRed.play('Red')
+            console.log(fireworks.body.x,fireworks.body.y)
+
+            this.fX = fireworks.body.x;
+            this.fY = fireworks.body.y;
+            this.FwYellow = this.add.sprite(fX,fY, 'yellow-').setOrigin(0, 0);
+
+            this.anims.create({
+                key: 'yellow',
+                frames: [
+                    {key: 'yellow-1'},
+                    {key: 'yellow-2'},
+                    {key: 'yellow-3'},
+                    {key: 'yellow-4'},
+                    {key: 'yellow-5'},
+                    {key: 'yellow-6'},
+                    {key: 'yellow-7'},
+                    {key: 'yellow-8'},
+                ],
+                frameRate: 8,
+                // repeat: -1
+            });
+            this.FwYellow.play('Red')
 
             fireworks.destroy();
-            //this.fX = fireworks.body.x;
-            //this.fY = fireworks.body.y;
-           // this.particles();
+           //this.particles();
         })
 
         this.physics.add.collider(firework, this.destructible,  (un,deux)=>{
