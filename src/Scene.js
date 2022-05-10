@@ -311,8 +311,6 @@ class Scene extends Phaser.Scene {
 
         }
 
-        this.randomColor = Math.random() * 5;
-
         const fireworksGenLoop = this.time.addEvent({
             delay:  this.fwDelay,
             callback: fireworksGen,
@@ -323,21 +321,32 @@ class Scene extends Phaser.Scene {
             console.log(fireworks.body.x,fireworks.body.y)
             me.FwYellow.setPosition(fireworks.body.x - 32,fireworks.body.y + 64);
 
-            switch (this.randomColor) {
+            var randomColor = Phaser.Math.Between(1, 5);
+            
+            switch (randomColor) {
                 case 1:
+                    me.FwYellow.setTexture('yellow')
                     me.FwYellow.play('yellow')
                     break
                 case 2:
+                    me.FwYellow.setTexture('blue')
                     me.FwYellow.play('blue')
+                    console.log('blue')
                     break
                 case 3:
+                    me.FwYellow.setTexture('pink')
                     me.FwYellow.play('pink')
+                    console.log('pink')
                     break
                 case 4:
+                    me.FwYellow.setTexture('red')
                     me.FwYellow.play('red')
+                    console.log('red')
                     break
                 case 5:
+                    me.FwYellow.setTexture('green')
                     me.FwYellow.play('green')
+                    console.log('green')
                     break
             }
             //me.FwYellow.play('red')
