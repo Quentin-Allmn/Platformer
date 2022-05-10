@@ -27,7 +27,7 @@ class Scene extends Phaser.Scene {
 
         this.load.image('enemy','assets/images/player.png');
 
-        for (let i = 1; i <= 8; i++) {
+        for (let i = 1; i <= 9; i++) {
             this.load.image('yellow-' + i, 'assets/images/Fireworks/yellow/yellow-' + i + '.png');
         }
 
@@ -217,24 +217,25 @@ class Scene extends Phaser.Scene {
 
             this.fX = fireworks.body.x;
             this.fY = fireworks.body.y;
-            this.FwYellow = this.add.sprite(fX,fY, 'yellow-').setOrigin(0, 0);
-
-            this.anims.create({
-                key: 'yellow',
-                frames: [
-                    {key: 'yellow-1'},
-                    {key: 'yellow-2'},
-                    {key: 'yellow-3'},
-                    {key: 'yellow-4'},
-                    {key: 'yellow-5'},
-                    {key: 'yellow-6'},
-                    {key: 'yellow-7'},
-                    {key: 'yellow-8'},
-                ],
-                frameRate: 8,
-                // repeat: -1
-            });
-            this.FwYellow.play('Red')
+            // this.FwYellow = this.add.sprite(fX,fY, 'yellow-').setOrigin(0, 0);
+            //
+            // this.anims.create({
+            //     key: 'yellow',
+            //     frames: [
+            //         {key: 'yellow-1'},
+            //         {key: 'yellow-2'},
+            //         {key: 'yellow-3'},
+            //         {key: 'yellow-4'},
+            //         {key: 'yellow-5'},
+            //         {key: 'yellow-6'},
+            //         {key: 'yellow-7'},
+            //         {key: 'yellow-8'},
+            //         {key: 'yellow-9'},
+            //     ],
+            //     frameRate: 12,
+            //     // repeat: -1
+            // });
+            //this.FwYellow.play('yellow')
 
             fireworks.destroy();
            //this.particles();

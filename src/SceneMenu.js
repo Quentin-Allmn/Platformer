@@ -9,7 +9,12 @@ class SceneMenu extends Phaser.Scene{
         this.load.image('play2', 'assets/images/UI/UI_Play1_On.png');
         this.load.image('options', 'assets/images/UI/UI_Options1.png');
         this.load.image('options2', 'assets/images/UI/UI_Options1_On.png');
-        this.load.image('background2','assets/images/background/sky1-C.png')
+        this.load.image('background2','assets/images/background/sky1.png')
+
+        for (let i = 1; i <= 9; i++) {
+            this.load.image('yellow-' + i, 'assets/images/Fireworks/yellow/yellow-' + i + '.png');
+        }
+
     }
 
     create() {
@@ -60,6 +65,30 @@ class SceneMenu extends Phaser.Scene{
             optionsbutton.setTexture('options2')
             this.scene.start("optionsGame")
         })
+
+
+        this.FwYellow = this.add.sprite(320,200, 'yellow-').setOrigin(0, 0);
+
+        this.anims.create({
+            key: 'yellow',
+            frames: [
+                {key: 'yellow-1'},
+                {key: 'yellow-2'},
+                {key: 'yellow-3'},
+                {key: 'yellow-4'},
+                {key: 'yellow-5'},
+                {key: 'yellow-6'},
+                {key: 'yellow-7'},
+                {key: 'yellow-8'},
+                {key: 'yellow-9'},
+            ],
+            frameRate: 12,
+
+            // repeat: -1
+        });
+        this.FwYellow.play('yellow')
+
+
 
     }
 
