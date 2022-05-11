@@ -55,18 +55,7 @@ class Scene extends Phaser.Scene {
 
         let me = this;
 
-        this.options = new SceneOptions(this);
-
-        this.hard = diffHard;
-
-        console.log(this.hard)
-
-        if (this.hard === false){
-            console.log("la c'est normal")
-        }
-        if (this.hard === true){
-            console.log("la c'est Hard")
-        }
+        console.log(diffHard)
 
         // Background
 
@@ -102,8 +91,8 @@ class Scene extends Phaser.Scene {
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
-        this.currentSaveX = 0;
-        this.currentSaveY = 0;
+        this.currentSaveX = 720;
+        this.currentSaveY = 200;
 
         // Platformes Destructibles
 
@@ -143,13 +132,12 @@ class Scene extends Phaser.Scene {
         this.fireworks();
 
         // Mode Normal
+        this.vie = 3;
 
-        if ( this.options.diffHard === false ) {
+        if (diffHard === false ) {
             console.log("Normal")
-            this.vie = 3;
             this.add.text(120,40,this.vie,{ color: '#FFC100', fontSize: '20px' });
 
-            while (this.vie > 0) {
 
                 this.saves = this.physics.add.group({
                     allowGravity: false,
@@ -165,9 +153,8 @@ class Scene extends Phaser.Scene {
                 this.cameras.main.startFollow(this.player.player);
 
             }
-            this.scene.start("GameOver")
-        }
-        if (this.options.diffHard === true) {
+
+        if (this.diffHard === true) {
             console.log("Hard")
         }
 
@@ -369,16 +356,18 @@ class Scene extends Phaser.Scene {
             deux.destroy();
         })
 
-        this.physics.add.collider(this.player.player, firework, () => {
-            //fireworksGenLoop.destroy();
-            //this.physics.pause();
-
-            this.scene.start("GameOver")
-
+        this.physics.add.collider(this.player.player, firework, (player,firework) => {
+            firework.destroy();
             this.vie -= 1;
-            console.log("Game Over")
 
-            if (this.options.diffHard === true) {
+            this.player.player.x = this.currentSaveX;
+            this.player.player.y = this.currentSaveY;
+
+            if (this.vie < 0){
+                this.scene.start("GameOver")
+            }
+
+            if (diffHard === true) {
                 this.scene.start("GameOver")
             }
             //alert("GAME OVER !!!");

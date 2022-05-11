@@ -15,7 +15,7 @@ let gameConfig = {
 let game = new Phaser.Game(gameConfig);
 
 // Choix du mode de jeu
-var diffHard;
+var diffHard = false;
 
 // Choix de la langue
 var langue;

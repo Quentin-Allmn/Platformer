@@ -68,7 +68,7 @@ class SceneOptions extends Phaser.Scene{
                 diffHard = false;
                 console.log("Normal")
             }
-            //this.scene.start("menuGame")
+
         })
 
         this.FwYellow = this.add.sprite(600,10, 'yellow-').setOrigin(0, 0);
