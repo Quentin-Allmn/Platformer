@@ -57,10 +57,14 @@ class Scene extends Phaser.Scene {
 
         this.options = new SceneOptions(this);
 
-        if (this.options.diffHard === false){
+        this.hard = diffHard;
+
+        console.log(this.hard)
+
+        if (this.hard === false){
             console.log("la c'est normal")
         }
-        if (this.options.diffHard === true){
+        if (this.hard === true){
             console.log("la c'est Hard")
         }
 

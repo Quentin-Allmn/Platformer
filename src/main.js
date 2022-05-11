@@ -7,9 +7,15 @@ let gameConfig = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 500 }
+            gravity: { y: 700 }
         }
     },
     scene: [SceneMenu,Scene,SceneOptions,SceneGameOver,SceneVictory]
 };
 let game = new Phaser.Game(gameConfig);
+
+// Choix du mode de jeu
+var diffHard;
+
+// Choix de la langue
+var langue;
