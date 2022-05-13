@@ -51,26 +51,25 @@ class SceneOptions extends Phaser.Scene{
             this.scene.start("menuGame")
         })
 
-        this.diffHard = false;
-
         let diffbutton = this.add.image(700,460,'normal');
         diffbutton.setScale(1)
 
         diffbutton.setInteractive();
 
         diffbutton.on("pointerup",()=>{
+
             //console.log("up")
-            if (this.diffHard === false){
+            if (diffHard === false){
                 diffbutton.setTexture('hard')
-                this.diffHard = true;
+                diffHard = true;
                 console.log("Hard")
             }
             else {
                 diffbutton.setTexture('normal')
-                this.diffHard = false;
+                diffHard = false;
                 console.log("Normal")
             }
-            //this.scene.start("menuGame")
+
         })
 
         this.FwYellow = this.add.sprite(600,10, 'yellow-').setOrigin(0, 0);
@@ -98,7 +97,7 @@ class SceneOptions extends Phaser.Scene{
     }
 
     update(){
-        if (this.diffHard === true){
+        if (diffHard === true){
             console.log("Hard")
         }
         else {

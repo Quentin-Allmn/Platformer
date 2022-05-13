@@ -120,24 +120,6 @@ class SceneMenu extends Phaser.Scene{
 
         });
 
-        // const firework = this.physics.add.group();
-        //
-        // const fireworksList = ['yellow']
-        //
-        // const fireworksGen = () => {
-        //     const xCoord = Math.random() * 1920
-        //     const yCoord = Math.random() * 720
-        //     let randomfireworks = fireworksList(Math.random() * 3)
-        //     firework.create(xCoord, yCoord, randomfireworks);
-        //
-        // }
-        //
-        // const fireworksGenLoop = this.time.addEvent({
-        //     delay:  this.fwDelay,
-        //     callback: fireworksGen,
-        //     loop: true,
-        // });
-
          this.FwYellow.play('yellow')
     }
 
