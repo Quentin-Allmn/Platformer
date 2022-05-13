@@ -10,6 +10,7 @@ class SceneMenu extends Phaser.Scene{
         this.load.image('options', 'assets/images/UI/UI_Options1.png');
         this.load.image('options2', 'assets/images/UI/UI_Options1_On.png');
         this.load.image('background2','assets/images/background/sky1.png');
+        this.load.image('logo','assets/images/Logo/Logo.png')
 
         this.load.image('controls','assets/images/UI/Controls.png');
         this.load.image('controls2','assets/images/UI/Controls_On.png');
@@ -26,7 +27,9 @@ class SceneMenu extends Phaser.Scene{
         const MbackgroundImage = this.add.image(0, 0, 'background2').setOrigin(0, 0);
         MbackgroundImage.setScale(0.75, 1);
 
-        this.add.text(425,40,"A Night In Fire",{ fontFamily: 'Asian', color: '#FFC100', fontSize: '80px' });
+        //this.add.text(425,40,"A Night In Fire",{ fontFamily: 'Asian', color: '#FFC100', fontSize: '80px' });
+
+        this.add.image(380,10,'logo').setOrigin(0,0).setScale(0.5);
 
         let playbutton = this.add.image(660,440,'play');
         playbutton.setScale(1);

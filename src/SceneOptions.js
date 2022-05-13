@@ -13,6 +13,7 @@ class SceneOptions extends Phaser.Scene{
         this.load.image('normal', 'assets/images/UI/UI_Difficulty_Normal.png');
 
         this.load.image('background2','assets/images/background/sky1.png');
+        this.load.image('logo','assets/images/Logo/Logo.png')
 
         for (let i = 1; i <= 9; i++) {
             this.load.image('yellow-' + i, 'assets/images/Fireworks/yellow/yellow-' + i + '.png');
@@ -27,7 +28,7 @@ class SceneOptions extends Phaser.Scene{
 
         //this.add.text(380,120,"A Night In Fire",{ fontFamily: 'Asian', color: '#FFC100', fontSize: '100px' });
 
-        this.add.text(600,20,"Options",{ fontFamily: 'Asian', color: '#FFC100', fontSize: '50px' });
+        this.add.image(400,10,'logo').setOrigin(0,0).setScale(0.5);
 
         let backbutton = this.add.image(160,60,'back');
         backbutton.setScale(1)
