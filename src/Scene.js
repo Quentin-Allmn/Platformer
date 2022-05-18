@@ -346,7 +346,7 @@ class Scene extends Phaser.Scene {
         })
 
         this.physics.add.collider(firework, this.destructible,  (un,deux)=>{
-            this.cameras.main.shake(1000, 0.005);
+            this.cameras.main.shake(1000, 0.004);
             console.log("shake")
             me.FwYellow.setPosition(un.body.x,un.body.y);
 
