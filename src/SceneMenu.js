@@ -40,6 +40,16 @@ class SceneMenu extends Phaser.Scene{
         let playbutton = this.add.image(660,440,'play');
         playbutton.setScale(1);
 
+        if (langue === "en"){
+            playbutton.setTexture('play')
+        }
+        else if (langue === "fr"){
+            playbutton.setTexture("jouer")
+        }
+        else {
+            playbutton.setTexture("jouer3")
+        }
+
         let optionsbutton = this.add.image(660,540,'options');
         optionsbutton.setScale(1);
 

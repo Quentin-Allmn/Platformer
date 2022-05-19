@@ -54,6 +54,13 @@ class SceneOptions extends Phaser.Scene{
         let diffbutton = this.add.image(700,460,'normal');
         diffbutton.setScale(1)
 
+        if (diffHard === true){
+            diffbutton.setTexture('hard')
+        }
+        else {
+            diffbutton.setTexture('normal')
+        }
+
         diffbutton.setInteractive();
 
         diffbutton.on("pointerup",()=>{
