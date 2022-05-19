@@ -9,7 +9,7 @@ class SceneMenu extends Phaser.Scene{
         this.load.image('play2', 'assets/images/UI/UI_Play1_On.png');
         this.load.image('options', 'assets/images/UI/UI_Options1.png');
         this.load.image('options2', 'assets/images/UI/UI_Options1_On.png');
-        this.load.image('background2','assets/images/background/sky1-min.png');
+        this.load.image('background2','assets/images/background/Sky1-min.png');
         this.load.image('logo','assets/images/Logo/Logo.png')
 
         this.load.image('jouer', 'assets/images/UI/Fr/Jouer_fr.png');

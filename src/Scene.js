@@ -267,7 +267,7 @@ class Scene extends Phaser.Scene {
     console.log("current", this.currentSaveX, this.currentSaveY)
     this.currentSaveX = player.x
       this.currentSaveY = player.y
-      saves.body.enable = false;
+      saves.body.enable = true;
       this.currentKey = player.key
     }
 
