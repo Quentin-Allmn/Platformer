@@ -92,7 +92,7 @@ class Scene extends Phaser.Scene {
         this.cursors = this.input.keyboard.createCursorKeys();
 
         this.currentSaveX = 720;
-        this.currentSaveY = 200;
+        this.currentSaveY = 900;
 
         // Platformes Destructibles
 
@@ -137,7 +137,6 @@ class Scene extends Phaser.Scene {
         if (diffHard === false ) {
             console.log("Normal")
             this.add.text(120,40,this.vie,{ color: '#FFC100', fontSize: '20px' });
-
 
                 this.saves = this.physics.add.group({
                     allowGravity: false,
@@ -348,6 +347,7 @@ class Scene extends Phaser.Scene {
         this.physics.add.collider(firework, this.destructible,  (un,deux)=>{
             this.cameras.main.shake(1000, 0.004);
             console.log("shake")
+            console.log(un.body.x)
             me.FwYellow.setPosition(un.body.x,un.body.y);
 
             me.FwYellow.play('yellow')
