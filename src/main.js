@@ -18,4 +18,4 @@ let game = new Phaser.Game(gameConfig);
 var diffHard = false;
 
 // Choix de la langue
-var langue;
+var langue = "en";

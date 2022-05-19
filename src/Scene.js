@@ -128,7 +128,7 @@ class Scene extends Phaser.Scene {
 
         // Fireworks
 
-        this.fwDelay = 200;
+        this.fwDelay = 180;
         this.fireworks();
 
         // Mode Normal
@@ -274,10 +274,10 @@ class Scene extends Phaser.Scene {
 
     checkFw(player){
         if (player < 900){
-            this.fwDelay = 300;
+            this.fwDelay = 400;
         }
         if (player > 900){
-            this.fwDelay = 200;
+            this.fwDelay = 180;
         }
         if (player > 10240){
             this.fwDelay = this.fwDelay - 50;

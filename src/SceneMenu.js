@@ -12,6 +12,12 @@ class SceneMenu extends Phaser.Scene{
         this.load.image('background2','assets/images/background/sky1.png');
         this.load.image('logo','assets/images/Logo/Logo.png')
 
+        this.load.image('jouer', 'assets/images/UI/Fr/Jouer_fr.png');
+        this.load.image('jouer2', 'assets/images/UI/Fr/Jouer_fr_On.png');
+
+        this.load.image('jouer3', 'assets/images/UI/Kr/Jouer_kr.png');
+        this.load.image('jouer4', 'assets/images/UI/Kr/Jouer_kr_On.png');
+
         this.load.image('controls','assets/images/UI/Controls.png');
         this.load.image('controls2','assets/images/UI/Controls_On.png');
 
@@ -44,12 +50,28 @@ class SceneMenu extends Phaser.Scene{
 
         playbutton.on("pointerover",()=>{
             //console.log("over")
-            playbutton.setTexture('play2')
+            if (langue === "en") {
+                playbutton.setTexture('play2')
+            }
+            else if (langue === "fr"){
+                playbutton.setTexture('jouer2')
+            }
+            else {
+                playbutton.setTexture('jouer4')
+            }
         })
 
         playbutton.on("pointerout",()=>{
             //console.log("out")
-            playbutton.setTexture('play')
+            if (langue === "en") {
+                playbutton.setTexture('play')
+            }
+            else if (langue === "fr"){
+                playbutton.setTexture('jouer')
+            }
+            else {
+                playbutton.setTexture('jouer3')
+            }
         })
 
         playbutton.on("pointerup",()=>{
@@ -122,5 +144,6 @@ class SceneMenu extends Phaser.Scene{
 
          this.FwYellow.play('yellow')
     }
+
 
 }

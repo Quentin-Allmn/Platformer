@@ -72,6 +72,43 @@ class SceneOptions extends Phaser.Scene{
 
         })
 
+        let languebutton = this.add.text(500, 560, 'English',{ color: '#FFC100', fontSize: '100px' });
+
+        if (langue === "en"){
+            languebutton.setText("English")
+        }
+        else if (langue === "fr"){
+            languebutton.setText("Français")
+        }
+        else {
+            languebutton.setText("Korean")
+        }
+
+        languebutton.setInteractive();
+
+        languebutton.on("pointerup",()=>{
+            //console.log("up")
+
+            if (langue === "en"){
+                console.log("en")
+                languebutton.setText("Français")
+                langue = "fr"
+                console.log("fr")
+            }
+            else if (langue === "fr"){
+                console.log("fr")
+                languebutton.setText("Korean")
+                langue = "kr"
+                console.log("kr")
+            }
+            else {
+                console.log("kr")
+                languebutton.setText("English")
+                langue = "en"
+                console.log("en")
+            }
+        })
+
         this.FwYellow = this.add.sprite(600,10, 'yellow-').setOrigin(0, 0);
         this.FwYellow.setScale(1.5)
 
@@ -102,6 +139,16 @@ class SceneOptions extends Phaser.Scene{
         }
         else {
             console.log("Normal")
+        }
+
+        if (langue === "en"){
+            console.log("en")
+        }
+        else if (langue === "fr"){
+            console.log("fr")
+        }
+        else {
+            console.log("kr")
         }
 
     }
