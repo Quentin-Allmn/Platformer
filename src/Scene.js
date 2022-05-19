@@ -25,6 +25,8 @@ class Scene extends Phaser.Scene {
         this.load.image('invisible','assets/images/Invisible.png')
         this.load.image('save', 'assets/images/Save.png');
 
+        this.load.image('save', 'assets/images/UI/Vie/UI-Vie.png');
+
         this.load.image('enemy','assets/images/player.png');
 
         // Fireworks
@@ -151,6 +153,15 @@ class Scene extends Phaser.Scene {
                 this.cursors = this.input.keyboard.createCursorKeys();
                 this.cameras.main.startFollow(this.player.player);
 
+                if (this.vie >= 1){
+                    this.vie1 = this.add.image()
+                }
+            if (this.vie >= 2){
+
+            }
+            if (this.vie >= 3){
+
+            }
             }
 
         if (this.diffHard === true) {
@@ -348,9 +359,11 @@ class Scene extends Phaser.Scene {
             this.cameras.main.shake(1000, 0.004);
             console.log("shake")
             console.log(un.body.x)
-            me.FwYellow.setPosition(un.body.x,un.body.y);
 
-            me.FwYellow.play('yellow')
+            this.FwYellow = this.add.sprite(un.body.x,un.body.y, 'yellow-');
+            this.FwYellow.setScale(2);
+            this.FwYellow.play('yellow')
+
             //console.log(un.body.x,un.body.y)
             un.destroy();
             deux.destroy();
