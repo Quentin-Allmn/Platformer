@@ -12,7 +12,7 @@ class SceneOptions extends Phaser.Scene{
         this.load.image('hard', 'assets/images/UI/UI_Difficulty_Hard.png');
         this.load.image('normal', 'assets/images/UI/UI_Difficulty_Normal.png');
 
-        this.load.image('background2','assets/images/background/sky1.png');
+        this.load.image('background2','assets/images/background/Sky1.png');
         this.load.image('logo','assets/images/Logo/Logo.png')
 
         for (let i = 1; i <= 9; i++) {
