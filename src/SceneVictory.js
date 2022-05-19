@@ -9,7 +9,7 @@ class SceneVictory extends Phaser.Scene{
         this.load.image('back2', 'assets/images/UI/UI_BackMenu1_On.png');
         this.load.image('playAgain', 'assets/images/UI/UI_PlayAgain1.png');
         this.load.image('playAgain2', 'assets/images/UI/UI_PlayAgain1_On.png');
-        this.load.image('background2','assets/images/background/sky1.png')
+        this.load.image('background2','assets/images/Background/Sky1-min.png');
 
     }
 
