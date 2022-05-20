@@ -29,7 +29,6 @@ class SceneMenu extends Phaser.Scene{
 
     create() {
 
-
         const MbackgroundImage = this.add.image(0, 0, 'background2').setOrigin(0, 0);
         MbackgroundImage.setScale(0.75, 1);
 

@@ -25,7 +25,7 @@ class Scene extends Phaser.Scene {
         this.load.image('invisible','assets/images/Invisible.png')
         this.load.image('save', 'assets/images/Save.png');
 
-        this.load.image('save', 'assets/images/UI/Vie/UI-Vie.png');
+        this.load.image('vie', 'assets/images/UI/Vie/UI-Vie2.png');
 
         this.load.image('enemy','assets/images/player.png');
 
@@ -137,6 +137,7 @@ class Scene extends Phaser.Scene {
         this.vie = 3;
 
         if (diffHard === false ) {
+            this.scene.setActive(true,'SceneUI');
             console.log("Normal")
             this.add.text(120,40,this.vie,{ color: '#FFC100', fontSize: '20px' });
 
@@ -153,15 +154,19 @@ class Scene extends Phaser.Scene {
                 this.cursors = this.input.keyboard.createCursorKeys();
                 this.cameras.main.startFollow(this.player.player);
 
-                if (this.vie >= 1){
-                    this.vie1 = this.add.image()
-                }
-            if (this.vie >= 2){
+            let hud = this.add.image(1240,40,'vie');
+            hud.setScale(0.5);
 
+            if (this.vie === 3){
+                hud.setTexture('vie');
             }
-            if (this.vie >= 3){
+            if (this.vie === 2){
+                hud.setTexture('vie');
+            }
+            if (this.vie === 1){
+                hud.setTexture('vie');
+            }
 
-            }
             }
 
         if (this.diffHard === true) {
