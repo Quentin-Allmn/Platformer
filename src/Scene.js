@@ -63,6 +63,7 @@ class Scene extends Phaser.Scene {
 
         const backgroundImage = this.add.image(0, 40, 'sky2').setOrigin(0, 0);
         backgroundImage.setScale(1, 1);
+        backgroundImage.setAngle(8);
 
         // chargement de la map
         const map = this.add.tilemap('carte');
@@ -98,6 +99,11 @@ class Scene extends Phaser.Scene {
         // this.bois2.setCollisionByExclusion(-1, true);
         this.bois2.srollFactorX = 1;
 
+        this.arbre = map.createLayer('Arbre', tileset, 0, 100);
+        // this.bois2.setCollisionByProperty({collides: true});
+        // this.bois2.setCollisionByExclusion(-1, true);
+        this.arbre.srollFactorX = 1;
+
 
         // palyer
         this.player = new Player(this)
@@ -113,7 +119,7 @@ class Scene extends Phaser.Scene {
             immovable: true,
         });
         map.getObjectLayer('Collider').objects.forEach((col) => {
-            this.collideSprite = this.collide.create(col.x, col.y+100, col.height).setOrigin(0,0).setDisplaySize(col.width,col.height).visible=false;
+            this.collideSprite = this.collide.create(col.x, col.y+90, col.height).setOrigin(0,0).setDisplaySize(col.width,col.height).visible=false;
             this.physics.add.collider(this.collide, this.collideSprite)
         });
 
