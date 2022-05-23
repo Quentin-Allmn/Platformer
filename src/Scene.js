@@ -10,13 +10,9 @@ class Scene extends Phaser.Scene {
         this.load.image('sky2','assets/images/background/Sky4.png');
 
         this.load.atlas('player', 'assets/images/kenney_player.png', 'assets/images/kenney_player_atlas.json');
-<<<<<<< HEAD
         this.load.image('tiles', 'assets/tilesets/Tileset_test.png');
-=======
-        this.load.image('tiles', 'assets/tilesets/platformPack_tilesheet.png');
->>>>>>> parent of a0c54e3 (yes)
 
-        this.load.tilemapTiledJSON('map', 'assets/tilemaps/level3.json');
+        this.load.tilemapTiledJSON('carte', 'assets/tilemaps/level3.json');
 
         this.load.image('fireworks1','assets/images/fireworks1.png')
         this.load.image('fireworks2','assets/images/fireworks2.png')
@@ -69,28 +65,39 @@ class Scene extends Phaser.Scene {
         backgroundImage.setScale(1, 1);
 
         // chargement de la map
-        const map = this.add.tilemap('map');
+        const map = this.add.tilemap('carte');
+        console.log("map")
         // chargement du tileset
         const tileset = map.addTilesetImage(
-            'Tileset_test.png',
+            'Tileset_test',
             'tiles'
         );
-
-        // Troisieme Plan
-
-        const troisiemePlan = map.createLayer('troisiemePlan',tileset, 0, 200);
-        troisiemePlan.srollFactorX = 0.55;
-
-        // Second Plan
-
-        const secondPlan = map.createLayer('secondPlan',tileset, 0, 200);
-        secondPlan.srollFactorX = 0.65;
-
 
         this.platforms = map.createStaticLayer('Platforms', tileset, 0, 100);
         this.platforms.setCollisionByProperty({collides: true});
         this.platforms.setCollisionByExclusion(-1, true);
         this.platforms.srollFactorX = 1;
+
+        this.platforms3 = map.createStaticLayer('Platforms3', tileset, 0, 100);
+        this.platforms3.setCollisionByProperty({collides: true});
+        this.platforms3.setCollisionByExclusion(-1, true);
+        this.platforms3.srollFactorX = 1;
+
+        this.platforms2 = map.createStaticLayer('Platforms2', tileset, 0, 100);
+        this.platforms2.setCollisionByProperty({collides: true});
+        this.platforms2.setCollisionByExclusion(-1, true);
+        this.platforms2.srollFactorX = 1;
+
+        this.bois = map.createStaticLayer('Bois', tileset, 0, 100);
+        this.bois.setCollisionByProperty({collides: true});
+        this.bois.setCollisionByExclusion(-1, true);
+        this.bois.srollFactorX = 1;
+
+        this.bois2 = map.createStaticLayer('Bois2', tileset, 0, 100);
+        this.bois2.setCollisionByProperty({collides: true});
+        this.bois2.setCollisionByExclusion(-1, true);
+        this.bois2.srollFactorX = 1;
+
 
         // palyer
         this.player = new Player(this)
@@ -99,6 +106,18 @@ class Scene extends Phaser.Scene {
 
         this.currentSaveX = 720;
         this.currentSaveY = 900;
+
+
+        this.collide = this.physics.add.group({
+            allowGravity: false,
+            immovable: true,
+        });
+        map.getObjectLayer('Collider').objects.forEach((col) => {
+            this.collideSprite = this.collide.create(col.x, col.y+100, col.height).setOrigin(0).setDisplaySize(col.width,col.height).visible=false;
+            this.physics.add.collider(this.collide, this.collideSprite)
+        });
+
+        this.physics.add.collider(this.collide, this.player.player);
 
         // Platformes Destructibles
 
@@ -127,7 +146,7 @@ class Scene extends Phaser.Scene {
 
         // Camera
 
-        this.cameras.main.setBounds(0, 0, 17920, 1152);
+        this.cameras.main.setBounds(0, 0, 35840, 1152);
         this.cameras.main.startFollow(this.player.player);
         this.cameras.main.setAngle(-8);
         this.cameras.main.setRoundPixels(true);
@@ -183,7 +202,7 @@ class Scene extends Phaser.Scene {
 
         this.Rkick = false;
 
-        this.enemy = this.physics.add.sprite(17800, 500, "enemy")
+        this.enemy = this.physics.add.sprite(35750, 500, "enemy")
         //this.enemy.setCollideWorldBounds(true);
         //this.enemy.setDepth(0);
         this.enemy.body.setImmovable(false)
@@ -328,7 +347,7 @@ class Scene extends Phaser.Scene {
             loop: true,
         });
 
-        this.physics.add.collider(firework, this.platforms, function (fireworks){
+        this.physics.add.collider(firework, this.collide, function (fireworks){
             console.log(fireworks.body.x,fireworks.body.y)
             me.FwYellow.setPosition(fireworks.body.x - 32,fireworks.body.y + 64);
 
