@@ -61,8 +61,8 @@ class Scene extends Phaser.Scene {
 
         // Background
 
-        const backgroundImage = this.add.image(0, 0, 'sky2').setOrigin(0, 0);
-        //backgroundImage.setScale(18, 1.75);
+        const backgroundImage = this.add.image(0, 40, 'sky2').setOrigin(0, 0);
+        backgroundImage.setScale(1, 1);
 
         // chargement de la map
         const map = this.add.tilemap('map');
