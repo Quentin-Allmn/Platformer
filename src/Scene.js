@@ -10,7 +10,11 @@ class Scene extends Phaser.Scene {
         this.load.image('sky2','assets/images/background/Sky4.png');
 
         this.load.atlas('player', 'assets/images/kenney_player.png', 'assets/images/kenney_player_atlas.json');
+<<<<<<< HEAD
         this.load.image('tiles', 'assets/tilesets/Tileset_test.png');
+=======
+        this.load.image('tiles', 'assets/tilesets/platformPack_tilesheet.png');
+>>>>>>> parent of a0c54e3 (yes)
 
         this.load.tilemapTiledJSON('map', 'assets/tilemaps/level3.json');
 
