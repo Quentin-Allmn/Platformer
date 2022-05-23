@@ -74,28 +74,28 @@ class Scene extends Phaser.Scene {
         );
 
         this.platforms = map.createStaticLayer('Platforms', tileset, 0, 100);
-        this.platforms.setCollisionByProperty({collides: true});
-        this.platforms.setCollisionByExclusion(-1, true);
+        // this.platforms.setCollisionByProperty({collides: true});
+        // this.platforms.setCollisionByExclusion(-1, true);
         this.platforms.srollFactorX = 1;
 
         this.platforms3 = map.createStaticLayer('Platforms3', tileset, 0, 100);
-        this.platforms3.setCollisionByProperty({collides: true});
-        this.platforms3.setCollisionByExclusion(-1, true);
+        // this.platforms3.setCollisionByProperty({collides: true});
+        // this.platforms3.setCollisionByExclusion(-1, true);
         this.platforms3.srollFactorX = 1;
 
         this.platforms2 = map.createStaticLayer('Platforms2', tileset, 0, 100);
-        this.platforms2.setCollisionByProperty({collides: true});
-        this.platforms2.setCollisionByExclusion(-1, true);
+        // this.platforms2.setCollisionByProperty({collides: true});
+        // this.platforms2.setCollisionByExclusion(-1, true);
         this.platforms2.srollFactorX = 1;
 
         this.bois = map.createStaticLayer('Bois', tileset, 0, 100);
-        this.bois.setCollisionByProperty({collides: true});
-        this.bois.setCollisionByExclusion(-1, true);
+        // this.bois.setCollisionByProperty({collides: true});
+        // this.bois.setCollisionByExclusion(-1, true);
         this.bois.srollFactorX = 1;
 
         this.bois2 = map.createStaticLayer('Bois2', tileset, 0, 100);
-        this.bois2.setCollisionByProperty({collides: true});
-        this.bois2.setCollisionByExclusion(-1, true);
+        // this.bois2.setCollisionByProperty({collides: true});
+        // this.bois2.setCollisionByExclusion(-1, true);
         this.bois2.srollFactorX = 1;
 
 
@@ -113,7 +113,7 @@ class Scene extends Phaser.Scene {
             immovable: true,
         });
         map.getObjectLayer('Collider').objects.forEach((col) => {
-            this.collideSprite = this.collide.create(col.x, col.y+100, col.height).setOrigin(0).setDisplaySize(col.width,col.height).visible=false;
+            this.collideSprite = this.collide.create(col.x, col.y+100, col.height).setOrigin(0,0).setDisplaySize(col.width,col.height).visible=false;
             this.physics.add.collider(this.collide, this.collideSprite)
         });
 
@@ -143,6 +143,7 @@ class Scene extends Phaser.Scene {
             const InvisibleSprite = this.invisible.create(invisible.x, invisible.y, 'invisible').setOrigin(0).visible = false ;
         });
         this.physics.add.collider(this.player.player, this.invisible);
+
 
         // Camera
 
@@ -211,7 +212,7 @@ class Scene extends Phaser.Scene {
             this.enemy.body.setImmovable(true)
             this.Rkick = true;
         })
-        this.physics.add.collider(this.platforms, this.enemy, () => {
+        this.physics.add.collider(this.collide, this.enemy, () => {
 
         })
         this.physics.add.collider(this.invisible, this.enemy, () => {
