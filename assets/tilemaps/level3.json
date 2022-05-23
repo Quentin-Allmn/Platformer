@@ -1241,7 +1241,7 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":10,
+ "nextlayerid":14,
  "nextobjectid":107,
  "orientation":"orthogonal",
  "renderorder":"right-down",
@@ -1261,6 +1261,10 @@
          "tileheight":64,
          "tilewidth":64,
          "transparentcolor":"#555555"
+        }, 
+        {
+         "firstgid":99,
+         "source":"Tileset_test.tsx"
         }],
  "tilewidth":64,
  "type":"map",
