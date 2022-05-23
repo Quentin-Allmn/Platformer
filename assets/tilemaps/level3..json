@@ -1,12 +1,4 @@
 { "compressionlevel":-1,
- "editorsettings":
-    {
-     "export":
-        {
-         "format":"json",
-         "target":"level3..json"
-        }
-    },
  "height":18,
  "infinite":false,
  "layers":[
@@ -142,31 +134,8 @@
          "name":"Platforms",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
-         "width":560,
-         "x":0,
-         "y":0
-        }, 
-        {
-         "color":"#00ff00",
-         "draworder":"topdown",
-         "id":19,
-         "name":"Collider",
-         "objects":[
-                {
-                 "height":100,
-                 "id":113,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":1072,
-                 "x":4,
-                 "y":992
-                }],
-         "opacity":1,
-         "type":"objectgroup",
          "visible":true,
+         "width":560,
          "x":0,
          "y":0
         }, 
@@ -1342,8 +1311,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":20,
- "nextobjectid":114,
+ "nextlayerid":19,
+ "nextobjectid":107,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.2",
