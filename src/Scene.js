@@ -63,7 +63,8 @@ class Scene extends Phaser.Scene {
 
         const backgroundImage = this.add.image(0, 40, 'sky2').setOrigin(0, 0);
         backgroundImage.setScale(1, 1);
-        backgroundImage.setAngle(8);
+        //backgroundImage.setAngle(8);
+
 
         // chargement de la map
         const map = this.add.tilemap('carte');
@@ -99,7 +100,7 @@ class Scene extends Phaser.Scene {
         // this.bois2.setCollisionByExclusion(-1, true);
         this.bois2.srollFactorX = 1;
 
-        this.arbre = map.createLayer('Arbre', tileset, 0, 100);
+        this.arbre = map.createLayer('Arbre2', tileset, 0, 100);
         // this.bois2.setCollisionByProperty({collides: true});
         // this.bois2.setCollisionByExclusion(-1, true);
         this.arbre.srollFactorX = 1;
@@ -125,6 +126,14 @@ class Scene extends Phaser.Scene {
 
         this.physics.add.collider(this.collide, this.player.player);
 
+        // this.collideSky = this.physics.add.group({
+        //     allowGravity: false,
+        //     immovable: true,
+        // });
+        // map.getObjectLayer('ColliderSky').objects.forEach((col) => {
+        //     this.collideSkySprite = this.collideSky.create(col.x, col.y+90, col.height).setOrigin(0,0).setDisplaySize(col.width,col.height).visible=false;
+        // });
+
         // Platformes Destructibles
 
         this.destructible = this.physics.add.group({
@@ -149,6 +158,9 @@ class Scene extends Phaser.Scene {
             const InvisibleSprite = this.invisible.create(invisible.x, invisible.y, 'invisible').setOrigin(0).visible = false ;
         });
         this.physics.add.collider(this.player.player, this.invisible);
+
+
+
 
 
         // Camera
@@ -323,12 +335,18 @@ class Scene extends Phaser.Scene {
             this.fwDelay = 400;
         }
         if (player > 900){
-            this.fwDelay = 180;
+            this.fwDelay = 250;
         }
         if (player > 10240){
             this.fwDelay = this.fwDelay - 50;
         }
         if (player > 14080){
+            this.fwDelay = this.fwDelay - 50;
+        }
+        if (player > 17920){
+            this.fwDelay = this.fwDelay - 50;
+        }
+        if (player > 26780){
             this.fwDelay = this.fwDelay - 50;
         }
     }
@@ -355,8 +373,8 @@ class Scene extends Phaser.Scene {
         });
 
         this.physics.add.collider(firework, this.collide, function (fireworks){
-            console.log(fireworks.body.x,fireworks.body.y)
-            me.FwYellow.setPosition(fireworks.body.x - 32,fireworks.body.y + 64);
+            //console.log(fireworks.body.x,fireworks.body.y)
+            me.FwYellow.setPosition(fireworks.x - 32,fireworks.y + 64);
 
             var randomColor = Phaser.Math.Between(1, 5);
 
@@ -396,9 +414,9 @@ class Scene extends Phaser.Scene {
             console.log("shake")
             console.log(un.body.x)
 
-            this.FwYellow = this.add.sprite(un.body.x,un.body.y, 'yellow-');
-            this.FwYellow.setScale(2);
-            this.FwYellow.play('yellow')
+            this.FWred = this.add.sprite(un.body.x,un.body.y, 'red-');
+            this.FWred.setScale(2);
+            this.FWred.play('red')
 
             //console.log(un.body.x,un.body.y)
             un.destroy();
@@ -412,6 +430,19 @@ class Scene extends Phaser.Scene {
             this.player.player.x = this.currentSaveX;
             this.player.player.y = this.currentSaveY;
 
+            // Flash player red
+            let tintTween = this.tweens.add({
+                targets: this.player.player,
+                duration: 200,
+                tint: 0xff0000,
+                callbackScope: this,
+                loop : 2,
+                onComplete: function(tween, sprites) {
+                    // Return to original color
+                    this.player.player.clearTint();
+                }
+            });
+
             if (this.vie < 0){
                 this.scene.start("GameOver")
             }
@@ -422,6 +453,70 @@ class Scene extends Phaser.Scene {
             //alert("GAME OVER !!!");
            // location.reload();
             //this.add.text(280, 150, 'Game Over', { fontSize: '32px', fill: '#000' })
+        })
+
+    }
+
+    fireworksSky() {
+
+        let me = this;
+
+        const firework = this.physics.add.group();
+
+        const fireworksList = ['fireworks1', 'fireworks2', 'fireworks3']
+
+        const fireworksGen = () => {
+            const xCoord = Math.random() * 17920
+            let randomfireworks = fireworksList[Math.floor(Math.random() * 3)]
+            firework.create(xCoord, 10, randomfireworks);
+
+        }
+
+        const fireworksGenLoop = this.time.addEvent({
+            delay:  this.fwDelay,
+            callback: fireworksGen,
+            loop: true,
+        });
+
+        this.physics.add.collider(firework, this.collideSky, function (fireworks){
+            //console.log(fireworks.body.x,fireworks.body.y)
+
+            this.Fwgreen = this.add.sprite(un.body.x,un.body.y, 'red-');
+            this.Fwgreen.setScale(2);
+            this.Fwgreen.play('red')
+
+            me.Fwgreen.setPosition(fireworks.x - 32,fireworks.y + 64);
+
+            var randomColor = Phaser.Math.Between(1, 5);
+
+            switch (randomColor) {
+                case 1:
+                    me.Fwgreen.setTexture('yellow')
+                    me.Fwgreen.play('yellow')
+                    break
+                case 2:
+                    me.Fwgreen.setTexture('blue')
+                    me.Fwgreen.play('blue')
+                    console.log('blue')
+                    break
+                case 3:
+                    me.Fwgreen.setTexture('pink')
+                    me.Fwgreen.play('pink')
+                    console.log('pink')
+                    break
+                case 4:
+                    me.Fwgreen.setTexture('red')
+                    me.Fwgreen.play('red')
+                    console.log('red')
+                    break
+                case 5:
+                    me.Fwgreen.setTexture('green')
+                    me.Fwgreen.play('green')
+                    console.log('green')
+                    break
+            }
+
+            fireworks.destroy();
         })
 
     }
