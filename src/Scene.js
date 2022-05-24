@@ -7,7 +7,7 @@ class Scene extends Phaser.Scene {
     preload() {
 
         this.load.image('background', 'assets/images/backgroundN.png');
-        this.load.image('sky2','assets/images/background/Sky4.png');
+        this.load.image('sky2','assets/images/Background/Sky4.png');
 
         this.load.atlas('player', 'assets/images/kenney_player.png', 'assets/images/kenney_player_atlas.json');
         this.load.image('tiles', 'assets/tilesets/Tileset_test.png');
