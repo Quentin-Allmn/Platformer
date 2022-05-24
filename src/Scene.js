@@ -57,6 +57,8 @@ class Scene extends Phaser.Scene {
 
         let me = this;
 
+        this.saut = false;
+
         console.log(diffHard)
 
         // Background
@@ -526,9 +528,14 @@ class Scene extends Phaser.Scene {
 
         this.checkFw(this.player.player.x)
 
-        if (this.cursors.up.isDown && this.player.player.body.onFloor()) {
+        if (this.cursors.up.isDown && this.player.player.body.onFloor() && this.saut === false) {
             this.player.jump()
             console.log("oui")
+            this.saut = true;
+        }
+
+        if (this.cursors.up.isUp){
+            this.saut = false;
         }
 
         if (this.cursors.left.isDown ){
