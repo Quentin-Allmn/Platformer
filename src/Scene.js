@@ -100,10 +100,9 @@ class Scene extends Phaser.Scene {
         // this.bois2.setCollisionByExclusion(-1, true);
         this.bois2.srollFactorX = 1;
 
-        this.arbre = map.createLayer('Arbre2', tileset, 0, 100);
+        this.arbre = map.createLayer('Arbre', tileset, 0, 100);
         // this.bois2.setCollisionByProperty({collides: true});
         // this.bois2.setCollisionByExclusion(-1, true);
-        this.arbre.srollFactorX = 1;
 
 
         // palyer
