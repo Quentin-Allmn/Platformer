@@ -2942,8 +2942,17 @@
          "tilewidth":64
         }, 
         {
+         "columns":30,
          "firstgid":1059,
-         "source":"Tileset_test.tsx"
+         "image":"..\/tilesets\/Tileset_test.png",
+         "imageheight":1080,
+         "imagewidth":1920,
+         "margin":0,
+         "name":"Tileset_test",
+         "spacing":0,
+         "tilecount":480,
+         "tileheight":64,
+         "tilewidth":64
         }],
  "tilewidth":64,
  "type":"map",
