@@ -199,9 +199,26 @@ class Scene extends Phaser.Scene {
                 this.cursors = this.input.keyboard.createCursorKeys();
                 this.cameras.main.startFollow(this.player.player);
 
-                this.hud = this.add.image(1000,550, 'vie').setOrigin(0,0);
-                this.hud.setScale(0.5)
-                this.hud.scrollFactorX = -0.05;
+            this.hud = this.add.container(0, 0);
+
+            let vie1 = this.add.image(1000, 550, 'vie').setOrigin(0, 0);
+            vie1.setScale(0.5)
+            this.hud.add(vie1);
+            let vie2 = this.add.image(1075, 550, 'vie').setOrigin(0, 0);
+            vie2.setScale(0.5)
+            this.hud.add(vie2);
+            let vie3 = this.add.image(1150, 550, 'vie').setOrigin(0, 0);
+            vie3.setScale(0.5)
+            this.hud.add(vie3);
+
+            this.hud.scrollFactorX = -0.001;
+
+            if (this.vie === 2){
+                vie3.setVisible(false);
+            }
+            if (this.vie === 1){
+                vie2.setVisible(false);
+            }
 
             }
 
