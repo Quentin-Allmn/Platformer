@@ -361,7 +361,7 @@ class Scene extends Phaser.Scene {
         const fireworksList = ['fireworks1', 'fireworks2', 'fireworks3']
 
         const fireworksGen = () => {
-            const xCoord = Math.random() * 17920
+            const xCoord = Math.random() * 35840
             let randomfireworks = fireworksList[Math.floor(Math.random() * 3)]
             firework.create(xCoord, 10, randomfireworks);
 
