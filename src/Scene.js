@@ -383,7 +383,7 @@ class Scene extends Phaser.Scene {
                             // particles.addGravityWell()
 
                             var randomColor = Phaser.Math.Between(1, 5);
- 
+
                             switch (randomColor) {
                                 case 1:
                                     this.FwYellow.setTexture('yellow')
