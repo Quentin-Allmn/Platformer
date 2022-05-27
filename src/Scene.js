@@ -323,6 +323,21 @@ class Scene extends Phaser.Scene {
             frameRate: 12,
         });
 
+        var particleJump = this.add.particles('spark')
+
+        particleJump.createEmitter({
+            x: this.player.player.x - 64,
+            speed: {min: 0, max: 170},
+            angle: {min: 0, max: 190},
+            gravityY: -300,
+            scale: {start : 0.1, end: 0.4, ease: 'Back.easeln'},
+            alpha: {start: 0.8, end: 0},
+            lifespan: 500,
+            follow : this.player.player,
+        })
+
+        particleJump.pause();
+
 }
 
     sauvegarde(player, saves) {
@@ -371,16 +386,25 @@ class Scene extends Phaser.Scene {
             // monfirework.setGravity(0);
             monfirework.setVelocityY(-1250);
             monfirework.setFlipY(true);
+
+            var particleSmoke = this.add.particles('smoke');
+
+            particleSmoke.createEmitter({
+                speed: 100,
+                scale: {start : 0.1, end: 0.4},
+                lifespan: 500,
+                follow : monfirework,
+            })
+
+
             //monfirework.body.setAllowGravity(false);
             this.time.delayedCall(2000,()=>{
-                monfirework.setVelocityY(1150);
+                //monfirework.setVelocityY(1150);
                 monfirework.setFlipY(false);
                 this.physics.add.collider(monfirework, this.collide,  (fire)=>{
                             //console.log(fireworks.body.x,fireworks.body.y)
 
                             this.FwYellow.setPosition(fire.x - 32,fire.y + 64);
-                            // particles.setPosition(fireworks.x - 32,fireworks.y + 64);
-                            // particles.addGravityWell()
 
                             var randomColor = Phaser.Math.Between(1, 5);
 
@@ -410,8 +434,8 @@ class Scene extends Phaser.Scene {
                                     console.log('green')
                                     break
                             }
-                    this.physics.add.collider(this.player.player, firework, (player,firework) => {
-                                firework.destroy();
+                    this.physics.add.collider(monfirework, this.player.player, (player,firework) => {
+                                monfirework.destroy();
                                 this.vie -= 1;
 
                                 this.player.player.x = this.currentSaveX;
@@ -438,7 +462,7 @@ class Scene extends Phaser.Scene {
                                     this.scene.start("GameOver")
                                 }
                             })
-                    this.physics.add.collider(firework, this.destructible,  (un,deux)=>{
+                    this.physics.add.collider(monfirework, this.destructible,  (un,deux)=>{
                                 this.cameras.main.shake(1000, 0.004);
                                 console.log("shake")
 
@@ -452,104 +476,16 @@ class Scene extends Phaser.Scene {
                             })
                             this.FwYellow.play('red')
 
+                            particleSmoke.destroy();
                             monfirework.destroy();
                         })
             });
 
-            const checkFwV = (fire) => {
-                // if (fire.body.velocity.y === 950){
-                //     this.physics.add.collider(firework, this.collide, function (fire){
-                //         //console.log(fireworks.body.x,fireworks.body.y)
-                //
-                //         me.FwYellow.setPosition(fire.x - 32,fire.y + 64);
-                //         // particles.setPosition(fireworks.x - 32,fireworks.y + 64);
-                //         // particles.addGravityWell()
-                //
-                //         var randomColor = Phaser.Math.Between(1, 5);
-                //
-                //         switch (randomColor) {
-                //             case 1:
-                //                 me.FwYellow.setTexture('yellow')
-                //                 me.FwYellow.play('yellow')
-                //                 break
-                //             case 2:
-                //                 me.FwYellow.setTexture('blue')
-                //                 me.FwYellow.play('blue')
-                //                 console.log('blue')
-                //                 break
-                //             case 3:
-                //                 me.FwYellow.setTexture('pink')
-                //                 me.FwYellow.play('pink')
-                //                 console.log('pink')
-                //                 break
-                //             case 4:
-                //                 me.FwYellow.setTexture('red')
-                //                 me.FwYellow.play('red')
-                //                 console.log('red')
-                //                 break
-                //             case 5:
-                //                 me.FwYellow.setTexture('green')
-                //                 me.FwYellow.play('green')
-                //                 console.log('green')
-                //                 break
-                //         }
-                //         //me.FwYellow.play('red')
-                //
-                //         fireworks.destroy();
-                //     })
-                //
-                //     this.physics.add.collider(firework, this.destructible,  (un,deux)=>{
-                //         this.cameras.main.shake(1000, 0.004);
-                //         console.log("shake")
-                //
-                //         this.FWred = this.add.sprite(un.x,un.y, 'red-');
-                //         this.FWred.setScale(2);
-                //         this.FWred.play('red')
-                //
-                //         //console.log(un.body.x,un.body.y)
-                //         un.destroy();
-                //         deux.destroy();
-                //     })
-                //
-                //     this.physics.add.collider(this.player.player, firework, (player,firework) => {
-                //         firework.destroy();
-                //         this.vie -= 1;
-                //
-                //         this.player.player.x = this.currentSaveX;
-                //         this.player.player.y = this.currentSaveY;
-                //
-                //         // Flash player red
-                //         let tintTween = this.tweens.add({
-                //             targets: this.player.player,
-                //             duration: 200,
-                //             tint: 0xff0000,
-                //             callbackScope: this,
-                //             loop : 2,
-                //             onComplete: function(tween, sprites) {
-                //                 // Return to original color
-                //                 this.player.player.clearTint();
-                //             }
-                //         });
-                //
-                //         if (this.vie < 0){
-                //             this.scene.start("GameOver")
-                //         }
-                //
-                //         if (diffHard === true) {
-                //             this.scene.start("GameOver")
-                //         }
-                //         //alert("GAME OVER !!!");
-                //         // location.reload();
-                //         //this.add.text(280, 150, 'Game Over', { fontSize: '32px', fill: '#000' })
-                //     })
-                // }
-            }
-
-            const fireworksGenLoop = this.time.addEvent({
-                delay:  this.fwDelay,
-                callback: checkFwV(monfirework),
-                loop: true,
-            });
+            // const fireworksGenLoop = this.time.addEvent({
+            //     delay:  this.fwDelay,
+            //     callback: checkFwV(monfirework),
+            //     loop: true,
+            //});
         }
 
         const fireworksGenLoop = this.time.addEvent({
@@ -566,73 +502,6 @@ class Scene extends Phaser.Scene {
 
     }
 
-
-    fireworksSky() {
-
-        let me = this;
-
-        const firework = this.physics.add.group();
-
-        const fireworksList = ['fireworks1', 'fireworks2', 'fireworks3']
-
-        const fireworksGen = () => {
-            const xCoord = Math.random() * 17920
-            let randomfireworks = fireworksList[Math.floor(Math.random() * 3)]
-            firework.create(xCoord, 10, randomfireworks);
-
-        }
-
-        const fireworksGenLoop = this.time.addEvent({
-            delay:  this.fwDelay,
-            callback: fireworksGen,
-            loop: true,
-        });
-
-        this.physics.add.collider(firework, this.collideSky, function (fireworks){
-            //console.log(fireworks.body.x,fireworks.body.y)
-
-
-
-            this.Fwgreen = this.add.sprite(un.body.x,un.body.y, 'red-');
-            this.Fwgreen.setScale(2);
-            this.Fwgreen.play('red')
-
-            me.Fwgreen.setPosition(fireworks.x - 32,fireworks.y + 64);
-
-            var randomColor = Phaser.Math.Between(1, 5);
-
-            switch (randomColor) {
-                case 1:
-                    me.Fwgreen.setTexture('yellow')
-                    me.Fwgreen.play('yellow')
-                    break
-                case 2:
-                    me.Fwgreen.setTexture('blue')
-                    me.Fwgreen.play('blue')
-                    console.log('blue')
-                    break
-                case 3:
-                    me.Fwgreen.setTexture('pink')
-                    me.Fwgreen.play('pink')
-                    console.log('pink')
-                    break
-                case 4:
-                    me.Fwgreen.setTexture('red')
-                    me.Fwgreen.play('red')
-                    console.log('red')
-                    break
-                case 5:
-                    me.Fwgreen.setTexture('green')
-                    me.Fwgreen.play('green')
-                    console.log('green')
-                    break
-            }
-
-            fireworks.destroy();
-        })
-
-    }
-
     update() {
 
         //console.log("player",this.player.player.x,"y",this.player.player.y)
@@ -643,6 +512,7 @@ class Scene extends Phaser.Scene {
             this.player.jump()
             console.log("oui")
             this.saut = true;
+            //particleJump.play();
         }
 
         if (this.cursors.up.isUp){
