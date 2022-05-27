@@ -51,6 +51,8 @@ class Scene extends Phaser.Scene {
             this.load.image('pink-' + i, 'assets/images/Fireworks/pink/pink-' + i + '.png');
         }
 
+        this.load.image('spark', 'assets/images/particles/blue.png');
+
     }
 
     create() {
@@ -173,7 +175,7 @@ class Scene extends Phaser.Scene {
 
         // Fireworks
 
-        this.fwDelay = 180;
+        this.fwDelay = 250;
         this.fireworks();
 
         // Mode Normal
@@ -352,19 +354,202 @@ class Scene extends Phaser.Scene {
         }
     }
 
-    fireworks() {
 
-        let me = this;
+    fireworks() {
 
         const firework = this.physics.add.group();
 
         const fireworksList = ['fireworks1', 'fireworks2', 'fireworks3']
 
         const fireworksGen = () => {
-            const xCoord = Math.random() * 35840
+            const xCoord = Math.random(this.player.player.x - 20) * (this.player.player.x + 400)
             let randomfireworks = fireworksList[Math.floor(Math.random() * 3)]
-            firework.create(xCoord, 10, randomfireworks);
+            var monfirework = firework.create(xCoord, 1500, randomfireworks).setDepth(1);
 
+            // firework.create(xCoord, 900, randomfireworks);
+            // monfirework.setVelocityY(Math.random() * 1000 - 500);
+            // monfirework.setGravity(0);
+            monfirework.setVelocityY(-1250);
+            monfirework.setFlipY(true);
+            //monfirework.body.setAllowGravity(false);
+            this.time.delayedCall(2000,()=>{
+                monfirework.setVelocityY(1150);
+                monfirework.setFlipY(false);
+                this.physics.add.collider(monfirework, this.collide,  (fire)=>{
+                            //console.log(fireworks.body.x,fireworks.body.y)
+
+                            this.FwYellow.setPosition(fire.x - 32,fire.y + 64);
+                            // particles.setPosition(fireworks.x - 32,fireworks.y + 64);
+                            // particles.addGravityWell()
+
+                            var randomColor = Phaser.Math.Between(1, 5);
+
+                            switch (randomColor) {
+                                case 1:
+                                    this.FwYellow.setTexture('yellow')
+                                    this.FwYellow.play('yellow')
+                                    break
+                                case 2:
+                                    this.FwYellow.setTexture('blue')
+                                    this.FwYellow.play('blue')
+                                    console.log('blue')
+                                    break
+                                case 3:
+                                    this.FwYellow.setTexture('pink')
+                                    this.FwYellow.play('pink')
+                                    console.log('pink')
+                                    break
+                                case 4:
+                                    this.FwYellow.setTexture('red')
+                                    this.FwYellow.play('red')
+                                    console.log('red')
+                                    break
+                                case 5:
+                                    this.FwYellow.setTexture('green')
+                                    this.FwYellow.play('green')
+                                    console.log('green')
+                                    break
+                            }
+                    this.physics.add.collider(this.player.player, firework, (player,firework) => {
+                                firework.destroy();
+                                this.vie -= 1;
+
+                                this.player.player.x = this.currentSaveX;
+                                this.player.player.y = this.currentSaveY;
+
+                                // Flash player red
+                                let tintTween = this.tweens.add({
+                                    targets: this.player.player,
+                                    duration: 200,
+                                    tint: 0xff0000,
+                                    callbackScope: this,
+                                    loop : 2,
+                                    onComplete: function(tween, sprites) {
+                                        // Return to original color
+                                        this.player.player.clearTint();
+                                    }
+                                });
+
+                                if (this.vie < 0){
+                                    this.scene.start("GameOver")
+                                }
+
+                                if (diffHard === true) {
+                                    this.scene.start("GameOver")
+                                }
+                            })
+                    this.physics.add.collider(firework, this.destructible,  (un,deux)=>{
+                                this.cameras.main.shake(1000, 0.004);
+                                console.log("shake")
+
+                                this.FWred = this.add.sprite(un.x,un.y, 'red-');
+                                this.FWred.setScale(2);
+                                this.FWred.play('red')
+
+                                //console.log(un.body.x,un.body.y)
+                                un.destroy();
+                                deux.destroy();
+                            })
+                            this.FwYellow.play('red')
+
+                            monfirework.destroy();
+                        })
+            });
+
+            const checkFwV = (fire) => {
+                // if (fire.body.velocity.y === 950){
+                //     this.physics.add.collider(firework, this.collide, function (fire){
+                //         //console.log(fireworks.body.x,fireworks.body.y)
+                //
+                //         me.FwYellow.setPosition(fire.x - 32,fire.y + 64);
+                //         // particles.setPosition(fireworks.x - 32,fireworks.y + 64);
+                //         // particles.addGravityWell()
+                //
+                //         var randomColor = Phaser.Math.Between(1, 5);
+                //
+                //         switch (randomColor) {
+                //             case 1:
+                //                 me.FwYellow.setTexture('yellow')
+                //                 me.FwYellow.play('yellow')
+                //                 break
+                //             case 2:
+                //                 me.FwYellow.setTexture('blue')
+                //                 me.FwYellow.play('blue')
+                //                 console.log('blue')
+                //                 break
+                //             case 3:
+                //                 me.FwYellow.setTexture('pink')
+                //                 me.FwYellow.play('pink')
+                //                 console.log('pink')
+                //                 break
+                //             case 4:
+                //                 me.FwYellow.setTexture('red')
+                //                 me.FwYellow.play('red')
+                //                 console.log('red')
+                //                 break
+                //             case 5:
+                //                 me.FwYellow.setTexture('green')
+                //                 me.FwYellow.play('green')
+                //                 console.log('green')
+                //                 break
+                //         }
+                //         //me.FwYellow.play('red')
+                //
+                //         fireworks.destroy();
+                //     })
+                //
+                //     this.physics.add.collider(firework, this.destructible,  (un,deux)=>{
+                //         this.cameras.main.shake(1000, 0.004);
+                //         console.log("shake")
+                //
+                //         this.FWred = this.add.sprite(un.x,un.y, 'red-');
+                //         this.FWred.setScale(2);
+                //         this.FWred.play('red')
+                //
+                //         //console.log(un.body.x,un.body.y)
+                //         un.destroy();
+                //         deux.destroy();
+                //     })
+                //
+                //     this.physics.add.collider(this.player.player, firework, (player,firework) => {
+                //         firework.destroy();
+                //         this.vie -= 1;
+                //
+                //         this.player.player.x = this.currentSaveX;
+                //         this.player.player.y = this.currentSaveY;
+                //
+                //         // Flash player red
+                //         let tintTween = this.tweens.add({
+                //             targets: this.player.player,
+                //             duration: 200,
+                //             tint: 0xff0000,
+                //             callbackScope: this,
+                //             loop : 2,
+                //             onComplete: function(tween, sprites) {
+                //                 // Return to original color
+                //                 this.player.player.clearTint();
+                //             }
+                //         });
+                //
+                //         if (this.vie < 0){
+                //             this.scene.start("GameOver")
+                //         }
+                //
+                //         if (diffHard === true) {
+                //             this.scene.start("GameOver")
+                //         }
+                //         //alert("GAME OVER !!!");
+                //         // location.reload();
+                //         //this.add.text(280, 150, 'Game Over', { fontSize: '32px', fill: '#000' })
+                //     })
+                // }
+            }
+
+            const fireworksGenLoop = this.time.addEvent({
+                delay:  this.fwDelay,
+                callback: checkFwV(monfirework),
+                loop: true,
+            });
         }
 
         const fireworksGenLoop = this.time.addEvent({
@@ -373,90 +558,14 @@ class Scene extends Phaser.Scene {
             loop: true,
         });
 
-        this.physics.add.collider(firework, this.collide, function (fireworks){
-            //console.log(fireworks.body.x,fireworks.body.y)
-            me.FwYellow.setPosition(fireworks.x - 32,fireworks.y + 64);
 
-            var randomColor = Phaser.Math.Between(1, 5);
 
-            switch (randomColor) {
-                case 1:
-                    me.FwYellow.setTexture('yellow')
-                    me.FwYellow.play('yellow')
-                    break
-                case 2:
-                    me.FwYellow.setTexture('blue')
-                    me.FwYellow.play('blue')
-                    console.log('blue')
-                    break
-                case 3:
-                    me.FwYellow.setTexture('pink')
-                    me.FwYellow.play('pink')
-                    console.log('pink')
-                    break
-                case 4:
-                    me.FwYellow.setTexture('red')
-                    me.FwYellow.play('red')
-                    console.log('red')
-                    break
-                case 5:
-                    me.FwYellow.setTexture('green')
-                    me.FwYellow.play('green')
-                    console.log('green')
-                    break
-            }
-            //me.FwYellow.play('red')
+        var particles = this.add.particles('rising-smoke.png');
 
-            fireworks.destroy();
-        })
 
-        this.physics.add.collider(firework, this.destructible,  (un,deux)=>{
-            this.cameras.main.shake(1000, 0.004);
-            console.log("shake")
-            console.log(un.body.x)
-
-            this.FWred = this.add.sprite(un.body.x,un.body.y, 'red-');
-            this.FWred.setScale(2);
-            this.FWred.play('red')
-
-            //console.log(un.body.x,un.body.y)
-            un.destroy();
-            deux.destroy();
-        })
-
-        this.physics.add.collider(this.player.player, firework, (player,firework) => {
-            firework.destroy();
-            this.vie -= 1;
-
-            this.player.player.x = this.currentSaveX;
-            this.player.player.y = this.currentSaveY;
-
-            // Flash player red
-            let tintTween = this.tweens.add({
-                targets: this.player.player,
-                duration: 200,
-                tint: 0xff0000,
-                callbackScope: this,
-                loop : 2,
-                onComplete: function(tween, sprites) {
-                    // Return to original color
-                    this.player.player.clearTint();
-                }
-            });
-
-            if (this.vie < 0){
-                this.scene.start("GameOver")
-            }
-
-            if (diffHard === true) {
-                this.scene.start("GameOver")
-            }
-            //alert("GAME OVER !!!");
-           // location.reload();
-            //this.add.text(280, 150, 'Game Over', { fontSize: '32px', fill: '#000' })
-        })
 
     }
+
 
     fireworksSky() {
 
@@ -481,6 +590,8 @@ class Scene extends Phaser.Scene {
 
         this.physics.add.collider(firework, this.collideSky, function (fireworks){
             //console.log(fireworks.body.x,fireworks.body.y)
+
+
 
             this.Fwgreen = this.add.sprite(un.body.x,un.body.y, 'red-');
             this.Fwgreen.setScale(2);
@@ -556,6 +667,9 @@ class Scene extends Phaser.Scene {
             this.scene.start("Victory");
         }
        //   console.log("Delay",this.fwDelay)
+
+
+
     }
 
 }
