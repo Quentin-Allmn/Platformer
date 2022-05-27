@@ -199,19 +199,9 @@ class Scene extends Phaser.Scene {
                 this.cursors = this.input.keyboard.createCursorKeys();
                 this.cameras.main.startFollow(this.player.player);
 
-            // this.hud = this.add.sprite(100,40,'vie');
-            // this.hud.setScale(0.5);
-            // this.hud.body.startFollow(this.player.player);
-
-            // if (this.vie === 3){
-            //     this.hud.setTexture('vie');
-            // }
-            // if (this.vie === 2){
-            //     this.hud.setTexture('vie');
-            // }
-            // if (this.vie === 1){
-            //     this.hud.setTexture('vie');
-            // }
+                this.hud = this.add.image(1000,550, 'vie').setOrigin(0,0);
+                this.hud.setScale(0.5)
+                this.hud.scrollFactorX = -0.05;
 
             }
 

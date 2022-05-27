@@ -10,7 +10,7 @@ let gameConfig = {
             gravity: { y: 700 }
         }
     },
-    scene: [SceneMenu,Scene,SceneOptions,SceneGameOver,SceneVictory]
+    scene: [SceneMenu,Scene,SceneOptions,SceneGameOver,SceneVictory,SceneUI]
 };
 let game = new Phaser.Game(gameConfig);
 
