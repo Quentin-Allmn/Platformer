@@ -65,7 +65,7 @@ class Scene extends Phaser.Scene {
 
         // Background
 
-        const backgroundImage = this.add.image(0, 40, 'sky2').setOrigin(0, 0);
+        const backgroundImage = this.add.image(0, 40, 'sky2').setOrigin(0, 0).setDepth(-2);
         backgroundImage.setScale(1, 1);
         //backgroundImage.setAngle(8);
 
@@ -389,13 +389,14 @@ class Scene extends Phaser.Scene {
         const fireworksGen = () => {
             const xCoord = Math.random(this.player.player.x - 10) * (this.player.player.x + 1000)
             let randomfireworks = fireworksList[Math.floor(Math.random() * 3)]
-            var monfirework = firework.create(xCoord, 1500, randomfireworks).setDepth(1);
+            var monfirework = firework.create(xCoord, 1500, randomfireworks).setDepth(-1);
 
             // firework.create(xCoord, 900, randomfireworks);
             // monfirework.setVelocityY(Math.random() * 1000 - 500);
             // monfirework.setGravity(0);
             monfirework.setVelocityY(-1250);
             monfirework.setFlipY(true);
+            monfirework.setAlpha(0.75);
 
             var particleSmoke = this.add.particles('smoke');
 
@@ -411,6 +412,7 @@ class Scene extends Phaser.Scene {
             this.time.delayedCall(2000,()=>{
                 //monfirework.setVelocityY(1150);
                 monfirework.setFlipY(false);
+                monfirework.setAlpha(1);
                 this.physics.add.collider(monfirework, this.collide,  (fire)=>{
                             //console.log(fireworks.body.x,fireworks.body.y)
 
