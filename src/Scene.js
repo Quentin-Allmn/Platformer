@@ -201,15 +201,17 @@ class Scene extends Phaser.Scene {
 
             this.hud = this.add.container(0, 0);
 
-            let vie1 = this.add.image(1000, 150, 'vie').setOrigin(0, 0);
+            let vie1 = this.add.image(1100, 0, 'vie').setOrigin(0, 0);
             vie1.setScale(0.5)
             this.hud.add(vie1);
-            let vie2 = this.add.image(1075, 150, 'vie').setOrigin(0, 0);
+            let vie2 = this.add.image(1175, 0, 'vie').setOrigin(0, 0);
             vie2.setScale(0.5)
             this.hud.add(vie2);
-            let vie3 = this.add.image(1150, 150, 'vie').setOrigin(0, 0);
+            let vie3 = this.add.image(1250, 0, 'vie').setOrigin(0, 0);
             vie3.setScale(0.5)
             this.hud.add(vie3);
+
+            this.hud.setAngle(8);
 
             this.hud.scrollFactorX = -0.001;
             this.hud.scrollFactorY = -0.001;
@@ -413,6 +415,8 @@ class Scene extends Phaser.Scene {
                             //console.log(fireworks.body.x,fireworks.body.y)
 
                             this.FwYellow.setPosition(fire.x - 32,fire.y + 64);
+                            fire.destroy();
+                            particleSmoke.destroy();
 
                             var randomColor = Phaser.Math.Between(1, 5);
 
@@ -442,8 +446,11 @@ class Scene extends Phaser.Scene {
                                     console.log('green')
                                     break
                             }
-                    this.physics.add.collider(monfirework, this.player.player, (player,firework) => {
-                                monfirework.destroy();
+                this.physics.add.collider(monfirework, this.player.player, (firework) => {
+
+                                console.log("Hu")
+                                particleSmoke.destroy();
+                                firework.destroy();
                                 this.vie -= 1;
 
                                 this.player.player.x = this.currentSaveX;
@@ -470,7 +477,7 @@ class Scene extends Phaser.Scene {
                                     this.scene.start("GameOver")
                                 }
                             })
-                    this.physics.add.collider(monfirework, this.destructible,  (un,deux)=>{
+                this.physics.add.collider(monfirework, this.destructible,  (un,deux)=>{
                                 this.cameras.main.shake(1000, 0.004);
                                 console.log("shake")
 
@@ -481,11 +488,8 @@ class Scene extends Phaser.Scene {
                                 //console.log(un.body.x,un.body.y)
                                 un.destroy();
                                 deux.destroy();
+                                particleSmoke.destroy();
                             })
-                            this.FwYellow.play('red')
-
-                            particleSmoke.destroy();
-                            monfirework.destroy();
                         })
             });
 
@@ -497,7 +501,7 @@ class Scene extends Phaser.Scene {
         }
 
         const fireworksGenLoop = this.time.addEvent({
-            delay:  this.fwDelay,
+            delay:  4000,
             callback: fireworksGen,
             loop: true,
         });
