@@ -201,17 +201,18 @@ class Scene extends Phaser.Scene {
 
             this.hud = this.add.container(0, 0);
 
-            let vie1 = this.add.image(1000, 550, 'vie').setOrigin(0, 0);
+            let vie1 = this.add.image(1000, 150, 'vie').setOrigin(0, 0);
             vie1.setScale(0.5)
             this.hud.add(vie1);
-            let vie2 = this.add.image(1075, 550, 'vie').setOrigin(0, 0);
+            let vie2 = this.add.image(1075, 150, 'vie').setOrigin(0, 0);
             vie2.setScale(0.5)
             this.hud.add(vie2);
-            let vie3 = this.add.image(1150, 550, 'vie').setOrigin(0, 0);
+            let vie3 = this.add.image(1150, 150, 'vie').setOrigin(0, 0);
             vie3.setScale(0.5)
             this.hud.add(vie3);
 
             this.hud.scrollFactorX = -0.001;
+            this.hud.scrollFactorY = -0.001;
 
             if (this.vie === 2){
                 vie3.setVisible(false);
@@ -357,7 +358,7 @@ class Scene extends Phaser.Scene {
 
     checkFw(player){
         if (player < 900){
-            this.fwDelay = 400;
+            this.fwDelay = 40000;
         }
         if (player > 900){
             this.fwDelay = 250;
@@ -384,7 +385,7 @@ class Scene extends Phaser.Scene {
         const fireworksList = ['fireworks1', 'fireworks2', 'fireworks3']
 
         const fireworksGen = () => {
-            const xCoord = Math.random(this.player.player.x - 20) * (this.player.player.x + 400)
+            const xCoord = Math.random(this.player.player.x - 10) * (this.player.player.x + 1000)
             let randomfireworks = fireworksList[Math.floor(Math.random() * 3)]
             var monfirework = firework.create(xCoord, 1500, randomfireworks).setDepth(1);
 
