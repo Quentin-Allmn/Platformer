@@ -162,10 +162,6 @@ class Scene extends Phaser.Scene {
         });
         this.physics.add.collider(this.player.player, this.invisible);
 
-
-
-
-
         // Camera
 
         this.cameras.main.setBounds(0, 0, 35840, 1152);
@@ -228,7 +224,6 @@ class Scene extends Phaser.Scene {
         if (this.diffHard === true) {
             console.log("Hard")
         }
-
 
         //Enemy
 
@@ -379,7 +374,6 @@ class Scene extends Phaser.Scene {
         }
     }
 
-
     fireworks() {
 
         const firework = this.physics.add.group();
@@ -508,11 +502,7 @@ class Scene extends Phaser.Scene {
             loop: true,
         });
 
-
-
         var particles = this.add.particles('rising-smoke.png');
-
-
 
     }
 
@@ -550,9 +540,6 @@ class Scene extends Phaser.Scene {
             this.enemy.destroy();
             this.scene.start("Victory");
         }
-       //   console.log("Delay",this.fwDelay)
-
-
 
     }
 
