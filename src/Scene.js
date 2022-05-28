@@ -442,12 +442,14 @@ class Scene extends Phaser.Scene {
                                     console.log('green')
                                     break
                             }
-                this.physics.add.collider(monfirework, this.player.player, (firework) => {
+                })
+                this.physics.add.collider(monfirework, this.player.player, (fire) => {
 
                                 console.log("Hu")
-                                particleSmoke.destroy();
-                                firework.destroy();
                                 this.vie -= 1;
+
+                                particleSmoke.destroy();
+                                fire.destroy();
 
                                 this.player.player.x = this.currentSaveX;
                                 this.player.player.y = this.currentSaveY;
@@ -486,7 +488,6 @@ class Scene extends Phaser.Scene {
                                 deux.destroy();
                                 particleSmoke.destroy();
                             })
-                        })
             });
 
             // const fireworksGenLoop = this.time.addEvent({
