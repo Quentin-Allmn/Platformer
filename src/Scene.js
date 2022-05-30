@@ -19,7 +19,7 @@ class Scene extends Phaser.Scene {
         this.load.image('fireworks2','assets/images/fireworks2.png')
         this.load.image('fireworks3','assets/images/fireworks3.png')
 
-        this.load.image('smoke','assets/images/particles/rising-smoke.png')
+        this.load.image('smoke','assets/images/particles/cloud.png')
         this.load.image('blue','assets/images/particles/blue.png')
         this.load.atlas('flares', 'assets/images/particles/flares.png', 'assets/images/particles/flares.json');
 
@@ -205,7 +205,7 @@ class Scene extends Phaser.Scene {
 
         this.Rkick = false;
 
-        this.enemy = this.physics.add.sprite(35750, 500, "enemy")
+        this.enemy = this.physics.add.sprite(35700, 500, "enemy")
         //this.enemy.setCollideWorldBounds(true);
         //this.enemy.setDepth(0);
         this.enemy.body.setImmovable(false)
@@ -377,29 +377,31 @@ class Scene extends Phaser.Scene {
             monfirework.setAlpha(0.5);
             monfirework.setScale(0.75);
 
-            var particleSmoke = this.add.particles('smoke');
+            var particleSmoke = this.add.particles('smoke').setDepth(-1);
 
             particleSmoke.createEmitter({
                 speed: {max: 0, min: 0},
-                frequency: 1,
-                scale: {start : 0.3, end: 0},
+                rotate:{max : -360, min : 360},
+                frequency: 0.05,
+                scale: {start : 0.2, end: 0.05},
                 lifespan: 500,
-                alpha: {start: 1,end: 0},
+                alpha: {start: 0.5,end: 0.2},
                 follow : monfirework,
-                tint: 0xffffff,
+                blendMode: "ADD",
+                //tint: 0xffffff,
                 life: 1000,
 
             })
 
-            var particleFire = this.add.particles('blue')
+            var particleFire = this.add.particles('blue').setDepth(-1)
 
             particleFire.createEmitter({
                 speed: {max: 0, min: 0},
                 frequency: 1,
-                scale: {start : 0.3, end: 0},
+                scale: {start : 0.2, end: 0.1},
                 lifespan: 75,
                 alpha: {start: 1,end: 0.5},
-                tint: {start: 0xff6c00,end: 0xffe800},
+                tint: {start: 0xff8000,end: 0xff7000},
                 life: 1000,
                 follow : monfirework,
             })
