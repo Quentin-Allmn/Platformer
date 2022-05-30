@@ -175,12 +175,12 @@ class Scene extends Phaser.Scene {
         this.fireworks();
 
         // Mode Normal
-        this.vie = 3;
+        window.vie = 3;
 
         if (diffHard === false ) {
             this.scene.setActive(true,'SceneUI');
             console.log("Normal")
-            this.add.text(120,40,this.vie,{ color: '#FFC100', fontSize: '20px' });
+           // this.add.text(120,40,this.vie,{ color: '#FFC100', fontSize: '20px' });
 
                 this.saves = this.physics.add.group({
                     allowGravity: false,
@@ -195,31 +195,11 @@ class Scene extends Phaser.Scene {
                 this.cursors = this.input.keyboard.createCursorKeys();
                 this.cameras.main.startFollow(this.player.player);
 
-            this.hud = this.add.container(0, 0);
-
-            let vie1 = this.add.image(1100, 0, 'vie').setOrigin(0, 0);
-            vie1.setScale(0.5)
-            this.hud.add(vie1);
-            let vie2 = this.add.image(1175, 0, 'vie').setOrigin(0, 0);
-            vie2.setScale(0.5)
-            this.hud.add(vie2);
-            let vie3 = this.add.image(1250, 0, 'vie').setOrigin(0, 0);
-            vie3.setScale(0.5)
-            this.hud.add(vie3);
-
-            this.hud.setAngle(8);
-
-            this.hud.scrollFactorX = -0.001;
-            this.hud.scrollFactorY = -0.001;
-
-            if (this.vie === 2){
-                vie3.setVisible(false);
-            }
-            if (this.vie === 1){
-                vie2.setVisible(false);
-            }
+                this.scene.launch("SceneUI");
 
             }
+
+
 
         if (this.diffHard === true) {
             console.log("Hard")
@@ -448,7 +428,7 @@ class Scene extends Phaser.Scene {
                 this.physics.add.collider(monfirework, this.player.player, (fire) => {
 
                                 console.log("Hu")
-                                this.vie -= 1;
+                                vie -= 1;
 
                                 particleSmoke.destroy();
                                 fire.destroy();
@@ -469,7 +449,7 @@ class Scene extends Phaser.Scene {
                                     }
                                 });
 
-                                if (this.vie < 0){
+                                if (vie <= 0){
                                     this.scene.start("GameOver")
                                 }
 
@@ -544,6 +524,7 @@ class Scene extends Phaser.Scene {
             this.scene.start("Victory");
         }
 
+        console.log(vie);
     }
 
 }

@@ -19,3 +19,6 @@ var diffHard = false;
 
 // Choix de la langue
 var langue = "en";
+
+// Nb de Vies
+//var vie = 3;
