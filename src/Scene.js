@@ -211,8 +211,12 @@ class Scene extends Phaser.Scene {
         this.enemy.body.setImmovable(false)
         //this.enemy.hp = 100;
         this.physics.add.collider(this.player.player, this.enemy, () => {
-            this.enemy.body.setImmovable(true)
-            this.Rkick = true;
+            if(me.kick == true)
+            {
+                me.enemy.body.setImmovable(true)
+                me.enemy.body.setVelocityY(150);
+                me.Rkick = true;
+            }
         })
         this.physics.add.collider(this.collide, this.enemy, () => {
 
@@ -319,6 +323,13 @@ class Scene extends Phaser.Scene {
 
         particleJump.pause();
 
+
+        this.physics.add.collider(this.player.player, this.destructible, (player,destructible) => {
+            console.log("collide")
+            if (this.kick === true){
+                destructible.destroy()
+            }
+        })
 }
 
     sauvegarde(player, saves) {
@@ -327,35 +338,6 @@ class Scene extends Phaser.Scene {
       this.currentSaveY = player.y
       saves.body.enable = true;
       this.currentKey = player.key
-    }
-
-    checkFw(player){
-        if (player < 900){
-            this.fwDelay = 40000;
-        }
-        if (player > 900){
-            this.fwDelay = 250;
-        }
-        if (player > 10240){
-            this.fwDelay = this.fwDelay - 50;
-        }
-        if (player > 14080){
-            this.fwDelay = this.fwDelay - 50;
-        }
-        if (player > 17920){
-            this.fwDelay = this.fwDelay - 50;
-        }
-        if (player > 26780){
-            this.fwDelay = this.fwDelay - 50;
-        }
-
-        this.physics.add.collider(this.player.player, this.destructible, (player,destructible) => {
-            console.log("collide")
-            if (this.kick === true){
-                destructible.destroy()
-            }
-        })
-
     }
 
     fireworks() {
@@ -504,10 +486,12 @@ class Scene extends Phaser.Scene {
         }
 
         const fireworksGenLoop = this.time.addEvent({
-            delay:  1000,
+            delay : this.fwDelay,
             callback: fireworksGen,
             loop: true,
         });
+
+        //fireworksGenLoop.timer.timerEvent.delay = this.fwDelay;
 
         var particles = this.add.particles('rising-smoke.png');
 
@@ -515,7 +499,24 @@ class Scene extends Phaser.Scene {
 
     update() {
 
-        this.checkFw(this.player.player.x)
+            if (this.player.player.x < 900){
+                this.fwDelay = 40000;
+            }
+            if (this.player.player.x > 900){
+                this.fwDelay = 4000;
+            }
+            if (this.player.player.x > 10240){
+                this.fwDelay = this.fwDelay - 1000;
+            }
+            if (this.player.player.x > 14080){
+                this.fwDelay = this.fwDelay - 2000;
+            }
+            if (this.player.player.x > 17920){
+                this.fwDelay = this.fwDelay - 550;
+            }
+            if (this.player.player.x > 26780){
+                this.fwDelay = this.fwDelay - 550;
+            }
 
         if (this.cursors.up.isDown && this.player.player.body.onFloor() && this.saut === false) {
             this.player.jump()
@@ -559,7 +560,7 @@ class Scene extends Phaser.Scene {
             this.player.player.setX(725)
         }
 
-
+        console.log("delay",this.fwDelay)
     }
 
 }
