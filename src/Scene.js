@@ -20,6 +20,7 @@ class Scene extends Phaser.Scene {
         this.load.image('fireworks3','assets/images/fireworks3.png')
 
         this.load.image('smoke','assets/images/particles/rising-smoke.png')
+        this.load.image('blue','assets/images/particles/blue.png')
         this.load.atlas('flares', 'assets/images/particles/flares.png', 'assets/images/particles/flares.json');
 
         this.load.image('destructible','assets/images/destructible.png')
@@ -379,9 +380,27 @@ class Scene extends Phaser.Scene {
             var particleSmoke = this.add.particles('smoke');
 
             particleSmoke.createEmitter({
-                speed: 100,
-                scale: {start : 0.1, end: 0.4},
+                speed: {max: 0, min: 0},
+                frequency: 1,
+                scale: {start : 0.3, end: 0},
                 lifespan: 500,
+                alpha: {start: 1,end: 0},
+                follow : monfirework,
+                tint: 0xffffff,
+                life: 1000,
+
+            })
+
+            var particleFire = this.add.particles('blue')
+
+            particleFire.createEmitter({
+                speed: {max: 0, min: 0},
+                frequency: 1,
+                scale: {start : 0.3, end: 0},
+                lifespan: 75,
+                alpha: {start: 1,end: 0.5},
+                tint: {start: 0xff6c00,end: 0xffe800},
+                life: 1000,
                 follow : monfirework,
             })
 
@@ -397,6 +416,7 @@ class Scene extends Phaser.Scene {
                             this.FwYellow.setPosition(fire.x - 32,fire.y + 64);
                             fire.destroy();
                             particleSmoke.destroy();
+                            particleFire.destroy();
 
                             var randomColor = Phaser.Math.Between(1, 5);
 
@@ -433,6 +453,7 @@ class Scene extends Phaser.Scene {
                                 vie -= 1;
 
                                 particleSmoke.destroy();
+                                particleFire.destroy();
                                 fire.destroy();
 
                                 this.player.player.x = this.currentSaveX;
@@ -469,6 +490,7 @@ class Scene extends Phaser.Scene {
                                 un.destroy();
                                 deux.destroy();
                                 particleSmoke.destroy();
+                                particleFire.destroy();
                             })
             });
 
