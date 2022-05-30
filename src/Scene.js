@@ -342,6 +342,8 @@ class Scene extends Phaser.Scene {
 
     fireworks() {
 
+        let me = this;
+
         const firework = this.physics.add.group();
 
         const fireworksList = ['fireworks1', 'fireworks2', 'fireworks3']
@@ -486,7 +488,7 @@ class Scene extends Phaser.Scene {
         }
 
         const fireworksGenLoop = this.time.addEvent({
-            delay : this.fwDelay,
+            delay : 1000,
             callback: fireworksGen,
             loop: true,
         });
