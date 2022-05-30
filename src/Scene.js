@@ -390,7 +390,8 @@ class Scene extends Phaser.Scene {
             // monfirework.setGravity(0);
             monfirework.setVelocityY(-1250);
             monfirework.setFlipY(true);
-            monfirework.setAlpha(0.75);
+            monfirework.setAlpha(0.5);
+            monfirework.setScale(0.75);
 
             var particleSmoke = this.add.particles('smoke');
 
@@ -407,6 +408,7 @@ class Scene extends Phaser.Scene {
                 //monfirework.setVelocityY(1150);
                 monfirework.setFlipY(false);
                 monfirework.setAlpha(1);
+                monfirework.setScale(1);
                 this.physics.add.collider(monfirework, this.collide,  (fire)=>{
                             //console.log(fireworks.body.x,fireworks.body.y)
 
@@ -498,7 +500,7 @@ class Scene extends Phaser.Scene {
         }
 
         const fireworksGenLoop = this.time.addEvent({
-            delay:  4000,
+            delay:  2000,
             callback: fireworksGen,
             loop: true,
         });
