@@ -480,7 +480,7 @@ class Scene extends Phaser.Scene {
         }
 
         const fireworksGenLoop = this.time.addEvent({
-            delay:  2000,
+            delay:  1000,
             callback: fireworksGen,
             loop: true,
         });
