@@ -11,6 +11,7 @@ class Scene extends Phaser.Scene {
 
         this.load.atlas('player', 'assets/images/kenney_player.png', 'assets/images/kenney_player_atlas.json');
         this.load.image('tiles', 'assets/tilesets/Tileset_test.png');
+        this.load.image('tilesSky', 'assets/tilesets/Sky4.png');
 
         this.load.tilemapTiledJSON('carte', 'assets/tilemaps/level3.json');
 
@@ -65,9 +66,9 @@ class Scene extends Phaser.Scene {
 
         // Background
 
-        const backgroundImage = this.add.image(0, 40, 'sky2').setOrigin(0, 0).setDepth(-2);
-        backgroundImage.setScale(1, 1);
-        //backgroundImage.setAngle(8);
+        // const backgroundImage = this.add.image(0, 40, 'sky2').setOrigin(0, 0).setDepth(-2);
+        // backgroundImage.setScale(1, 1);
+        // //backgroundImage.setAngle(8);
 
 
         // chargement de la map
@@ -78,6 +79,13 @@ class Scene extends Phaser.Scene {
             'Tileset_test',
             'tiles'
         );
+        const tilesetSky = map.addTilesetImage(
+            'Sky4',
+            'tilesSky'
+        );
+
+        this.Sky = map.createLayer('Sky', tilesetSky, 0, 100).setDepth(-2);
+        this.Sky.srollFactorX = 1;
 
         this.platforms = map.createStaticLayer('Platforms', tileset, 0, 100);
         // this.platforms.setCollisionByProperty({collides: true});
@@ -108,8 +116,7 @@ class Scene extends Phaser.Scene {
         // this.bois2.setCollisionByProperty({collides: true});
         // this.bois2.setCollisionByExclusion(-1, true);
 
-
-        // palyer
+        // player
         this.player = new Player(this)
 
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -117,6 +124,7 @@ class Scene extends Phaser.Scene {
         this.currentSaveX = 720;
         this.currentSaveY = 900;
 
+        this.kick = false;
 
         this.collide = this.physics.add.group({
             allowGravity: false,
@@ -129,14 +137,6 @@ class Scene extends Phaser.Scene {
 
         this.physics.add.collider(this.collide, this.player.player);
 
-        // this.collideSky = this.physics.add.group({
-        //     allowGravity: false,
-        //     immovable: true,
-        // });
-        // map.getObjectLayer('ColliderSky').objects.forEach((col) => {
-        //     this.collideSkySprite = this.collideSky.create(col.x, col.y+90, col.height).setOrigin(0,0).setDisplaySize(col.width,col.height).visible=false;
-        // });
-
         // Platformes Destructibles
 
         this.destructible = this.physics.add.group({
@@ -146,9 +146,6 @@ class Scene extends Phaser.Scene {
         map.getObjectLayer('destructible').objects.forEach((destructible) => {
             const destructibleSprite = this.destructible.create(destructible.x, destructible.y - 200, 'destructible').setOrigin(0).destructible = 1;
         });
-
-        this.physics.add.collider(this.destructible, this.player.player);
-
 
         // Murs Invisibles
 
@@ -198,8 +195,6 @@ class Scene extends Phaser.Scene {
                 this.scene.launch("SceneUI");
 
             }
-
-
 
         if (this.diffHard === true) {
             console.log("Hard")
@@ -352,6 +347,14 @@ class Scene extends Phaser.Scene {
         if (player > 26780){
             this.fwDelay = this.fwDelay - 50;
         }
+
+        this.physics.add.collider(this.player.player, this.destructible, (player,destructible) => {
+            console.log("collide")
+            if (this.kick === true){
+                destructible.destroy()
+            }
+        })
+
     }
 
     fireworks() {
@@ -381,7 +384,6 @@ class Scene extends Phaser.Scene {
                 lifespan: 500,
                 follow : monfirework,
             })
-
 
             //monfirework.body.setAllowGravity(false);
             this.time.delayedCall(2000,()=>{
@@ -448,11 +450,9 @@ class Scene extends Phaser.Scene {
                                         this.player.player.clearTint();
                                     }
                                 });
-
                                 if (vie <= 0){
                                     this.scene.start("GameOver")
                                 }
-
                                 if (diffHard === true) {
                                     this.scene.start("GameOver")
                                 }
@@ -491,8 +491,6 @@ class Scene extends Phaser.Scene {
 
     update() {
 
-        //console.log("player",this.player.player.x,"y",this.player.player.y)
-
         this.checkFw(this.player.player.x)
 
         if (this.cursors.up.isDown && this.player.player.body.onFloor() && this.saut === false) {
@@ -523,8 +521,21 @@ class Scene extends Phaser.Scene {
             this.enemy.destroy();
             this.scene.start("Victory");
         }
+        if (this.cursors.space.isDown){
+            console.log(this.kick)
+            this.kick = true;
+        }
 
-        console.log(vie);
+        if (this.cursors.space.isUp){
+            console.log(this.kick)
+            this.kick = false;
+        }
+
+        if (this.player.player.x <= 725){
+            this.player.player.setX(725)
+        }
+
+
     }
 
 }

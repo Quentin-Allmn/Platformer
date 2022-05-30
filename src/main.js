@@ -10,7 +10,7 @@ let gameConfig = {
             gravity: { y: 700 }
         }
     },
-    scene: [SceneMenu,Scene,SceneOptions,SceneGameOver,SceneVictory,SceneUI]
+    scene: [SceneMenu,Scene,SceneOptions,SceneGameOver,SceneVictory,SceneUI,ControlScene]
 };
 let game = new Phaser.Game(gameConfig);
 
@@ -19,6 +19,3 @@ var diffHard = false;
 
 // Choix de la langue
 var langue = "en";
-
-// Nb de Vies
-//var vie = 3;

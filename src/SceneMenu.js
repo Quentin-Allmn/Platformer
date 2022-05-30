@@ -119,11 +119,11 @@ class SceneMenu extends Phaser.Scene{
             controlbutton.setTexture('controls')
         })
 
-        // controlbutton.on("pointerup",()=>{
-        //     //console.log("up")
-        //     controlbutton.setTexture('controls')
-        //     this.scene.start("optionsGame")
-        // })
+        controlbutton.on("pointerup",()=>{
+            //console.log("up")
+            controlbutton.setTexture('controls')
+            this.scene.start("ControlScene")
+        })
 
 
         this.fireworks();
