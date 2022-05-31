@@ -211,7 +211,7 @@ class Scene extends Phaser.Scene {
         this.enemy.body.setImmovable(false)
         //this.enemy.hp = 100;
         this.physics.add.collider(this.player.player, this.enemy, () => {
-            if(me.kick == true)
+            if(me.kick === true)
             {
                 me.enemy.body.setImmovable(true)
                 me.enemy.body.setVelocityY(150);
@@ -479,12 +479,6 @@ class Scene extends Phaser.Scene {
                                 particleFire.destroy();
                             })
             });
-
-            // const fireworksGenLoop = this.time.addEvent({
-            //     delay:  this.fwDelay,
-            //     callback: checkFwV(monfirework),
-            //     loop: true,
-            //});
         }
 
         const fireworksGenLoop = this.time.addEvent({
@@ -492,6 +486,10 @@ class Scene extends Phaser.Scene {
             callback: fireworksGen,
             loop: true,
         });
+
+        var delay = fireworksGenLoop.delay;
+
+        console.log(delay)
 
         //fireworksGenLoop.timer.timerEvent.delay = this.fwDelay;
 
