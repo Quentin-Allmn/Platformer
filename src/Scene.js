@@ -9,7 +9,7 @@ class Scene extends Phaser.Scene {
         this.load.image('background', 'assets/images/backgroundN.png');
         this.load.image('sky2','assets/images/Background/Sky4.png');
 
-        this.load.atlas('player', 'assets/images/kenney_player.png', 'assets/images/kenney_player_atlas.json');
+        this.load.image('player', 'assets/images/player.png');
         this.load.image('tiles', 'assets/tilesets/Tileset_test.png');
         this.load.image('tilesSky', 'assets/tilesets/The_Sky.png');
 
@@ -29,7 +29,7 @@ class Scene extends Phaser.Scene {
 
         this.load.image('vie', 'assets/images/UI/Vie/UI-Vie2.png');
 
-        this.load.image('enemy','assets/images/player.png');
+        this.load.image('enemy','assets/images/player2.png');
 
         // Fireworks
 
@@ -55,6 +55,20 @@ class Scene extends Phaser.Scene {
 
         this.load.image('spark', 'assets/images/particles/blue.png');
 
+        // Load Animations
+
+        for (let i = 1; i <= 8; i++) {
+            this.load.image('run-' + i, 'assets/images/Animations/Run/run-' + i + '.png');
+        }
+
+        for (let i = 1; i <= 7; i++) {
+            this.load.image('jump-' + i, 'assets/images/Animations/Saut/jump-' + i + '.png');
+        }
+
+        for (let i = 1; i <= 3; i++) {
+            this.load.image('kick-' + i, 'assets/images/Animations/Kick/kick-' + i + '.png');
+        }
+
     }
 
     create() {
@@ -63,7 +77,7 @@ class Scene extends Phaser.Scene {
 
         this.saut = false;
 
-        console.log(diffHard)
+        //console.log(diffHard)
 
         // Background
 
@@ -74,7 +88,7 @@ class Scene extends Phaser.Scene {
 
         // chargement de la map
         const map = this.add.tilemap('carte');
-        console.log("map")
+       // console.log("map")
         // chargement du tileset
         const tileset = map.addTilesetImage(
             'Tileset_test',
@@ -177,7 +191,7 @@ class Scene extends Phaser.Scene {
 
         if (diffHard === false ) {
             this.scene.setActive(true,'SceneUI');
-            console.log("Normal")
+            // console.log("Normal")
            // this.add.text(120,40,this.vie,{ color: '#FFC100', fontSize: '20px' });
 
                 this.saves = this.physics.add.group({
@@ -197,9 +211,9 @@ class Scene extends Phaser.Scene {
 
             }
 
-        if (this.diffHard === true) {
-            console.log("Hard")
-        }
+        // if (this.diffHard === true) {
+        //     // console.log("Hard")
+        // }
 
         //Enemy
 
@@ -326,7 +340,7 @@ class Scene extends Phaser.Scene {
 
 
         this.physics.add.collider(this.player.player, this.destructible, (player,destructible) => {
-            console.log("collide")
+            // console.log("collide")
             if (this.kick === true){
                 destructible.destroy()
             }
@@ -334,7 +348,7 @@ class Scene extends Phaser.Scene {
 }
 
     sauvegarde(player, saves) {
-    console.log("current", this.currentSaveX, this.currentSaveY)
+    // console.log("current", this.currentSaveX, this.currentSaveY)
     this.currentSaveX = player.x
       this.currentSaveY = player.y
       saves.body.enable = true;
@@ -436,7 +450,7 @@ class Scene extends Phaser.Scene {
                 })
                 this.physics.add.collider(monfirework, this.player.player, (fire) => {
 
-                                console.log("Hu")
+                                // console.log("Hu")
                                 vie -= 1;
 
                                 particleSmoke.destroy();
@@ -467,7 +481,7 @@ class Scene extends Phaser.Scene {
                             })
                 this.physics.add.collider(monfirework, this.destructible,  (un,deux)=>{
                                 this.cameras.main.shake(1000, 0.004);
-                                console.log("shake")
+                                // console.log("shake")
 
                                 this.FWred = this.add.sprite(un.x,un.y, 'red-');
                                 this.FWred.setScale(2);
@@ -513,7 +527,7 @@ class Scene extends Phaser.Scene {
 
         if (this.cursors.up.isDown && this.player.player.body.onFloor() && this.saut === false) {
             this.player.jump()
-            console.log("oui")
+            // console.log("oui")
             this.saut = true;
             //particleJump.play();
         }
@@ -535,17 +549,18 @@ class Scene extends Phaser.Scene {
             this.cameras.main.shake(0.05, 500);
         }
         if (this.cursors.space.isDown && this.Rkick === true){
-            console.log("Kick");
+            this.player.kick();
             this.enemy.destroy();
             this.scene.start("Victory");
         }
         if (this.cursors.space.isDown){
-            console.log(this.kick)
+            // console.log(this.kick)
             this.kick = true;
+            this.player.kick();
         }
 
         if (this.cursors.space.isUp){
-            console.log(this.kick)
+            // console.log(this.kick)
             this.kick = false;
         }
 
@@ -553,7 +568,7 @@ class Scene extends Phaser.Scene {
             this.player.player.setX(725)
         }
 
-        console.log("delay",this.fwDelay)
+        // console.log("delay",this.fwDelay)
     }
 
 }

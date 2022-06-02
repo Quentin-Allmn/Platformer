@@ -86,7 +86,7 @@ class SceneMenu extends Phaser.Scene{
         playbutton.on("pointerup",()=>{
             //console.log("up")
             playbutton.setTexture('play2')
-            this.scene.start("playGame")
+            this.scene.start("Intro")
         })
 
         optionsbutton.setInteractive();
