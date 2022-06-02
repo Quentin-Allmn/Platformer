@@ -11,7 +11,7 @@ class Scene extends Phaser.Scene {
 
         this.load.atlas('player', 'assets/images/kenney_player.png', 'assets/images/kenney_player_atlas.json');
         this.load.image('tiles', 'assets/tilesets/Tileset_test.png');
-        this.load.image('tilesSky', 'assets/tilesets/Sky4.png');
+        this.load.image('tilesSky', 'assets/tilesets/The_Sky.png');
 
         this.load.tilemapTiledJSON('carte', 'assets/tilemaps/level3.json');
 
@@ -81,7 +81,7 @@ class Scene extends Phaser.Scene {
             'tiles'
         );
         const tilesetSky = map.addTilesetImage(
-            'Sky4',
+            'The_Sky',
             'tilesSky'
         );
 
