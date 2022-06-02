@@ -357,7 +357,7 @@ class Scene extends Phaser.Scene {
             // firework.create(xCoord, 900, randomfireworks);
             // monfirework.setVelocityY(Math.random() * 1000 - 500);
             // monfirework.setGravity(0);
-            monfirework.setVelocityY(-1250);
+            monfirework.setVelocityY(-1300);
             monfirework.setFlipY(true);
             monfirework.setAlpha(0.5);
             monfirework.setScale(0.75);
@@ -487,14 +487,6 @@ class Scene extends Phaser.Scene {
             callback: fireworksGen,
             loop: true,
         });
-
-        var delay = fireworksGenLoop.delay;
-
-        console.log(delay)
-
-        //fireworksGenLoop.timer.timerEvent.delay = this.fwDelay;
-
-        var particles = this.add.particles('rising-smoke.png');
 
     }
 
