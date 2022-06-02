@@ -308,20 +308,21 @@ class Scene extends Phaser.Scene {
             frameRate: 12,
         });
 
-        var particleJump = this.add.particles('spark')
+        var particleJump = this.add.particles('smoke')
 
         particleJump.createEmitter({
-            x: this.player.player.x - 64,
+            //x: this.player.player.x - 64,
+            y: this.player.player.y + 32,
             speed: {min: 0, max: 170},
             angle: {min: 0, max: 190},
-            gravityY: -300,
+            gravityY: 300,
             scale: {start : 0.1, end: 0.4, ease: 'Back.easeln'},
             alpha: {start: 0.8, end: 0},
             lifespan: 500,
-            follow : this.player.player,
+            //follow : this.player.player,
         })
 
-        particleJump.pause();
+        //particleJump.pause();
 
 
         this.physics.add.collider(this.player.player, this.destructible, (player,destructible) => {
