@@ -56,9 +56,25 @@ class Player {
             frameRate: 9,
             repeat: 0});
 
+        this.jumpParticles = this.scene.add.particles('spark');
+        this.jumpParticles.createEmitter({
+            speed: 300,
+            lifespan: 300,
+            quantity: 5,
+            alpha: 1,
+            tint:0x808080,
+            gravityY: 2000,
+            scale: {start: 0.2, end: 0},
+            angle: { min: -135, max: -45 },
+            //follow: this.player,
+            //blendMode: 'ADD',
+            on: false
+        });
+
     }
 
     jump(){
+        this.jumpParticles.emitParticleAt(this.player.x+10, this.player.y+50);
         this.player.setVelocityY(-450);
         //this.player.play('jump', true);
     }

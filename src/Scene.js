@@ -75,6 +75,10 @@ class Scene extends Phaser.Scene {
         // Audio
         this.load.audio('Fw1','assets/Audio/Sd/Fw1.wav');
         this.load.audio('InsecteNuit','assets/Audio/Sd/InsecteNuit.wav');
+        this.load.audio('explosion1','assets/Audio/Sd/explosion1.wav');
+        this.load.audio('explosion2','assets/Audio/Sd/explosion2.wav');
+        this.load.audio('ambiance','assets/Audio/Sd/Fw2.wav');
+        this.load.audio('kickSd','assets/Audio/Sd/kick.wav');
 
     }
 
@@ -337,23 +341,6 @@ class Scene extends Phaser.Scene {
             frameRate: 12,
         });
 
-        var particleJump = this.add.particles('smoke')
-
-        particleJump.createEmitter({
-            //x: this.player.player.x - 64,
-            y: this.player.player.y + 32,
-            speed: {min: 0, max: 170},
-            angle: {min: 0, max: 190},
-            gravityY: 300,
-            scale: {start : 0.1, end: 0.4, ease: 'Back.easeln'},
-            alpha: {start: 0.8, end: 0},
-            lifespan: 500,
-            //follow : this.player.player,
-        })
-
-        //particleJump.pause();
-
-
         this.physics.add.collider(this.player.player, this.destructible, (player,destructible) => {
             // console.log("collide")
             if (this.kick === true){
@@ -368,10 +355,25 @@ class Scene extends Phaser.Scene {
             this.ambiance.play()
         }
 
-        this.ambiance2 = this.sound.add('InsecteNuit',{loop: true, volume: 0.1});
+        this.ambiance2 = this.sound.add('InsecteNuit',{loop: true, volume: 0.01});
         if (this.temp === this.temp){
             this.ambiance2.play()
         }
+
+        this.explosion1 = this.sound.add('explosion1',{loop: false, volume: 1});
+        // if (this.temp === this.temp){
+        //     this.explosion1.play()
+        // }
+
+        this.ambiance3 = this.sound.add('ambiance',{loop: false, volume: 1});
+        if (this.temp === this.temp){
+            this.ambiance3.play()
+        }
+
+        this.kickSd = this.sound.add('kickSd',{loop: false, volume: 1});
+        // if (this.temp === this.temp){
+        //     this.kickSd.play()
+        // }
 
 }
 
@@ -454,26 +456,31 @@ class Scene extends Phaser.Scene {
                                 case 1:
                                     this.FwYellow.setTexture('yellow')
                                     this.FwYellow.play('yellow')
+                                    this.explosion1.play()
                                     break
                                 case 2:
                                     this.FwYellow.setTexture('blue')
                                     this.FwYellow.play('blue')
                                     console.log('blue')
+                                    //this.explosion2.play()
                                     break
                                 case 3:
                                     this.FwYellow.setTexture('pink')
                                     this.FwYellow.play('pink')
                                     console.log('pink')
+                                    this.explosion1.play()
                                     break
                                 case 4:
                                     this.FwYellow.setTexture('red')
                                     this.FwYellow.play('red')
                                     console.log('red')
+                                    //this.explosion2.play()
                                     break
                                 case 5:
                                     this.FwYellow.setTexture('green')
                                     this.FwYellow.play('green')
                                     console.log('green')
+                                    this.explosion1.play()
                                     break
                             }
                 })
@@ -578,12 +585,14 @@ class Scene extends Phaser.Scene {
             this.cameras.main.shake(0.05, 500);
         }
         if (this.cursors.space.isDown && this.Rkick === true){
+            this.kickSd.play()
             this.player.kick();
             this.enemy.destroy();
             this.scene.start("Victory");
         }
         if (this.cursors.space.isDown){
             // console.log(this.kick)
+            this.kickSd.play()
             this.kick = true;
             this.player.kick();
         }
