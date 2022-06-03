@@ -25,8 +25,10 @@ class Scene extends Phaser.Scene {
         this.load.atlas('flares', 'assets/images/particles/flares.png', 'assets/images/particles/flares.json');
 
         this.load.image('destructible','assets/images/Destrcutible.png')
-        this.load.image('invisible','assets/images/Invisible.png')
+        this.load.image('invisible','assets/images/Invisible.png');
+
         this.load.image('save', 'assets/images/lanterne.png');
+        this.load.image('save2', 'assets/images/lanterneA.png');
 
         this.load.image('vie', 'assets/images/UI/Vie/UI-Vie2.png');
 
@@ -213,6 +215,7 @@ class Scene extends Phaser.Scene {
 
                 map.getObjectLayer('Save').objects.forEach((save) => {
                     const saveSprite = this.saves.create(save.x, save.y , 'save').setOrigin(0);
+                    saveSprite.setTexture('save2');
                 });
                 this.physics.add.overlap(this.player.player, this.saves, this.sauvegarde, null, this)
                 this.saves.setDepth(-1)
@@ -231,7 +234,7 @@ class Scene extends Phaser.Scene {
 
         this.Rkick = false;
 
-        this.enemy = this.physics.add.sprite(35700, 500, "enemy")
+        this.enemy = this.physics.add.sprite(35700, 500, "enemy").setScale(0.5);
         //this.enemy.setCollideWorldBounds(true);
         //this.enemy.setDepth(0);
         this.enemy.body.setImmovable(false)
@@ -374,6 +377,7 @@ class Scene extends Phaser.Scene {
 
     sauvegarde(player, saves) {
     // console.log("current", this.currentSaveX, this.currentSaveY)
+    //saveSprite.setTexture('save2');
     this.currentSaveX = player.x
       this.currentSaveY = player.y
       saves.body.enable = true;
