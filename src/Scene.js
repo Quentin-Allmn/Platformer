@@ -12,6 +12,7 @@ class Scene extends Phaser.Scene {
         this.load.image('player', 'assets/images/player.png');
         this.load.image('tiles', 'assets/tilesets/Tileset_test.png');
         this.load.image('tilesSky', 'assets/tilesets/The_Sky.png');
+        this.load.image('tilesBg', 'assets/tilesets/Tileset_bg.png');
 
         this.load.tilemapTiledJSON('carte', 'assets/tilemaps/level3.json');
 
@@ -102,38 +103,46 @@ class Scene extends Phaser.Scene {
             'The_Sky',
             'tilesSky'
         );
+        const tilesetBg = map.addTilesetImage(
+            'Tileset_bg',
+            'tilesBg'
+        );
 
-        this.Sky = map.createLayer('Sky', tilesetSky, 0, 100).setDepth(-2);
+        this.Sky = map.createLayer('Sky', tilesetSky, 0, 100).setDepth(-4);
         this.Sky.srollFactorX = 1;
 
-        this.platforms = map.createStaticLayer('Platforms', tileset, 0, 100);
+        this.platforms = map.createStaticLayer('Platforms', tileset, 0, 100).setDepth(0);
         // this.platforms.setCollisionByProperty({collides: true});
         // this.platforms.setCollisionByExclusion(-1, true);
         this.platforms.srollFactorX = 1;
 
-        this.platforms3 = map.createStaticLayer('Platforms3', tileset, 0, 100);
+        this.platforms3 = map.createStaticLayer('Platforms3', tileset, 0, 100).setDepth(0);
         // this.platforms3.setCollisionByProperty({collides: true});
         // this.platforms3.setCollisionByExclusion(-1, true);
         this.platforms3.srollFactorX = 1;
 
-        this.platforms2 = map.createStaticLayer('Platforms2', tileset, 0, 100);
+        this.platforms2 = map.createStaticLayer('Platforms2', tileset, 0, 100).setDepth(0);
         // this.platforms2.setCollisionByProperty({collides: true});
         // this.platforms2.setCollisionByExclusion(-1, true);
         this.platforms2.srollFactorX = 1;
 
-        this.bois = map.createStaticLayer('Bois', tileset, 0, 100);
+        this.bois = map.createLayer('Bois', tileset, 0, 100).setDepth(0);
         // this.bois.setCollisionByProperty({collides: true});
         // this.bois.setCollisionByExclusion(-1, true);
         this.bois.srollFactorX = 1;
 
-        this.bois2 = map.createStaticLayer('Bois2', tileset, 0, 100);
+        this.bois2 = map.createLayer('Bois2', tileset, 0, 100).setDepth(-1);
         // this.bois2.setCollisionByProperty({collides: true});
         // this.bois2.setCollisionByExclusion(-1, true);
         this.bois2.srollFactorX = 1;
 
-        this.arbre = map.createLayer('Arbre', tileset, 0, 100);
+        this.arbre = map.createLayer('Arbre', tileset, 0, 100).setDepth(-1);
         // this.bois2.setCollisionByProperty({collides: true});
         // this.bois2.setCollisionByExclusion(-1, true);
+
+        this.montagnes = map.createLayer('Montagnes', tilesetBg, 0, 100).setDepth(-2);
+
+        this.fond = map.createLayer('Fond', tilesetBg, 0, 100).setDepth(-3);
 
         // player
         this.player = new Player(this)
