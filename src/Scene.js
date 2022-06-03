@@ -25,7 +25,7 @@ class Scene extends Phaser.Scene {
         this.load.atlas('flares', 'assets/images/particles/flares.png', 'assets/images/particles/flares.json');
 
         this.load.image('destructible','assets/images/Destrcutible.png')
-
+        this.load.image('invisible','assets/images/Invisible.png');
 
         this.load.image('save', 'assets/images/lanterne.png');
         this.load.image('save2', 'assets/images/lanterneA.png');
@@ -180,6 +180,17 @@ class Scene extends Phaser.Scene {
         map.getObjectLayer('destructible').objects.forEach((destructible) => {
             const destructibleSprite = this.destructible.create(destructible.x, destructible.y - 200, 'destructible').setAngle(90).setOrigin(0).destructible = 1;
         });
+        // Murs Invisibles
+
+        this.invisible = this.physics.add.group({
+            allowGravity: false,
+            immovable: true
+        })
+
+        map.getObjectLayer('invisible').objects.forEach((invisible) => {
+            const InvisibleSprite = this.invisible.create(invisible.x, invisible.y, 'invisible').setOrigin(0).visible = false ;
+        });
+        this.physics.add.collider(this.player.player, this.invisible);
 
         // Camera
 
@@ -241,6 +252,9 @@ class Scene extends Phaser.Scene {
             }
         })
         this.physics.add.collider(this.collide, this.enemy, () => {
+
+        })
+        this.physics.add.collider(this.invisible, this.enemy, () => {
 
         })
 
@@ -547,60 +561,50 @@ class Scene extends Phaser.Scene {
                 this.fwDelay = this.fwDelay - 550;
             }
 
-            if ( this.enemy.x >= 35720 ){
-                this.enemy.x = 35720;
+        if (this.cursors.up.isDown && this.player.player.body.onFloor() && this.saut === false) {
+            this.player.jump()
+            // console.log("oui")
+            this.saut = true;
+            //particleJump.play();
         }
 
-    switch (true) {
-
-        case this.cursors.up.isDown && this.player.player.body.onFloor() && this.saut === false:
-            this.player.jump()
-            this.saut = true;
-            break;
-
-        case this.cursors.up.isUp:
+        if (this.cursors.up.isUp){
             this.saut = false;
-            break;
+        }
 
-        case this.cursors.left.isDown :
+        if (this.cursors.left.isDown ){
             this.player.runLeft();
-            break;
-
-        case this.cursors.right.isDown:
+        }
+        else if (this.cursors.right.isDown){
             this.player.runRight();
-            break;
-
-        case this.cursors.down.isDown:
+        }
+        else {
+            this.player.stop();
+        }
+        if (this.cursors.down.isDown){
             this.cameras.main.shake(0.05, 500);
-            break;
-
-        case this.cursors.space.isDown && this.Rkick === true:
+        }
+        if (this.cursors.space.isDown && this.Rkick === true){
             this.kickSd.play()
             this.player.kick();
             this.enemy.destroy();
             this.scene.start("Victory");
-            break;
-
-        case this.cursors.space.isDown:
+        }
+        if (this.cursors.space.isDown){
+            // console.log(this.kick)
             this.kickSd.play()
             this.kick = true;
             this.player.kick();
-            break;
+        }
 
-        case this.cursors.space.isUp:
+        if (this.cursors.space.isUp){
+            // console.log(this.kick)
             this.kick = false;
-            break;
+        }
 
-        case this.player.player.x <= 725:
+        if (this.player.player.x <= 725){
             this.player.player.setX(725)
-            break;
-
-        default:
-            this.player.stop();
-            break;
-
-    }
-
+        }
 
         // console.log("delay",this.fwDelay)
     }

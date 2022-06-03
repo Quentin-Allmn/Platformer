@@ -4,9 +4,9 @@ class Player {
         this.scene = Scene
         this.player = this.scene.physics.add.sprite(725, 900, 'player');
         this.player.setBounce(0).setVelocityX(0);
-        this.player.body.setSize(100,100)//.setOffset(0,0);
+        this.player.body.setSize(65,65).setOffset(50,50);
         this.player.setCollideWorldBounds(false);
-        //this.scene.physics.add.collider(this.player, this.scene.collide);
+        this.scene.physics.add.collider(this.player, this.scene.collide);
 
         this.scene.anims.create({
             key: 'idle',
@@ -76,7 +76,7 @@ class Player {
     jump(){
         this.jumpParticles.emitParticleAt(this.player.x+10, this.player.y+50);
         this.player.setVelocityY(-450);
-        this.player.play('jump', true);
+        //this.player.play('jump', true);
     }
 
     stop() {
@@ -89,16 +89,15 @@ class Player {
         this.player.setVelocityX(250);
         this.player.setFlipX(false);
         if (this.player.body.onFloor()) {
-            this.player.play('run', true)
+            //this.player.play('run', true)
             }
         }
 
     runLeft()
         {
-
             this.player.setVelocityX(-450);
             if (this.player.body.onFloor()) {
-               this.player.play('run', true)
+               // this.player.play('run', true)
             }
             this.player.setFlipX(true);
         }
