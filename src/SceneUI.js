@@ -6,7 +6,7 @@ constructor() {
 
     preload(){
 
-        this.load.image('vie1', 'assets/images/UI/Vie/UI-vie2.png');
+        this.load.image('vie1', 'assets/images/UI/Vie/UI-Vie2.png');
 
     }
 
