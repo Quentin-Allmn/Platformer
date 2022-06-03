@@ -7,7 +7,8 @@ let gameConfig = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 700 }
+            gravity: { y: 700 },
+            debug: true,
         }
     },
     scene: [SceneMenu,Scene,SceneOptions,SceneGameOver,SceneVictory,SceneUI,ControlScene,introScene]
