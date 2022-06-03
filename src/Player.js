@@ -3,10 +3,19 @@ class Player {
     constructor(Scene) {
         this.scene = Scene
         this.player = this.scene.physics.add.sprite(725, 900, 'player');
-        this.player.setBounce(0.2).setVelocityX(0);
+        this.player.setBounce(0).setVelocityX(0);
         this.player.body.setSize(65,65).setOffset(50,50);
         this.player.setCollideWorldBounds(false);
         this.scene.physics.add.collider(this.player, this.scene.collide);
+
+        this.scene.anims.create({
+            key: 'idle',
+            frames: [
+                {key: 'player'},
+            ],
+            frameRate: 1,
+            repeat: -1
+        })
 
         this.scene.anims.create({
             key: 'run',
@@ -44,14 +53,14 @@ class Player {
                 {key:'kick-2'},
                 {key:'kick-3'},
             ],
-            frameRate: 6,
+            frameRate: 9,
             repeat: 0});
 
     }
 
     jump(){
         this.player.setVelocityY(-450);
-        this.player.play('jump', true);
+        //this.player.play('jump', true);
     }
 
     stop() {
@@ -60,22 +69,24 @@ class Player {
             this.player.play('idle', true)
         }
     }
-    runRight(){
+    runRight() {
         this.player.setVelocityX(250);
         this.player.setFlipX(false);
         if (this.player.body.onFloor()) {
-            this.player.play('run', true)}
-    }
+            //this.player.play('run', true)
+            }
+        }
+
     runLeft()
         {
             this.player.setVelocityX(-450);
             if (this.player.body.onFloor()) {
-                this.player.play('run', true)
+               // this.player.play('run', true)
             }
             this.player.setFlipX(true);
         }
     kick(){
-        this.player.play('kick',true)
+        //this.player.play('kick',true)
     }
 
 }
