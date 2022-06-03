@@ -172,9 +172,8 @@ class Scene extends Phaser.Scene {
             immovable: true
         })
         map.getObjectLayer('destructible').objects.forEach((destructible) => {
-            const destructibleSprite = this.destructible.create(destructible.x, destructible.y - 200, 'destructible').setOrigin(0).destructible = 1;
+            const destructibleSprite = this.destructible.create(destructible.x, destructible.y - 200, 'destructible').setAngle(90).setOrigin(0).destructible = 1;
         });
-
         // Murs Invisibles
 
         this.invisible = this.physics.add.group({
