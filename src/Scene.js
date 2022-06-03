@@ -24,13 +24,13 @@ class Scene extends Phaser.Scene {
         this.load.image('blue','assets/images/particles/blue.png')
         this.load.atlas('flares', 'assets/images/particles/flares.png', 'assets/images/particles/flares.json');
 
-        this.load.image('destructible','assets/images/destructible.png')
+        this.load.image('destructible','assets/images/Destrcutible.png')
         this.load.image('invisible','assets/images/Invisible.png')
-        this.load.image('save', 'assets/images/Save.png');
+        this.load.image('save', 'assets/images/lanterne.png');
 
         this.load.image('vie', 'assets/images/UI/Vie/UI-Vie2.png');
 
-        this.load.image('enemy','assets/images/player2.png');
+        this.load.image('enemy','assets/images/Antagoniste.png');
 
         // Fireworks
 
@@ -216,7 +216,7 @@ class Scene extends Phaser.Scene {
                     const saveSprite = this.saves.create(save.x, save.y , 'save').setOrigin(0);
                 });
                 this.physics.add.overlap(this.player.player, this.saves, this.sauvegarde, null, this)
-
+                this.saves.setDepth(-1)
                 this.cursors = this.input.keyboard.createCursorKeys();
                 this.cameras.main.startFollow(this.player.player);
 
