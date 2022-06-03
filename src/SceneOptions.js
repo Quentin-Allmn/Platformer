@@ -6,11 +6,16 @@ class SceneOptions extends Phaser.Scene{
 
     preload(){
 
-        this.load.image('back', 'assets/images/UI/UI_BackMenu1.png');
-        this.load.image('back2', 'assets/images/UI/UI_BackMenu1_On.png');
+        this.load.image('back', 'assets/images/UI/Fr/Menu_fr.png');
+        this.load.image('back2', 'assets/images/UI/Fr/Menu_Fr_On.png');
 
         this.load.image('hard', 'assets/images/UI/UI_Difficulty_Hard.png');
         this.load.image('normal', 'assets/images/UI/UI_Difficulty_Normal.png');
+
+        this.load.image('Fr', 'assets/images/UI/langueFr.png');
+        this.load.image('En', 'assets/images/UI/LangueEn.png');
+        this.load.image('Kr', 'assets/images/UI/LangueKr.png');
+
 
         this.load.image('background2','assets/images/Background/Sky1.png');
         this.load.image('logo','assets/images/Logo/Logo.png')
@@ -79,16 +84,16 @@ class SceneOptions extends Phaser.Scene{
 
         })
 
-        let languebutton = this.add.text(500, 560, 'English',{ color: '#FFC100', fontSize: '100px' });
+        let languebutton = this.add.image(700, 600, 'En');
 
         if (langue === "en"){
-            languebutton.setText("English")
+            languebutton.setTexture("En")
         }
         else if (langue === "fr"){
-            languebutton.setText("Français")
+            languebutton.setTexture("Fr")
         }
         else {
-            languebutton.setText("Korean")
+            languebutton.setTexture("Kr")
         }
 
         languebutton.setInteractive();
@@ -98,19 +103,19 @@ class SceneOptions extends Phaser.Scene{
 
             if (langue === "en"){
                 console.log("en")
-                languebutton.setText("Français")
+                languebutton.setTexture("Fr")
                 langue = "fr"
                 console.log("fr")
             }
             else if (langue === "fr"){
                 console.log("fr")
-                languebutton.setText("Korean")
+                languebutton.setTexture("Kr")
                 langue = "kr"
                 console.log("kr")
             }
             else {
                 console.log("kr")
-                languebutton.setText("English")
+                languebutton.setTexture("En")
                 langue = "en"
                 console.log("en")
             }
