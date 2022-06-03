@@ -69,6 +69,10 @@ class Scene extends Phaser.Scene {
             this.load.image('kick-' + i, 'assets/images/Animations/Kick/kick-' + i + '.png');
         }
 
+        // Audio
+        this.load.audio('Fw1','assets/Audio/Sd/Fw1.wav');
+        this.load.audio('InsecteNuit','assets/Audio/Sd/InsecteNuit.wav');
+
     }
 
     create() {
@@ -345,6 +349,19 @@ class Scene extends Phaser.Scene {
                 destructible.destroy()
             }
         })
+
+        // Audio
+
+        this.ambiance = this.sound.add('Fw1',{loop: true, volume: 1});
+        if (this.temp === this.temp){
+            this.ambiance.play()
+        }
+
+        this.ambiance2 = this.sound.add('InsecteNuit',{loop: true, volume: 0.1});
+        if (this.temp === this.temp){
+            this.ambiance2.play()
+        }
+
 }
 
     sauvegarde(player, saves) {
